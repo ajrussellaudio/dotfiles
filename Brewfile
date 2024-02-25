@@ -7,6 +7,7 @@ brew "eza"
 brew "flac"
 brew "fzf"
 brew "htop"
+brew "jq"
 brew "neovim"
 brew "postgresql@14", restart_service: true
 brew "python@3.11"
