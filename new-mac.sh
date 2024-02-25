@@ -12,8 +12,11 @@ defaults write com.apple.screencapture location -string "$SCREENSHOTS_FOLDER"
 
 # Git shit
 
+SSH_KEYFILE=~/.ssh/id_rsa
 echo "Creating an SSH key for you..."
-ssh-keygen -t rsa
+ssh-keygen -t rsa -f $SSH_KEYFILE
+cat $SSH_KEYFILE.pub | pbcopy
+echo "Contents of" $SSH_KEYFILE.pub "copied."
 echo "Please add this public key to Github \n"
 echo "https://github.com/account/ssh \n"
 read -p "Press [Enter] key after this..."
