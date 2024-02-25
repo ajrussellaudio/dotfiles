@@ -121,21 +121,4 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# Commonly used folders
-alias work=/Users/alanrussell/Documents/working
-alias learn=/Users/alanrussell/Documents/learning
-alias play=/Users/alanrussell/Documents/playground
-alias oss=/Users/alanrussell/Documents/open-source
-
-# App aliases
-alias ls="eza"
-alias ll="eza -alh"
-alias tree="eza -TI node_modules"
-
-if command -v bat > /dev/null; then
-  alias cat="bat"
-elif command -v batcat > /dev/null; then
-  alias cat="batcat"
-fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
