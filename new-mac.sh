@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Mac shit
 echo "Setting up macOS preferences..."
 
