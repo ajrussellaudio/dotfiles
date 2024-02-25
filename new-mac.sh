@@ -14,6 +14,9 @@ defaults write com.apple.screencapture location -string "$SCREENSHOTS_FOLDER"
 
 # Git shit
 
+git config --global user.name "Alan Russell"
+git config --global user.name "ajrussellaudio@gmail.com"
+
 SSH_KEYFILE=~/.ssh/id_rsa
 echo "Creating an SSH key for you..."
 ssh-keygen -t rsa -f $SSH_KEYFILE
@@ -24,11 +27,6 @@ echo "https://github.com/account/ssh \n"
 read -p "Press [Enter] key after this..."
 
 # Install shit
-
-if [ ! -d ~/.oh-my-zsh ]; then
-  echo "Installing Oh My Zsh..."
-  curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-fi
 
 if ! command -v brew &> /dev/null; then
   echo "Installing Homebrew..."
@@ -41,7 +39,17 @@ echo "Installing all the things..."
 brew bundle
 
 echo "Migrating dotfiles..."
-stow . --adopt
+stow . 
+
+if [ ! -d ~/.oh-my-zsh ]; then
+  echo "Installing Oh My Zsh..."
+  curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+fi
+
+if command -v bat &> /dev/null; then
+  echo "Building bat cache..."
+  bat cache --build 
+fi
 
 if command -v tmux &> /dev/null; then
   echo "Configuring tmux..."  
