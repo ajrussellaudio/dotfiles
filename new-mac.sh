@@ -38,12 +38,17 @@ fi
 echo "Installing all the things..."
 brew bundle
 
+if command -v nvim &> /dev/null; then
+  echo "Installing NVChad..."
+  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+fi
+
 echo "Migrating dotfiles..."
 stow . 
 
-if [ ! -d ~/.oh-my-zsh ]; then
+if [ ! $ZSH ]; then
   echo "Installing Oh My Zsh..."
-  curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 fi
 
 if command -v bat &> /dev/null; then
