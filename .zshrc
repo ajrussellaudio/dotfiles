@@ -4,6 +4,12 @@ ZSH_THEME="robbyrussell"
 
 plugins=(git)
 
+if command -v nvim &> /dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 source /opt/homebrew/opt/spaceship/spaceship.zsh
