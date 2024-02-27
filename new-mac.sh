@@ -15,7 +15,7 @@ defaults write com.apple.screencapture location -string "$SCREENSHOTS_FOLDER"
 # Git shit
 
 git config --global user.name "Alan Russell"
-git config --global user.name "ajrussellaudio@gmail.com"
+git config --global user.email "ajrussellaudio@gmail.com"
 
 SSH_KEYFILE=~/.ssh/id_rsa
 echo "Creating an SSH key for you..."
@@ -43,13 +43,14 @@ if command -v nvim &> /dev/null; then
   git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 fi
 
-echo "Migrating dotfiles..."
-stow . 
-
 if [ ! $ZSH ]; then
   echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+  rm ~/.zshrc ~/.zprofile
 fi
+
+echo "Migrating dotfiles..."
+stow . 
 
 echo "Installing NVM..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -62,6 +63,7 @@ fi
 
 if command -v tmux &> /dev/null; then
   echo "Configuring tmux..."  
+  tmux new-session -D -s main
   tmux source ~/.config/tmux/tmux.conf
 fi
 
