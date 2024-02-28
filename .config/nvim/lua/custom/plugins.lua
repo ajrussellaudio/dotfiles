@@ -71,6 +71,9 @@ local plugins = {
           },
         },
       },
+      filters = {
+        custom = { '.git' }
+      }
     },
   },
 }
