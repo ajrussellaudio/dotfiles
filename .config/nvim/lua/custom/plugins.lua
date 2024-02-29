@@ -20,7 +20,8 @@ local plugins = {
         "eslint-lsp",
         "prettierd",
         "tailwindcss-language-server",
-        "typescript-language-server"
+        "typescript-language-server",
+        "prisma-language-server"
       }
     }
   },
