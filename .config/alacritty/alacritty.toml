@@ -5,6 +5,9 @@ import = [
 [env]
 TERM = "screen-256color"
 
+[window]
+option_as_alt = "OnlyLeft" # other values are None, OnlyRight, Both
+
 [font]
 normal = { family = "SauceCodePro Nerd Font Mono", style = "Regular" }
 size = 14
