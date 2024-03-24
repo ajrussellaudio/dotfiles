@@ -13,3 +13,5 @@ normal = { family = "SauceCodePro Nerd Font Mono", style = "Regular" }
 size = 14
 offset = { x = 0, y = 2 }
 
+[selection]
+save_to_clipboard = true
