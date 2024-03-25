@@ -5,13 +5,19 @@ return {
     local config = require("nvim-treesitter.configs")
     config.setup({
       ensure_installed = {
+        -- neovim
         "lua",
+
+        -- web dev
+        "html",
+        "css",
         "javascript",
-        "tsx"
+        "typescript",
+        "tsx",
       },
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
     })
-  end
+  end,
 }

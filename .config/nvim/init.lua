@@ -13,9 +13,3 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup("plugins")
-
--- TODO:
--- * Brackets autocompletion
--- * HTML tag autocompletion
--- * Quotes autocompletion
--- * Comment/uncomment
