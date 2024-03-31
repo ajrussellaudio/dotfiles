@@ -11,6 +11,11 @@ else
   export EDITOR=vim
 fi
 
+# Add Tmuxifier to path
+export PATH="$TMUX_PLUGIN_MANAGER_PATH/tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+export TMUXIFIER_LAYOUT_PATH=~/.config/tmux/layouts
+
 source $ZSH/oh-my-zsh.sh
 
 source /opt/homebrew/opt/spaceship/spaceship.zsh
