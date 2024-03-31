@@ -13,6 +13,7 @@ return {
 					"lua_ls",
 					"tsserver",
 					"eslint",
+					"emmet_language_server",
 				},
 			})
 		end,
@@ -30,6 +31,7 @@ return {
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 			})
+
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
 				on_attach = function(_, bufnr)
@@ -38,6 +40,10 @@ return {
 						command = "EslintFixAll",
 					})
 				end,
+			})
+
+			lspconfig.emmet_language_server.setup({
+				capabilities = capabilities,
 			})
 
 			-- globals
