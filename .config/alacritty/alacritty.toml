@@ -3,7 +3,7 @@ import = [
 ]
 
 [env]
-TERM = "screen-256color"
+TERM = "xterm-256color"
 
 [window]
 option_as_alt = "OnlyLeft" # other values are None, OnlyRight, Both
