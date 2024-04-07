@@ -14,5 +14,6 @@ return {
 
     vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal left<CR>")
     vim.keymap.set("n", "<leader>gs", ":Neotree git_status reveal float<CR>")
+    vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal float<CR>")
   end,
 }
