@@ -1,3 +1,11 @@
+-- return {
+-- 	"nvim-tree/nvim-tree.lua",
+-- 	config = function()
+-- 		require("nvim-tree").setup()
+-- 		vim.keymap.set("n", "<leader>n", ":NvimTreeFocus<CR>")
+-- 	end,
+-- }
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -14,6 +22,6 @@ return {
 
     vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal left<CR>")
     vim.keymap.set("n", "<leader>gs", ":Neotree git_status reveal float<CR>")
-    vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal float<CR>")
+    vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal left<CR>")
   end,
 }
