@@ -1,3 +1,4 @@
 Brewfile.lock.json
 lazy-lock.json
 btop.log
+.config/tmux/plugins
