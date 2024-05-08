@@ -14,6 +14,7 @@ return {
           "tsserver",
           "eslint",
           "emmet_language_server",
+          "stylelint_lsp",
         },
       })
     end,
@@ -44,6 +45,19 @@ return {
 
       lspconfig.emmet_language_server.setup({
         capabilities = capabilities,
+      })
+
+      lspconfig.stylelint_lsp.setup({
+        filetypes = { "css", "scss" },
+        root_dir = require("lspconfig").util.root_pattern("package.json", ".git"),
+        settings = {
+          stylelintplus = {
+            -- see available options in stylelint-lsp documentation
+          },
+        },
+        on_attach = function(client)
+          client.server_capabilities.document_formatting = false
+        end,
       })
 
       -- globals
