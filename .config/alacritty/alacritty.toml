@@ -9,7 +9,7 @@ TERM = "xterm-256color"
 option_as_alt = "OnlyLeft" # other values are None, OnlyRight, Both
 
 [font]
-normal = { family = "SauceCodePro Nerd Font Mono", style = "Regular" }
+normal = { family = "SauceCodePro NFM", style = "Regular" }
 size = 14
 offset = { x = 0, y = 2 }
 
