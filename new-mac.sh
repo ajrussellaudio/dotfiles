@@ -43,12 +43,6 @@ if command -v nvim &> /dev/null; then
   git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 fi
 
-if [ ! $ZSH ]; then
-  echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
-  rm ~/.zshrc ~/.zprofile
-fi
-
 echo "Migrating dotfiles..."
 stow . 
 
