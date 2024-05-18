@@ -1,8 +1,17 @@
+# Confused?
+# https://www.youtube.com/watch?v=ud7YxC33Z3w&t=5s
+# https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Integrate Homebrew
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Set the directory we want to store zinit and plugins
@@ -24,6 +33,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -54,6 +64,8 @@ setopt hist_find_no_dups
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # App aliases
 alias k='clear'
@@ -72,7 +84,6 @@ elif command -v batcat > /dev/null; then
 fi
 
 # Folder aliases
-
 create_or_cd () {
   [ ! -d $1 ] && mkdir $1
   cd $1
@@ -83,4 +94,7 @@ learn () { create_or_cd ~/Documents/learning }
 play () { create_or_cd ~/Documents/playground }
 oss () { create_or_cd ~/Documents/open-source }
 cfg () { create_or_cd ~/dotfiles } 
+
+# Shell integrations
+eval "$(fzf --zsh)"
 
