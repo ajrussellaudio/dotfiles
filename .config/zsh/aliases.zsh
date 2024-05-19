@@ -25,3 +25,12 @@ learn () { create_or_cd ~/Documents/learning }
 play () { create_or_cd ~/Documents/playground }
 oss () { create_or_cd ~/Documents/open-source }
 cfg () { create_or_cd ~/dotfiles } 
+
+set -o AUTO_CD
+alias ...="../.."
+alias ....="../../.."
+alias .....="../../../.."
+alias ......="../../../../.."
+alias .......="../../../../../.."
+alias ........="../../../../../../.."
+alias .........="../../../../../../../.."
