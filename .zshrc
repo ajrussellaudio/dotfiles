@@ -51,13 +51,6 @@ zinit snippet OMZP::git
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^[[A' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[[B' history-search-forward
-
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
@@ -77,37 +70,13 @@ zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
-# App aliases
-alias k='clear'
-
-alias ls="eza"
-alias ll="eza -alh"
-
-TREE_OPTIONS="--tree --group-directories-first --ignore-glob=\"node_modules|.git\""
-alias tree="eza $TREE_OPTIONS"
-alias treea="eza --all $TREE_OPTIONS"
-
-if command -v bat > /dev/null; then
-  alias cat="bat"
-elif command -v batcat > /dev/null; then
-  alias cat="batcat"
-fi
-
-# Folder aliases
-create_or_cd () {
-  [ ! -d $1 ] && mkdir $1
-  cd $1
-}
-
-work () { create_or_cd ~/Documents/working }
-learn () { create_or_cd ~/Documents/learning }
-play () { create_or_cd ~/Documents/playground }
-oss () { create_or_cd ~/Documents/open-source }
-cfg () { create_or_cd ~/dotfiles } 
-
 # Shell integrations
 eval "$(fzf --zsh)"
 
 # Node Version Manager
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Personal preferences
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/keybindings.zsh
