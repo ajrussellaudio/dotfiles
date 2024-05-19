@@ -10,7 +10,7 @@ alias treea="eza --all $TREE_OPTIONS"
 
 alias cat="bat"
 
-export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}'"
+export FZF_DEFAULT_OPTS="--preview 'bat --plain --color=always {}'"
 
 alias f="fzf"
 
