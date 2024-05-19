@@ -46,10 +46,6 @@ fi
 echo "Migrating dotfiles..."
 stow . 
 
-echo "Installing NVM..."
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-
 if command -v bat &> /dev/null; then
   echo "Building bat cache..."
   bat cache --build 
