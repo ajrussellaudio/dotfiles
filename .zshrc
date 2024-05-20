@@ -43,6 +43,8 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-completions \
   atinit"export NVM_COMPLETION=true" \
       lukechilds/zsh-nvm \
+  atclone"source fzf-git.sh" \
+      junegunn/fzf-git.sh \
       Aloxaf/fzf-tab
 
 # Add in snippets
@@ -76,6 +78,23 @@ eval "$(fzf --zsh)"
 # Node Version Manager
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Use fd instead of fzf 
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
 
 # Personal preferences
 source ~/.config/zsh/aliases.zsh
