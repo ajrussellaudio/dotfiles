@@ -14,6 +14,8 @@ export FZF_DEFAULT_OPTS="--preview 'bat --plain --color=always {}'"
 
 alias f="fzf"
 
+alias grep="rg"
+
 # Folder aliases
 create_or_cd () {
   [ ! -d $1 ] && mkdir $1
