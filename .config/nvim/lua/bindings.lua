@@ -15,6 +15,10 @@ map("n", "#", "#zz", opts)
 map("n", "g*", "g*zz", opts)
 map("n", "g#", "g#zz", opts)
 
+-- Zoom to up and down
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+
 -- Clear search on Esc
 map("n", "<Esc>", ":nohlsearch<CR>", opts)
 
@@ -23,20 +27,20 @@ map("v", "Y", ":w !pbcopy<CR><CR>")
 
 -- Trouble recommended
 map("n", "<leader>xx", function()
-	require("trouble").toggle()
+  require("trouble").toggle()
 end, opts)
 map("n", "<leader>xw", function()
-	require("trouble").toggle("workspace_diagnostics")
+  require("trouble").toggle("workspace_diagnostics")
 end, opts)
 map("n", "<leader>xd", function()
-	require("trouble").toggle("document_diagnostics")
+  require("trouble").toggle("document_diagnostics")
 end, opts)
 map("n", "<leader>xq", function()
-	require("trouble").toggle("quickfix")
+  require("trouble").toggle("quickfix")
 end, opts)
 map("n", "<leader>xl", function()
-	require("trouble").toggle("loclist")
+  require("trouble").toggle("loclist")
 end, opts)
 map("n", "gR", function()
-	require("trouble").toggle("lsp_references")
+  require("trouble").toggle("lsp_references")
 end, opts)
