@@ -73,9 +73,18 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # Shell integrations
 eval "$(fzf --zsh)"
 
+# Set Neovim as editor
+export EDITOR="nvim"
+
 # Node Version Manager
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# Tmuxifier if exists
+if [ -d "$HOME/.config/tmux/plugins/tmuxifier/bin" ]; then
+  export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
+  eval "$(tmuxifier init -)"
+fi
 
 # Personal preferences
 source ~/.config/zsh/aliases.zsh
