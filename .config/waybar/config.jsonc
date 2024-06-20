@@ -1,7 +1,7 @@
 // -*- mode: jsonc -*-
 {
   "spacing": 4, // Gaps between modules (4px)
-  "modules-left": ["hyprland/workspaces", "custom/media"],
+  "modules-left": ["hyprland/workspaces", "custom/spotify"],
   "modules-center": ["hyprland/window"],
   "modules-right": ["network", "cpu", "memory", "temperature", "clock"],
   "hyprland/workspaces": {
@@ -48,16 +48,19 @@
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
-  "custom/media": {
+  "custom/spotify": {
     "format": "{icon} {}",
+    "escape": true,
     "return-type": "json",
     "max-length": 40,
-    "format-icons": {
-      "spotify": "",
-      "default": "🎜",
-    },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
-    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    // "interval": 30, // Remove this if your script is endless and write in loop
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "killall spotify",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl -p spotify next",
+    "on-scroll-down": "playerctl -p spotify previous",
+    // "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec": "$HOME/.config/waybar/mediaplayer.py", // Script in resources/custom_modules folder
+    "exec-if": "pgrep spotify",
   },
 }
