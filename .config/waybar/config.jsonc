@@ -1,5 +1,6 @@
 // -*- mode: jsonc -*-
 {
+  "start_hidden": true,
   "spacing": 4, // Gaps between modules (4px)
   "modules-left": ["hyprland/workspaces", "custom/spotify"],
   "modules-center": ["hyprland/window"],
