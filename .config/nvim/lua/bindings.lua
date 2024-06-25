@@ -22,8 +22,11 @@ map("n", "<C-u>", "<C-u>zz", opts)
 -- Clear search on Esc
 map("n", "<Esc>", ":nohlsearch<CR>", opts)
 
--- Copy to system clipboard
+-- Copy to system clipboard (Mac only)
 map("v", "Y", ":w !pbcopy<CR><CR>")
+
+-- View Nerd Font glyphs
+map("n", "<leader>f,", ":Nerdy<CR>")
 
 -- Trouble recommended
 map("n", "<leader>xx", function()
