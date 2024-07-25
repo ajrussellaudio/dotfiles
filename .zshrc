@@ -90,3 +90,4 @@ fi
 # Personal preferences
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/keybindings.zsh
+eval "$(zellij setup --generate-auto-start zsh)"
