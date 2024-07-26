@@ -20,11 +20,11 @@ return {
 				},
 				sections = {
 					lualine_a = { "mode" },
-					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename" },
+					lualine_b = { "branch", "diff" },
+					lualine_c = { "diagnostics" },
 					lualine_x = { "filetype" },
-					lualine_y = { "progress" },
-					lualine_z = { "location" },
+					lualine_y = { "location" },
+					lualine_z = { "buffers" },
 				},
 				inactive_sections = {
 					lualine_a = {},
