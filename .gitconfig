@@ -1,3 +1,5 @@
 [user]
 	name = Alan Russell
 	email = ajrussellaudio@gmail.com
+[pull]
+	rebase = true

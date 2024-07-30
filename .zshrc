@@ -37,13 +37,14 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
       zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
+  atload"_zsh_autosuggest_start; \
+      bindkey '^n' autosuggest-accept" \
       zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions \
   atinit"export NVM_COMPLETION=true" \
       lukechilds/zsh-nvm \
-      Aloxaf/fzf-tab
+      Aloxaf/fzf-tab;
 
 # Add in snippets
 zinit wait lucid for \

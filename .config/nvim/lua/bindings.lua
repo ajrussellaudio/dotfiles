@@ -47,3 +47,7 @@ end, opts)
 map("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end, opts)
+
+-- Tab through open buffers
+map("n", "<Tab>", ":bnext<CR>")
+map("n", "<S-Tab>", ":bprev<CR>")
