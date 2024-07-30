@@ -28,26 +28,6 @@ map("v", "Y", ":w !pbcopy<CR><CR>")
 -- View Nerd Font glyphs
 map("n", "<leader>f,", ":Nerdy<CR>")
 
--- Trouble recommended
-map("n", "<leader>xx", function()
-  require("trouble").toggle()
-end, opts)
-map("n", "<leader>xw", function()
-  require("trouble").toggle("workspace_diagnostics")
-end, opts)
-map("n", "<leader>xd", function()
-  require("trouble").toggle("document_diagnostics")
-end, opts)
-map("n", "<leader>xq", function()
-  require("trouble").toggle("quickfix")
-end, opts)
-map("n", "<leader>xl", function()
-  require("trouble").toggle("loclist")
-end, opts)
-map("n", "gR", function()
-  require("trouble").toggle("lsp_references")
-end, opts)
-
 -- Tab through open buffers
 map("n", "<Tab>", ":bnext<CR>")
 map("n", "<S-Tab>", ":bprev<CR>")
