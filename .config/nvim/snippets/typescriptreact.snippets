@@ -1,0 +1,46 @@
+# Hooks
+snippet _us useState
+	const [${1:state}, set${2}] = useState(${3:initialState});
+
+snippet _ue useEffect
+	useEffect(() => {
+		${1}
+	});
+
+snippet _urd useReducer
+	const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer});
+
+snippet _urf useRef
+	const ${1:refContainer} = useRef(${2:initialValue});
+
+snippet _uct useContext
+	const ${1:value} = useContext(${2:MyContext});
+
+snippet _ucb useCallback
+	const ${1:memoizedCallback} = useCallback(
+	() => {
+		${2}(${3})
+	},
+	[$3]
+	);
+
+snippet _um useMemo
+	const ${1:memoizedCallback} = useMemo(() => ${2}(${3}), [$3]);
+
+snippet _ui useImperativeHandle
+	useImperativeHandle(${1:ref}, ${2:createHandle});
+
+snippet _ud useDebugValue
+	useDebugValue(${1:value});
+
+# Components
+snippet _c component
+	export function ${1:Component}() {
+	  ${2:state}
+
+		return (
+			<>
+				${3}
+			</>
+		)
+	}
