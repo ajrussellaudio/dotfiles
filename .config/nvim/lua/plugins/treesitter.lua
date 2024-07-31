@@ -36,7 +36,11 @@ return {
 		})
 
 		vim.filetype.add({
-			pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+			filename = {},
+			pattern = {
+				["Dockerfile.*"] = "dockerfile",
+				[".*/hypr/.*%.conf"] = "hyprlang",
+			},
 		})
 	end,
 }
