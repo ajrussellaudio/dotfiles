@@ -5,7 +5,7 @@ base-devel
 bat
 btop
 btrfs-progs
-clipboard
+clipse
 cmatrix
 dolphin
 dunst
@@ -48,6 +48,7 @@ waybar
 wev
 wget
 wireless_tools
+wl-clipboard
 wofi
 xclip
 xdg-desktop-portal-hyprland
