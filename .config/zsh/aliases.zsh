@@ -16,7 +16,7 @@ alias f="fzf"
 
 alias grep="rg"
 
-alias ff='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+alias nv='nvim $(fd --hidden --type f --exclude .git | fzf-tmux -p --reverse)'
 
 # Folder aliases
 create_or_cd () {
