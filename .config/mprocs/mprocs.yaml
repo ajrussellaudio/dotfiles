@@ -1,0 +1,4 @@
+hide_keymap_window: true
+keymap_procs:
+  <q>: {c: quit-or-ask} 
+  <C-q>: {c: quit} 
