@@ -22,9 +22,10 @@ alias f="fzf"
 
 alias cat="bat"
 alias catp="bat --plain"
-alias catf='bat $(fd --hidden --type f --exclude .git | fzf-tmux -p --reverse)'
+alias catf="fd --hidden --type f --exclude .git | fzf --reverse --bind 'enter:become(bat {})'"
 
-alias nv='nvim $(fd --hidden --type f --exclude .git | fzf-tmux -p --reverse)'
+# alias nv='nvim $(fd --hidden --type f --exclude .git | fzf-tmux -p --reverse)'
+alias nv="fd --hidden --type f --exclude .git | fzf --reverse --bind 'enter:become(nvim {})'"
 
 # Folder aliases
 create_or_cd () {
