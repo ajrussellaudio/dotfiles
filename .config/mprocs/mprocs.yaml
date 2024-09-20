@@ -1,4 +1,5 @@
 hide_keymap_window: true
+scrollback: 5000
 keymap_procs:
-  <q>: {c: quit-or-ask} 
-  <C-q>: {c: quit} 
+  <q>: { c: quit-or-ask }
+  <C-q>: { c: quit }
