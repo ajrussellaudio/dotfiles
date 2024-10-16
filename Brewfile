@@ -1,13 +1,10 @@
 tap "arl/arl"
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 tap "homebrew/services"
 tap "sst/tap"
 tap "yakitrak/yakitrak"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# GNU compiler collection
-brew "gcc"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Modern, maintained replacement for ls
@@ -18,6 +15,8 @@ brew "fd"
 brew "flac"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU compiler collection
+brew "gcc"
 # GitHub command-line tool
 brew "gh"
 # Syntax-highlighting pager for git and diff output
