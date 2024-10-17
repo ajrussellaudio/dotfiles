@@ -5,10 +5,11 @@
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-# font_family      SauceCodePro Nerd Font Regular
-# bold_font        SauceCodePro Nerd Font Bold
-# italic_font      SauceCodePro Nerd Font Italic
-# bold_italic_font SauceCodePro Nerd Font Bold Italic
+
+font_family      SauceCodePro Nerd Font Regular
+bold_font        SauceCodePro Nerd Font Bold
+italic_font      SauceCodePro Nerd Font Italic
+bold_italic_font SauceCodePro Nerd Font Bold Italic
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -2471,11 +2472,3 @@ background_blur 60
 # Catppuccin-Mocha
 include current-theme.conf
 # END_KITTY_THEME
-
-
-# BEGIN_KITTY_FONTS
-font_family      family='SauceCodePro Nerd Font' postscript_name=SauceCodeProNF
-bold_font        family='SauceCodePro Nerd Font' postscript_name=SauceCodeProNF-Bold
-italic_font      family='SauceCodePro Nerd Font' postscript_name=SauceCodeProNF-Italic
-bold_italic_font family='SauceCodePro Nerd Font' postscript_name=SauceCodeProNF-BoldItalic
-# END_KITTY_FONTS
