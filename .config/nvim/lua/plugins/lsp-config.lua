@@ -11,7 +11,6 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
-					"tsserver",
 					"eslint",
 					"emmet_language_server",
 					"stylelint_lsp",
@@ -33,10 +32,6 @@ return {
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
-
-			-- lspconfig.tsserver.setup({
-			-- 	capabilities = capabilities,
-			-- })
 
 			lspconfig.eslint.setup({
 				capabilities = capabilities,
