@@ -58,6 +58,8 @@ cask "elgato-control-center"
 cask "elgato-stream-deck"
 cask "font-monaspace-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
+# Web browser
+cask "google-chrome"
 # GPU-based terminal emulator
 cask "kitty"
 # Open-source software for live streaming and screen recording
