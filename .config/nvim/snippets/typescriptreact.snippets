@@ -45,6 +45,21 @@ snippet _c component
 		)
 	}
 
+# Testing
+snippet _ct component_test
+    import { render } from '@testing-library/react';
+    import { ComponentProps } from 'react';
+    import ${1:MyComponent} from './${1:MyComponent}';
+
+    const render${1:MyComponent} = (props: ComponentProps<typeof ${1:MyComponent}>) =>
+        render(<${1:MyComponent} {...props} />);
+
+    describe('${1:MyComponent}', () => {
+        it('first test', () => {
+            render${1:MyComponent}({});
+        });
+    });
+
 # Advanced debugging
 snippet _cl console.log
 	console.log(${1});
