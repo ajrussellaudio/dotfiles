@@ -35,15 +35,15 @@ snippet _ud useDebugValue
 
 # Components
 snippet _c component
-	export function ${1:Component}() {
-	  ${2:state}
+    const ${1:MyComponent} = () => {
+        return (
+            <>
+                I am the ${1:MyComponent}
+            </>
+        )
+    }
 
-		return (
-			<>
-				${3}
-			</>
-		)
-	}
+    export default ${1:MyComponent};
 
 # Testing
 snippet _ct component_test
