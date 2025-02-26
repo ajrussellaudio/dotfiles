@@ -39,8 +39,12 @@ return {
 			filename = {},
 			pattern = {
 				["Dockerfile.*"] = "dockerfile",
+				["*.docker"] = "dockerfile",
 				[".*/hypr/.*%.conf"] = "hyprlang",
 			},
 		})
+
+        -- vim.treesitter.language.register("<tree-sitter>", "<filetype>")
+		vim.treesitter.language.register("dockerfile", "docker")
 	end,
 }
