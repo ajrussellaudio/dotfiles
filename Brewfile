@@ -1,8 +1,6 @@
 tap "arl/arl"
 tap "homebrew/bundle"
 tap "homebrew/services"
-tap "sst/tap"
-tap "yakitrak/yakitrak"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -23,14 +21,14 @@ brew "gh"
 brew "git-delta"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Run multiple commands in parallel
 brew "mprocs"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -47,7 +45,6 @@ brew "zsh"
 brew "zsh-completions"
 # Git in your tmux status bar.
 brew "arl/arl/gitmux"
-brew "sst/tap/sst"
 # Chromium based browser
 cask "arc"
 # Opensource IDE for exploring and testing api's
@@ -60,6 +57,8 @@ cask "font-monaspace-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
 # Web browser
 cask "google-chrome"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # GPU-based terminal emulator
 cask "kitty"
 # Open-source software for live streaming and screen recording
