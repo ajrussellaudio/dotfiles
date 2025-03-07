@@ -45,6 +45,32 @@ snippet _c component
 
     export default ${1:MyComponent};
 
+snippet _cs component stories
+    import { Meta, StoryObj } from '@storybook/react';
+    import ${1:MyComponent} from './${1:MyComponent}';
+
+    type Story = StoryObj<typeof ${1:MyComponent}>;
+
+    const meta: Meta<typeof ${1:MyComponent}> = {
+        title: '${1:MyComponent}',
+        component: ${1:MyComponent},
+        parameters: {
+            docs: {
+                description: {
+                    component: '',
+                },
+            },
+            design: {
+                type: 'figma',
+                url: '',
+            },
+        },
+    };
+
+    export default meta;
+
+    export const Default: Story = {};
+
 # Testing
 snippet _ct component_test
     import { render } from '@testing-library/react';
