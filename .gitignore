@@ -2,3 +2,5 @@ Brewfile.lock.json
 lazy-lock.json
 btop.log
 .config/tmux/plugins
+.config/zsh/local.zsh
+.config/zsh/secrets.zsh
