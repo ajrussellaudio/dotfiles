@@ -81,3 +81,7 @@ fi
 # Personal preferences
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/keybindings.zsh
+
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/catppuccin_mocha.omp.json)"
+fi
