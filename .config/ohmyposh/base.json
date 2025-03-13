@@ -76,24 +76,6 @@
           "style": "plain",
           "foreground": "p:yellow",
           "template": "<p:text></> {{ .FormattedMs }} "
-        },
-        {
-          "type": "docker",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "p:blue",
-          "template": "  {{ .Context }} "
-        },
-        {
-          "type": "aws",
-          "style": "plain",
-          "foreground": "p:peach",
-          "template": "  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
-        },
-        {
-          "type": "node",
-          "style": "plain",
-          "foreground": "p:green"
         }
       ]
     },
