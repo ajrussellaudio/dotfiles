@@ -30,9 +30,12 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 return {
-    {
-        "hrsh7th/cmp-nvim-lsp",
-    },
+    { "neovim/nvim-lspconfig" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-path" },
+    { "hrsh7th/cmp-cmdline" },
+    { "saadparwaiz1/cmp_luasnip" },
     {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -94,26 +97,18 @@ return {
                     end, { "i", "s" }),
                 }),
                 sources = cmp.config.sources({
-                    { name = "copilot", group_index = 2 },
+                    { name = "copilot",  group_index = 2 },
                     -- Other Sources
                     { name = "nvim_lsp", group_index = 2 },
-                    { name = "buffer", group_index = 2 },
-                    { name = "path", group_index = 2 },
-                    { name = "luasnip", group_index = 2 },
+                    { name = "buffer",   group_index = 2 },
+                    { name = "path",     group_index = 2 },
+                    { name = "luasnip",  group_index = 2 },
                 }),
                 formatting = {
-                    fields = { "kind", "abbr", "menu" },
+                    fields = { "kind", "abbr" },
                     format = function(_, vim_item)
                         -- Kind icons
                         vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                        -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                        -- vim_item.menu = ({
-                        -- 	nvim_lsp = "[LSP]",
-                        -- 	luasnip = "[Snippet]",
-                        -- 	buffer = "[Buffer]",
-                        -- 	path = "[Path]",
-                        -- 	copilot = "[Copilot]",
-                        -- })[entry.source.name]
                         return vim_item
                     end,
                 },
@@ -133,17 +128,10 @@ return {
                 sources = cmp.config.sources({
                     { name = "path" },
                 }, {
-                        { name = "cmdline" },
-                    }),
+                    { name = "cmdline" },
+                }),
                 matching = { disallow_symbol_nonprefix_matching = false },
             })
-
-            -- -- Set up lspconfig.
-            -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            -- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-            -- require("lspconfig")["<YOUR_LSP_SERVER>"].setup({
-            --     capabilities = capabilities,
-            -- })
         end,
     },
 }
