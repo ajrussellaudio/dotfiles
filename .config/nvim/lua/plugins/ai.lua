@@ -27,7 +27,7 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
-			-- "folke/trouble.nvim", -- optional
+			"folke/trouble.nvim", -- optional
 			"nvim-telescope/telescope.nvim",
 		},
 	},
