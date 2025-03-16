@@ -3,7 +3,4 @@ font-family = SauceCodePro NF
 font-size = 14
 cursor-invert-fg-bg = true
 
-macos-option-as-alt = true
-
-keybind = alt+left=unbind
-keybind = alt+right=unbind
+macos-option-as-alt = right
