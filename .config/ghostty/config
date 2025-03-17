@@ -2,3 +2,5 @@ theme = catppuccin-mocha
 font-family = SauceCodePro NF
 font-size = 14
 cursor-invert-fg-bg = true
+
+macos-option-as-alt = right
