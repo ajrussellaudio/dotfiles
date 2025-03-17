@@ -65,12 +65,6 @@ export NVM_DIR="${XDG_CONFIG_HOME:-${HOME}/.nvm}/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Tmuxifier if exists
-if [ -d "$HOME/.config/tmux/plugins/tmuxifier/bin" ]; then
-  export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
-  eval "$(tmuxifier init -)"
-fi
-
 # Personal preferences
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/keybindings.zsh
