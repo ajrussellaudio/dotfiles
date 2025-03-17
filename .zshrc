@@ -69,6 +69,11 @@ export NVM_DIR="${XDG_CONFIG_HOME:-${HOME}/.nvm}/nvm"
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/keybindings.zsh
 
+# Rancher Desktop for work
+if [ -d "$HOME/.rd" ]; then
+  export PATH="$HOME/.rd/bin:$PATH"
+fi
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
 fi
