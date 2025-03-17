@@ -3,7 +3,7 @@
 # https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
 
 # Integrate Homebrew
-if [[ -f "/opt/homebrew/bin/brew" ]] then
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
@@ -12,45 +12,38 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
-# https://zdharma-continuum.github.io/zinit/wiki/Example-Minimal-Setup/
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
-      zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start; \
-      bindkey '^n' autosuggest-accept" \
-      zsh-users/zsh-autosuggestions \
+  zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start; bindkey '^n' autosuggest-accept" \
+  zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
-      zsh-users/zsh-completions \
+  zsh-users/zsh-completions \
   atinit"export NVM_COMPLETION=true" \
-      lukechilds/zsh-nvm \
-      Aloxaf/fzf-tab;
+  lukechilds/zsh-nvm \
+  Aloxaf/fzf-tab
 
 # Add in snippets
 zinit wait lucid for \
-        OMZL::git.zsh \
+  OMZL::git.zsh \
   atload"unalias grv" \
-        OMZP::git
+  OMZP::git
 
-# History
+# History settings
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups \
+  hist_save_no_dups hist_ignore_dups hist_find_no_dups
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -68,9 +61,9 @@ export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Node Version Manager
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="${XDG_CONFIG_HOME:-${HOME}/.nvm}/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Tmuxifier if exists
 if [ -d "$HOME/.config/tmux/plugins/tmuxifier/bin" ]; then
