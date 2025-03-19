@@ -1,0 +1,91 @@
+# Hooks
+snippet _us useState
+	const [${1:state}, set${2}] = useState(${3:initialState});
+
+snippet _ue useEffect
+	useEffect(() => {
+		${1}
+	});
+
+snippet _urd useReducer
+	const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer});
+
+snippet _urf useRef
+	const ${1:refContainer} = useRef(${2:initialValue});
+
+snippet _uct useContext
+	const ${1:value} = useContext(${2:MyContext});
+
+snippet _ucb useCallback
+	const ${1:memoizedCallback} = useCallback(
+	() => {
+		${2}(${3})
+	},
+	[$3]
+	);
+
+snippet _um useMemo
+	const ${1:memoizedCallback} = useMemo(() => ${2}(${3}), [$3]);
+
+snippet _ui useImperativeHandle
+	useImperativeHandle(${1:ref}, ${2:createHandle});
+
+snippet _ud useDebugValue
+	useDebugValue(${1:value});
+
+# Components
+snippet _c component
+    const ${1:MyComponent} = () => {
+        return (
+            <>
+                I am the ${1:MyComponent}
+            </>
+        )
+    }
+
+    export default ${1:MyComponent};
+
+snippet _cs component stories
+    import { Meta, StoryObj } from '@storybook/react';
+    import ${1:MyComponent} from './${1:MyComponent}';
+
+    type Story = StoryObj<typeof ${1:MyComponent}>;
+
+    const meta: Meta<typeof ${1:MyComponent}> = {
+        title: '${1:MyComponent}',
+        component: ${1:MyComponent},
+        parameters: {
+            docs: {
+                description: {
+                    component: '',
+                },
+            },
+            design: {
+                type: 'figma',
+                url: '',
+            },
+        },
+    };
+
+    export default meta;
+
+    export const Default: Story = {};
+
+# Testing
+snippet _ct component_test
+    import { render } from '@testing-library/react';
+    import { ComponentProps } from 'react';
+    import ${1:MyComponent} from './${1:MyComponent}';
+
+    const render${1:MyComponent} = (props: ComponentProps<typeof ${1:MyComponent}>) =>
+        render(<${1:MyComponent} {...props} />);
+
+    describe('${1:MyComponent}', () => {
+        it('first test', () => {
+            render${1:MyComponent}({});
+        });
+    });
+
+# Advanced debugging
+snippet _cl console.log
+	console.log(${1});
