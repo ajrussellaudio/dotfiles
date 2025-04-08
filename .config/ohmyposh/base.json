@@ -1,104 +1,99 @@
 {
-  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "palette": {
-    "base": "#1e1e2e",
-    "blue": "#89b4fa",
-    "crust": "#11111b",
-    "flamingo": "#f2cdcd",
-    "green": "#a6e3a1",
-    "lavender": "#b4befe",
-    "mantle": "#181825",
-    "maroon": "#eba0ac",
-    "mauve": "#cba6f7",
-    "peach": "#fab387",
-    "pink": "#f5c2e7",
-    "red": "#f38ba8",
-    "rosewater": "#f5e0dc",
-    "sapphire": "#74c7ec",
-    "sky": "#89dceb",
-    "teal": "#94e2d5",
-    "text": "#cdd6f4",
-    "yellow": "#f9e2af"
-  },
-  "upgrade": {
-    "source": "cdn",
-    "interval": "168h",
-    "auto": false,
-    "notice": false
-  },
-  "blocks": [
-    {
-      "type": "prompt",
-      "alignment": "left",
-      "newline": true,
-      "segments": [
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "palette": {
+        "base": "#1e1e2e",
+        "blue": "#89b4fa",
+        "crust": "#11111b",
+        "flamingo": "#f2cdcd",
+        "green": "#a6e3a1",
+        "lavender": "#b4befe",
+        "mantle": "#181825",
+        "maroon": "#eba0ac",
+        "mauve": "#cba6f7",
+        "peach": "#fab387",
+        "pink": "#f5c2e7",
+        "red": "#f38ba8",
+        "rosewater": "#f5e0dc",
+        "sapphire": "#74c7ec",
+        "sky": "#89dceb",
+        "teal": "#94e2d5",
+        "text": "#cdd6f4",
+        "yellow": "#f9e2af"
+    },
+    "upgrade": {
+        "source": "cdn",
+        "interval": "168h",
+        "auto": false,
+        "notice": false
+    },
+    "blocks": [
         {
-          "properties": {
-            "home_icon": "~",
-            "style": "full"
-          },
-          "template": "{{ if .Segments.Git.Ref }}<p:blue>{{ .Segments.Git.RepoName }}</>{{ .Path | replace .Segments.Git.Dir \"\" }}{{ else }}{{ .Path }}{{ end }} ",
-          "foreground": "p:mauve",
-          "type": "path",
-          "style": "plain"
+            "type": "prompt",
+            "alignment": "left",
+            "newline": true,
+            "segments": [
+                {
+                    "properties": {
+                        "home_icon": "~",
+                        "style": "full"
+                    },
+                    "template": "{{ if .Segments.Git.Ref }}<p:blue>{{ .Segments.Git.RepoName }}</>{{ .Path | replace .Segments.Git.Dir \"\" }}{{ else }}{{ .Path }}{{ end }} ",
+                    "foreground": "p:mauve",
+                    "type": "path",
+                    "style": "plain"
+                },
+                {
+                    "properties": {
+                        "branch_icon": " ",
+                        "cherry_pick_icon": " ",
+                        "commit_icon": " ",
+                        "merge_icon": " ",
+                        "no_commits_icon": " ",
+                        "rebase_icon": " ",
+                        "revert_icon": " ",
+                        "tag_icon": "󰓹 ",
+                        "fetch_status": true,
+                        "fetch_upstream_icon": true
+                    },
+                    "template": "{{ .HEAD }}{{if .BranchStatus }} <p:yellow>{{ .BranchStatus }}</>{{ end }}{{ if .Working.Changed }} <p:red> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:green> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
+                    "background": "transparent",
+                    "foreground": "p:lavender",
+                    "type": "git",
+                    "style": "plain"
+                }
+            ]
         },
         {
-          "properties": {
-            "branch_icon": " ",
-            "cherry_pick_icon": " ",
-            "commit_icon": " ",
-            "fetch_status": false,
-            "fetch_upstream_icon": false,
-            "merge_icon": " ",
-            "no_commits_icon": " ",
-            "rebase_icon": " ",
-            "revert_icon": " ",
-            "tag_icon": "󰓹 "
-          },
-          "template": "{{ .HEAD }}{{if .BranchStatus }} <p:yellow>{{ .BranchStatus }}</>{{ end }}{{ if .Working.Changed }} <p:red> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:green> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
-          "background": "transparent",
-          "foreground": "p:lavender",
-          "type": "git",
-          "style": "plain",
-          "properties": {
-            "fetch_status": true,
-            "fetch_upstream_icon": true
-          }
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "alignment": "right",
-      "segments": [
+            "type": "prompt",
+            "alignment": "right",
+            "segments": [
+                {
+                    "type": "executiontime",
+                    "style": "plain",
+                    "foreground": "p:yellow",
+                    "template": "<p:text></> {{ .FormattedMs }} "
+                }
+            ]
+        },
         {
-          "type": "executiontime",
-          "style": "plain",
-          "foreground": "p:yellow",
-          "template": "<p:text></> {{ .FormattedMs }} "
+            "type": "prompt",
+            "alignment": "left",
+            "newline": true,
+            "segments": [
+                {
+                    "type": "text",
+                    "style": "plain",
+                    "template": "❯",
+                    "foreground": "p:yellow"
+                }
+            ]
         }
-      ]
+    ],
+    "transient_prompt": {
+        "background": "transparent",
+        "foreground": "p:yellow",
+        "template": "❯ "
     },
-    {
-      "type": "prompt",
-      "alignment": "left",
-      "newline": true,
-      "segments": [
-        {
-          "type": "text",
-          "style": "plain",
-          "template": "❯",
-          "foreground": "p:yellow"
-        }
-      ]
-    }
-  ],
-  "transient_prompt": {
-    "background": "transparent",
-    "foreground": "p:yellow",
-    "template": "❯ ",
-    "newline": true
-  },
-  "version": 3,
-  "final_space": true
+    "version": 3,
+    "final_space": true
 }
