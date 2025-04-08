@@ -74,6 +74,13 @@ if [ -d "$HOME/.rd" ]; then
   export PATH="$HOME/.rd/bin:$PATH"
 fi
 
+# Tmuxifier if installed
+if [ -d "$HOME/.config/tmux/plugins/tmuxifier" ]; then
+    export PATH="$HOME/.config/tmux/plugins/tmuxifier/bin:$PATH"
+    eval "$(tmuxifier init -)"
+    export TMUXIFIER_LAYOUT_PATH="$HOME/.config/tmux/layouts"
+fi
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
 fi
