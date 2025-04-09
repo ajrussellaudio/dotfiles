@@ -1,4 +1,8 @@
 Brewfile.lock.json
 lazy-lock.json
 btop.log
+
+.config/github-copilot
+.config/nvm
+.config/op
 .config/tmux/plugins
