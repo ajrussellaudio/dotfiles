@@ -12,7 +12,7 @@ if initialize_session "elevate"; then
     split_h 20
 
     new_window "run"
-    run_cmd 'mprocs "yarn dev" "yarn test" "yarn storybook --no-open" "yarn lint" "yarn typecheck --watch"'
+    run_cmd 'yarn install && mprocs "yarn dev" "yarn test" "yarn storybook --no-open" "yarn lint" "yarn typecheck --watch"'
     split_h 20
 
     select_window 1
