@@ -35,6 +35,8 @@ brew "stow"
 brew "subversion"
 # Terminal multiplexer
 brew "tmux"
+# JavaScript package manager
+brew "yarn"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Additional completion definitions for zsh
