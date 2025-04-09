@@ -1,6 +1,4 @@
-tap "arl/arl"
-tap "homebrew/bundle"
-tap "homebrew/services"
+tap "jandedobbeleer/oh-my-posh"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -37,33 +35,28 @@ brew "stow"
 brew "subversion"
 # Terminal multiplexer
 brew "tmux"
-# Blazing fast terminal file manager written in Rust, based on async I/O
-brew "yazi"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Git in your tmux status bar.
-brew "arl/arl/gitmux"
+# Prompt theme engine for any shell
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Command-line interface for 1Password
+cask "1password-cli"
 # Chromium based browser
 cask "arc"
-# Opensource IDE for exploring and testing api's
+# Open source IDE for exploring and testing APIs
 cask "bruno"
 # Control your Elgato key lights
 cask "elgato-control-center"
 # Assign keys, and then decorate and label them
 cask "elgato-stream-deck"
-cask "font-monaspace-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
-# Web browser
-cask "google-chrome"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
-# GPU-based terminal emulator
-cask "kitty"
-# Open-source software for live streaming and screen recording
-cask "obs"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
+# Web browser
+cask "google-chrome"
 # Music streaming service
 cask "spotify"
