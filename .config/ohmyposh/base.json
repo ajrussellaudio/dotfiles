@@ -83,7 +83,7 @@
                 {
                     "type": "text",
                     "style": "plain",
-                    "template": "❯",
+                    "template": "",
                     "foreground": "p:yellow"
                 }
             ]
@@ -92,7 +92,12 @@
     "transient_prompt": {
         "background": "transparent",
         "foreground": "p:yellow",
-        "template": "❯ "
+        "template": " "
+    },
+    "secondary_prompt": {
+        "background": "transparent",
+        "foreground": "p:yellow",
+        "template": " "
     },
     "version": 3,
     "final_space": true
