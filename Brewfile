@@ -3,6 +3,8 @@ tap "jandedobbeleer/oh-my-posh"
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# USB programmer
+brew "dfu-util"
 # Modern, maintained replacement for ls
 brew "eza"
 # Simple, fast and user-friendly alternative to find
@@ -17,6 +19,8 @@ brew "gcc"
 brew "gh"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Render markdown on the CLI
+brew "glow"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Lazier way to manage everything docker
@@ -27,16 +31,26 @@ brew "lazygit"
 brew "mprocs"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Fast, disk space efficient package manager
+brew "pnpm"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Audio time stretcher tool and library
+brew "rubberband"
+# SOund eXchange: universal sound sample translator
+brew "sox"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 # Version control system designed to be a better CVS
 brew "subversion"
+# Simplified and community-driven man pages
+brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # JavaScript package manager
 brew "yarn"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Additional completion definitions for zsh
