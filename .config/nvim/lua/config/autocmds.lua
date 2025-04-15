@@ -7,6 +7,19 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+-- Custom macros
+
+local esc = vim.api.nvim_replace_termcodes("<Esc>", true, true, true)
+
+vim.api.nvim_create_augroup("JSLogMacro", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "JSLogMacro",
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  callback = function()
+    vim.fn.setreg("l", "yoconsole.log('" .. esc .. "pa:" .. esc .. "la, " .. esc .. "p")
+  end,
+})
+
 -- Reddit thread:
 -- https://www.reddit.com/r/neovim/comments/1jpbc7s/disable_virtual_text_if_there_is_diagnostic_in/
 vim.diagnostic.config({
