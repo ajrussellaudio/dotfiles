@@ -66,8 +66,11 @@ export NVM_DIR="${XDG_CONFIG_HOME:-${HOME}/.nvm}/nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Personal preferences
-source ~/.config/zsh/aliases.zsh
-source ~/.config/zsh/keybindings.zsh
+for script in ~/.config/zsh/*.zsh; do
+  if [ -f "$script" ]; then
+    source "$script"
+  fi
+done
 
 # Rancher Desktop for work
 if [ -d "$HOME/.rd" ]; then
