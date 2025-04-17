@@ -50,3 +50,7 @@ alias .........="../../../../../../../.."
 
 # Give Copilot shell access
 eval "$(gh copilot alias -- zsh)"
+
+cht() {
+    curl -sS https://cht.sh/:cht.sh | bash -s -- "$@"
+}
