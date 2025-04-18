@@ -1,6 +1,7 @@
 theme = catppuccin-mocha
-font-family = SauceCodePro NF
+font-family = CommitMono Nerd Font
 font-size = 14
+adjust-cell-height = 10%
 cursor-invert-fg-bg = true
 
 macos-option-as-alt = right

@@ -69,6 +69,7 @@ cask "bruno"
 cask "elgato-control-center"
 # Assign keys, and then decorate and label them
 cask "elgato-stream-deck"
+cask "font-commit-mono-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
