@@ -33,10 +33,14 @@ brew "mprocs"
 brew "neovim"
 # Fast, disk space efficient package manager
 brew "pnpm"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Audio time stretcher tool and library
 brew "rubberband"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
 # SOund eXchange: universal sound sample translator
 brew "sox"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
