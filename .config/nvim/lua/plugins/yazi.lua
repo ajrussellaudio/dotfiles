@@ -15,9 +15,9 @@ return {
         desc = "Open yazi at the current file",
       },
       {
-        "<leader>cw",
+        "<leader>_",
         "<cmd>Yazi cwd<cr>",
-        desc = "Open the file manager in nvim's working directory",
+        desc = "Yazi - working directory",
       },
       {
         "<c-up>",
