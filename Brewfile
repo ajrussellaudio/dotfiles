@@ -3,6 +3,8 @@ tap "jandedobbeleer/oh-my-posh"
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # USB programmer
 brew "dfu-util"
 # Modern, maintained replacement for ls
