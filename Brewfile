@@ -1,4 +1,6 @@
 tap "jandedobbeleer/oh-my-posh"
+# Code searching, linting, rewriting
+brew "ast-grep"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
