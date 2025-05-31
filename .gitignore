@@ -6,3 +6,6 @@ btop.log
 .config/nvm
 .config/op
 .config/tmux/plugins
+
+# ncspot cache
+userstate.cbor
