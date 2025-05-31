@@ -87,3 +87,5 @@ cask "ghostty"
 cask "google-chrome"
 # Music streaming service
 cask "spotify"
+# Web browser with built-in email client focusing on customization and control
+cask "vivaldi"
