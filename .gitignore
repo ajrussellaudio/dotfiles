@@ -9,3 +9,6 @@ btop.log
 
 # ncspot cache
 userstate.cbor
+
+# private files
+twinkl.*
