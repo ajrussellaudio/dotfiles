@@ -1,27 +1,34 @@
 [user]
-  name = Alan Russell
-  email = ajrussellaudio@gmail.com
+    name = Alan Russell
+    email = ajrussellaudio@gmail.com
+	signingkey = /Users/alanrussell/.ssh/id_ed25519.pub
+
+[gpg]
+	format = ssh
+
+[commit]
+    gpgsign = true
 
 [pull]
-  rebase = true
+    rebase = true
 
 [core]
-  pager = delta
-	excludesfile = /Users/alanrussell/.gitignore_global
+    pager = delta
+    excludesfile = /Users/alanrussell/.gitignore_global
 
 [interactive]
-  diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [include]
-  path = "~/.config/delta/themes/catppuccin.gitconfig"
+    path = "~/.config/delta/themes/catppuccin.gitconfig"
 
 [delta]
-  dark = true
-  features = catppuccin-mocha
+    dark = true
+    features = catppuccin-mocha
   ; side-by-side = true
 
 [merge]
-  conflictstyle = diff3
+    conflictstyle = diff3
 
 [diff]
-  colorMoved = default
+    colorMoved = default
