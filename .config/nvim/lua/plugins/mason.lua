@@ -12,6 +12,7 @@ return {
       "markdown-toc",
       "markdownlint-cli2",
       "prettier",
+      "prettierd",
       "shfmt",
       "stylelint-lsp",
       "stylua",
