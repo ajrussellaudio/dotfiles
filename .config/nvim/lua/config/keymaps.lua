@@ -4,3 +4,12 @@
 
 -- https://www.reddit.com/r/neovim/s/ijMNrMACqz
 vim.keymap.set("n", "ycc", "yygccp", { remap = true, desc = "Duplicate and comment line" })
+
+-- Terraform alignment
+vim.keymap.set(
+  { "v" },
+  "<leader>=",
+  "!sed 's/=/PXXXQYYY/'| column -t -s 'PXXX' | sed 's/QYYY\\s*/= /' | sed 's/  = /=/'<CR>",
+  { desc = "Align to = char" }
+)
+vim.keymap.set({ "v" }, "<leader>+", ":s/ \\+= / = /g<CR>", { desc = "Remove = char alignment" })
