@@ -17,6 +17,7 @@ return {
       "stylelint-lsp",
       "stylua",
       "taplo",
+      "terraform-lsp",
       "vtsls",
       "yaml-language-server",
     },
