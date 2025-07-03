@@ -31,6 +31,8 @@ brew "jq"
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Run multiple commands in parallel
 brew "mprocs"
 # Cross-platform ncurses Spotify client written in Rust

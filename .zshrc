@@ -27,8 +27,6 @@ zinit wait lucid light-mode for \
   zsh-users/zsh-autosuggestions \
   blockf atpull'zinit creinstall -q .' \
   zsh-users/zsh-completions \
-  atinit"export NVM_COMPLETION=true" \
-  lukechilds/zsh-nvm \
   Aloxaf/fzf-tab
 
 # Add in snippets
@@ -60,10 +58,8 @@ export EDITOR="nvim"
 # Set ~/.config as config directory for most stuff
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Node Version Manager
-export NVM_DIR="${XDG_CONFIG_HOME:-${HOME}/.nvm}/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# jdx/mise - dev tools
+eval "$($(which mise) activate zsh)"
 
 # Personal preferences
 for script in ~/.config/zsh/*.zsh; do
