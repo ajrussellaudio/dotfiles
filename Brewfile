@@ -35,8 +35,6 @@ brew "lazygit"
 brew "mise"
 # Run multiple commands in parallel
 brew "mprocs"
-# Cross-platform ncurses Spotify client written in Rust
-brew "ncspot"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Fast, disk space efficient package manager

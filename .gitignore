@@ -5,11 +5,13 @@ btop.log
 .config/github-copilot
 .config/nvm
 .config/op
-.config/tmux/plugins
+
+# Installed submodules
+shared/.config/tmux/plugins
+shared/.config/github-copilot
 
 # ncspot cache
 userstate.cbor
 
 # private files
 twinkl.*
-.config/configstore/update-notifier-@google/gemini-cli.json
