@@ -15,4 +15,3 @@ userstate.cbor
 
 # private files
 twinkl.*
-.config/configstore/update-notifier-@google/gemini-cli.json
