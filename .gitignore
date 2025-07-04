@@ -5,7 +5,10 @@ btop.log
 .config/github-copilot
 .config/nvm
 .config/op
-.config/tmux/plugins
+
+# Installed submodules
+tmux/.config/tmux/plugins
+git/.config/github-copilot
 
 # ncspot cache
 userstate.cbor
