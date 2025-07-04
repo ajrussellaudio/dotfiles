@@ -1,23 +1,29 @@
 # dotfiles
 
-## Pacman install from list
+My dotfiles innit.
+
+## Mac
+
+- Install [homebrew](https://brew.sh/)
+- Install all the things
 
 ```bash
-$ pacman -Qqe > pkglist.txt
+brew bundle install
 ```
 
-https://wiki.archlinux.org/title/pacman/Tips_and_tricks#List_of_installed_packages
-
-## Pacman install from list
+- Stow the Mac config
 
 ```bash
-$ pacman -S --needed - < pkglist.txt
+stow shared mac
 ```
 
-or
+## Linux
+
+> TODO: package list?
+
+- Start with [Omarchy](https://omarchy.org/)
+- Stow the Linux config
 
 ```bash
-$ pacman -S --needed $(comm -12 <(pacman -Slq | sort) <(sort pkglist.txt))
+stow shared linux
 ```
-
-https://wiki.archlinux.org/title/pacman/Tips_and_tricks#Install_packages_from_a_list
