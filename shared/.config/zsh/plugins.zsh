@@ -46,12 +46,6 @@ install_plugins_if_missing() {
 # Ensure plugins are installed on startup
 install_plugins_if_missing
 
-# --- Completion Styling ---
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-
 # --- Completion Initialization ---
 # Add zsh-completions to fpath and initialize compinit for faster startup
 # See: https://github.com/zsh-users/zsh-completions#usage
@@ -65,7 +59,6 @@ if [ -n "$ZSH_PLUGINS_DIR/zsh-completions/src/_git" ]; then
 else
   compinit
 fi
-
 
 # --- Source Plugins and Configure ---
 
@@ -83,3 +76,9 @@ source "$ZSH_PLUGINS_DIR/fzf-tab/fzf-tab.plugin.zsh"
 source "$ZSH_PLUGINS_DIR/ohmyzsh/lib/git.zsh"
 source "$ZSH_PLUGINS_DIR/ohmyzsh/plugins/git/git.plugin.zsh"
 unalias grv # Remove alias that might conflict
+
+# --- Completion Styling ---
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --oneline --all --color=always $realpath'

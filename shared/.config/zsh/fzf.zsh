@@ -7,3 +7,13 @@ export FZF_DEFAULT_OPTS=" \
 --tmux 50%"
 
 alias f="fzf --preview 'bat --plain --color=always --tabs=2 {}'"
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'eza --tree --all --color=always {}' ;;
+    *)            fzf "$@" ;;
+  esac
+}
