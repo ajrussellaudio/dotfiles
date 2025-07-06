@@ -82,6 +82,12 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)EZA_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --oneline --all --color=always $realpath'
+zstyle ':fzf-tab:complete:rm:*' fzf-preview 'if [ -d $realpath ]; \
+        then eza --oneline --all --icons --color=always $realpath; \
+        elif [ -f $realpath ]; \
+        then bat --plain --color=always --tabs=2 $realpath; \
+        else echo "Preview not available."; \
+        fi'
 zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'if [ -d $realpath ]; \
         then eza --oneline --all --icons --color=always $realpath; \
         elif [ -f $realpath ]; \

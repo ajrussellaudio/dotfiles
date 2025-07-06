@@ -14,6 +14,12 @@ _fzf_comprun() {
 
   case "$command" in
     cd)           fzf "$@" --preview 'eza --tree --all --color=always {}' ;;
+    rm)         fzf "$@" --preview 'if [ -d {} ]; \
+        then eza --tree --all --icons --color=always {}; \
+        elif [ -f {} ]; \
+        then bat --plain --color=always --tabs=2 {}; \
+        else echo "Preview not available."; \
+        fi' ;;
     nvim)         fzf "$@" --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
         elif [ -f {} ]; \
