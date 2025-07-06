@@ -4,4 +4,4 @@ git:
   paging:
     # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
     colorArg: always
-    pager: "delta --dark --paging=never --tabs 2"
+    pager: "delta --features catppuccin-mocha --paging=never --tabs 2"
