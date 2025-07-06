@@ -7,33 +7,37 @@ if [[ -f "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# Plugin manager replacement
+ZSH_PLUGINS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
 
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
+clone_plugin() {
+    local repo_url="$1"
+    local plugin_name="$(basename "$repo_url")"
+    local plugin_path="$ZSH_PLUGINS_DIR/$plugin_name"
+    [ -d "$plugin_path" ] || git clone --depth 1 "$repo_url" "$plugin_path"
+}
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+clone_plugin "https://github.com/zdharma-continuum/fast-syntax-highlighting"
+clone_plugin "https://github.com/zsh-users/zsh-autosuggestions"
+clone_plugin "https://github.com/zsh-users/zsh-completions"
+clone_plugin "https://github.com/Aloxaf/fzf-tab"
+clone_plugin "https://github.com/ohmyzsh/ohmyzsh"
 
-# Add in zsh plugins
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-  zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start; bindkey '^n' autosuggest-accept" \
-  zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
-  zsh-users/zsh-completions \
-  Aloxaf/fzf-tab
+# Initialize completions so plugins can use them
+fpath=($ZSH_PLUGINS_DIR/zsh-completions/src $fpath)
+autoload -U compinit && compinit
 
-# Add in snippets
-zinit wait lucid for \
-  OMZL::git.zsh \
-  atload"unalias grv" \
-  OMZP::git
+# Source plugins
+source "$ZSH_PLUGINS_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+source "$ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+bindkey '^n' autosuggest-accept
+
+source "$ZSH_PLUGINS_DIR/fzf-tab/fzf-tab.plugin.zsh"
+
+source "$ZSH_PLUGINS_DIR/ohmyzsh/lib/git.zsh"
+source "$ZSH_PLUGINS_DIR/ohmyzsh/plugins/git/git.plugin.zsh"
+unalias grv
 
 # History settings
 HISTSIZE=5000
