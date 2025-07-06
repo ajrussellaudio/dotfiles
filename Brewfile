@@ -11,6 +11,8 @@ brew "coreutils"
 brew "dfu-util"
 # Modern, maintained replacement for ls
 brew "eza"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Free lossless audio codec
