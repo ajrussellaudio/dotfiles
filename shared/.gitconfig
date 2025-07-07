@@ -9,7 +9,7 @@
 [user]
 	name = Alan Russell
 	email = ajrussellaudio@gmail.com
-	signingkey = /Users/alanrussell/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519.pub
 
 [gpg]
 	format = ssh
