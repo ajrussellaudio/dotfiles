@@ -16,3 +16,4 @@ userstate.cbor
 # private files
 twinkl.*
 secrets.zsh
+shared/.config/gh/hosts.yml
