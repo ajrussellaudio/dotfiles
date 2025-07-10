@@ -14,6 +14,6 @@ shared/.config/github-copilot
 userstate.cbor
 
 # private files
-twinkl.*
+work/
 secrets.zsh
 shared/.config/gh/hosts.yml
