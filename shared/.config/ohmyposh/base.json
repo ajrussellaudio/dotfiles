@@ -76,6 +76,18 @@
             ]
         },
         {
+            "type": "rprompt",
+            "segments": [
+                {
+                    "type": "node",
+                    "style": "plain",
+                    "foreground": "p:green",
+                    "fetch_package_manager": true,
+                    "template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }} "
+                }
+            ]
+        },
+        {
             "type": "prompt",
             "alignment": "left",
             "newline": true,
