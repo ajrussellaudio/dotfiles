@@ -12,14 +12,23 @@
                 "AWS_DOCUMENTATION_PARTITION": "aws"
             },
             "disabled": false,
-            "autoApprove": []
+            "trust": true
         },
         "context7": {
             "command": "npx",
             "args": [
                 "-y",
                 "@upstash/context7-mcp"
-            ]
+            ],
+            "trust": true
+        },
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ],
+            "trust": true
         }
     },
     "preferredEditor": "neovim"
