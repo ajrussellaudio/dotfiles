@@ -2,6 +2,7 @@
 claude-code = "latest"
 node = "latest"
 "npm:@google/gemini-cli" = "latest"
+"npm:mcp-hub" = "latest"
 python = "latest"
 terraform = "latest"
 uv = "latest"
