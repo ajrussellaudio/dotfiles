@@ -3,6 +3,7 @@ node = "latest"
 "npm:@google/gemini-cli" = "latest"
 "npm:mcp-hub" = "latest"
 python = "latest"
+rust = "latest"
 terraform = "latest"
 uv = "latest"
 
