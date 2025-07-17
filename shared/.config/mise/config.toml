@@ -1,5 +1,5 @@
 [tools]
-node = "latest"
+node = "lts"
 "npm:@google/gemini-cli" = "latest"
 "npm:mcp-hub" = "latest"
 python = "latest"
