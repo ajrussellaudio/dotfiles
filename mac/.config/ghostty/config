@@ -1,6 +1,6 @@
 theme = catppuccin-mocha
-font-family = CommitMono Nerd Font
-font-size = 14
+font-family = SauceCodePro Nerd Font
+font-size = 16
 adjust-cell-height = 10%
 cursor-invert-fg-bg = true
 
