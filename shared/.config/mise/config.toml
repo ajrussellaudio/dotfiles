@@ -1,6 +1,7 @@
 [tools]
 node = "lts"
 "npm:@google/gemini-cli" = "latest"
+"npm:@sanity/cli" = "latest"
 "npm:mcp-hub" = "latest"
 "npm:sanity" = "latest"
 python = "latest"
