@@ -1,7 +1,11 @@
 theme = catppuccin-mocha
-font-family = SauceCodePro Nerd Font
-font-size = 16
-adjust-cell-height = 10%
+font-family = VictorMono NF
+font-size = 14
+font-style = SemiBold
+font-style-italic = SemiBold Italic
+font-style-bold = Bold
+font-style-bold-italic = Bold Italic
+adjust-cell-height = 5%
 cursor-invert-fg-bg = true
 
 macos-option-as-alt = right
