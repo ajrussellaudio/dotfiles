@@ -5,6 +5,8 @@
 -- vim.opt.shiftwidth = 2 -- Size of an indent
 -- vim.opt.tabstop = 2 -- Number of spaces tabs count for
 
+vim.g.lazyvim_eslint_auto_format = true
+
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
