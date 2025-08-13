@@ -31,9 +31,9 @@ return {
           -- { section = 'header' },
           {
             section = 'terminal',
-            cmd = "shuf -er -n 600 ╱ ╲ | tr -d '\n'",
+            cmd = 'stormy -city Glasgow',
             hl = 'header',
-            padding = 1,
+            indent = 12,
           },
           { section = 'keys', gap = 1, padding = 1 },
           { section = 'startup' },
