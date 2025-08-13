@@ -1,5 +1,3 @@
--- TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
 require 'config.options'
 require 'config.keymaps'
 require 'config.autocmd'
@@ -8,7 +6,7 @@ require 'lazy-init'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup {
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
