@@ -1,6 +1,7 @@
 require 'config.options'
 require 'config.keymaps'
 require 'config.autocmd'
+require 'config.diagnostics_virtual_line'
 
 require 'lazy-init'
 
