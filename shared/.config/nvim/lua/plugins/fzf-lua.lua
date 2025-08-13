@@ -3,7 +3,12 @@ return {
     'ibhagwan/fzf-lua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('fzf-lua').setup { 'fzf-tmux' }
+      require('fzf-lua').setup {
+        'fzf-tmux',
+        grep = {
+          hidden = true,
+        },
+      }
       local fzf_lua = require 'fzf-lua'
       -- Meta
       vim.keymap.set('n', '<leader><leader>', fzf_lua.global, { desc = 'Search all (fzf global)' })
