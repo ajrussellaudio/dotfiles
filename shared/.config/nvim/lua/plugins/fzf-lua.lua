@@ -6,7 +6,12 @@ return {
       require('fzf-lua').setup {
         'fzf-tmux',
         grep = {
+          prompt = 'grep > ',
           hidden = true,
+        },
+        oldfiles = {
+          prompt = 'Recents > ',
+          cwd_only = true,
         },
       }
       local fzf_lua = require 'fzf-lua'
@@ -23,6 +28,12 @@ return {
       vim.keymap.set('n', '<leader>sf', fzf_lua.files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>sb', fzf_lua.buffers, { desc = '[S]earch [B]uffers' })
       vim.keymap.set('n', '<leader>s.', fzf_lua.oldfiles, { desc = '[S]earch Recent Files' })
+      vim.keymap.set('n', '<leader>s!', function()
+        fzf_lua.oldfiles {
+          prompt = 'All Recents > ',
+          cwd_only = false,
+        }
+      end, { desc = '[S]earch Recent Files (everywhere)' })
 
       -- grep
       vim.keymap.set('n', '<leader>sg', fzf_lua.live_grep, { desc = '[S]earch by [G]rep' })
