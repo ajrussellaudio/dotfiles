@@ -32,6 +32,9 @@ return {
         return '%2l:%-2v'
       end
 
+      -- Smooth scrolling etc
+      require('mini.animate').setup()
+
       -- File browser
       require('mini.files').setup {
         vim.keymap.set('n', '-', function()

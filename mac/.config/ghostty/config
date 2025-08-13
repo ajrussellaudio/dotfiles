@@ -1,4 +1,5 @@
 theme = catppuccin-mocha
+
 font-family = VictorMono NF
 font-size = 14
 font-style = SemiBold
@@ -6,6 +7,9 @@ font-style-italic = SemiBold Italic
 font-style-bold = Bold
 font-style-bold-italic = Bold Italic
 adjust-cell-height = 5%
-cursor-invert-fg-bg = true
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
 
 macos-option-as-alt = right
