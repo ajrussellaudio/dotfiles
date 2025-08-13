@@ -1,0 +1,7 @@
+provider = "OpenMeteo"
+api_key = ""
+city = "Glasgow"
+units = "metric"
+showcityname = true
+use_colors = false
+compact = false

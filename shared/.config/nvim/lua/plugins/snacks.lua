@@ -31,7 +31,7 @@ return {
           -- { section = 'header' },
           {
             section = 'terminal',
-            cmd = 'stormy -city Glasgow',
+            cmd = 'stormy',
             hl = 'header',
             indent = 12,
           },
