@@ -43,6 +43,36 @@ return {
         MiniFiles.open(path)
         MiniFiles.reveal_cwd()
       end, { desc = 'Open mini.files' })
+
+      -- Visual guide to block scope and indentation
+      require('mini.indentscope').setup {
+        symbol = '┆',
+      }
+      -- Alternatives: ~
+      --   • left aligned solid
+      --     • `▏`
+      --     • `▎` (default)
+      --     • `▍`
+      --     • `▌`
+      --     • `▋`
+      --     • `▊`
+      --     • `▉`
+      --     • `█`
+      --   • center aligned solid
+      --     • `│`
+      --     • `┃`
+      --   • right aligned solid
+      --     • `▕`
+      --     • `▐`
+      --   • center aligned dashed
+      --     • `╎`
+      --     • `╏`
+      --     • `┆`
+      --     • `┇`
+      --     • `┊`
+      --     • `┋`
+      --   • center aligned double
+      --     • `║`
     end,
   },
 }
