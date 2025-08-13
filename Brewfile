@@ -1,3 +1,5 @@
+tap "ascii-draw/ascii-tree"
+tap "charmbracelet/tap"
 tap "jandedobbeleer/oh-my-posh"
 # Code searching, linting, rewriting
 brew "ast-grep"
@@ -51,6 +53,8 @@ brew "rubberband"
 brew "sevenzip"
 # SOund eXchange: universal sound sample translator
 brew "sox"
+# Minimal, customizable and neofetch-like weather CLI based on rainy
+brew "stormy"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 # Version control system designed to be a better CVS
@@ -67,12 +71,16 @@ brew "yazi"
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
+# A command line tool for drawing tree structures with ascii characters.
+brew "ascii-draw/ascii-tree/astree"
+# A powerful terminal-based AI assistant for developers, providing intelligent coding assistance directly in your terminal.
+brew "charmbracelet/tap/crush"
 # Prompt theme engine for any shell
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
-# Command-line interface for 1Password
-cask "1password-cli"
+# Command-line helper for the 1Password password manager
+cask "1password-cli@beta"
 # Chromium based browser
 cask "arc"
 # Open source IDE for exploring and testing APIs
@@ -83,10 +91,13 @@ cask "elgato-control-center"
 cask "elgato-stream-deck"
 cask "font-commit-mono-nerd-font"
 cask "font-sauce-code-pro-nerd-font"
+cask "font-victor-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Web browser
 cask "google-chrome"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Music streaming service
 cask "spotify"
 # Web browser with built-in email client focusing on customization and control
