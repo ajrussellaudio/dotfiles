@@ -17,7 +17,10 @@ return {
       }
 
       if (vim.g.colors_name or ''):find 'catppuccin' then
-        opts.highlights = require('catppuccin.groups.integrations.bufferline').get()
+        local ok, catppuccin_bufferline = pcall(require, 'catppuccin.groups.integrations.bufferline')
+        if ok and type(catppuccin_bufferline.get) == 'function' then
+          opts.highlights = catppuccin_bufferline.get()
+        end
       end
 
       vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
