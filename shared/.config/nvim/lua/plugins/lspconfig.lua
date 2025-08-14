@@ -193,11 +193,44 @@ return {
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {},
+        vtsls = {
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.jsx',
+          },
+          settings = {
+            complete_func_calls = true,
+            vtsls = {
+              -- https://github.com/yioneko/vtsls/blob/main/packages/service/configuration.schema.json
+              -- enableMoveToFileCodeAction = true, -- Enable 'Move to file' code action. This action enables user to move code to existing file, but requires corresponding handling on the client side.
+              autoUseWorkspaceTsdk = true, -- Automatically use workspace version of TypeScript lib on startup. By default, the bundled version is used for intelliSense.
+              experimental = {
+                maxInlayHintLength = 30, -- Maximum length of single inlay hint. Note that hint is simply truncated if the limit is exceeded. Do not set this if your client already handles overly long hints gracefully.
+                completion = {
+                  enableServerSideFuzzyMatch = true, -- Execute fuzzy match of completion items on server side. Enable this will help filter out useless completion items from tsserver.
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = 'always' },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
+        },
         eslint = {},
         tailwindcss = {},
         --
