@@ -37,6 +37,7 @@ return {
 
       -- File browser
       require('mini.files').setup {}
+      vim.keymap.set('n', '_', MiniFiles.open, { desc = 'Open mini.files (cwd)' })
       vim.keymap.set('n', '-', function()
         local buf_name = vim.api.nvim_buf_get_name(0)
         local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
