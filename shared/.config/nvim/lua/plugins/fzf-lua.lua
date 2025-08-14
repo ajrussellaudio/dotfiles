@@ -13,6 +13,9 @@ return {
           prompt = 'Recents > ',
           cwd_only = true,
         },
+        buffers = {
+          prompt = 'Buffers > ',
+        },
         lsp = {
           prompt_postfix = ' > ',
           cwd_only = true,
