@@ -13,6 +13,13 @@ return {
           prompt = 'Recents > ',
           cwd_only = true,
         },
+        lsp = {
+          prompt_postfix = ' > ',
+          cwd_only = true,
+        },
+        diagnostics = {
+          prompt = 'Diagnostics > ',
+        },
       }
       local fzf_lua = require 'fzf-lua'
       -- Meta
