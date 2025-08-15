@@ -1,10 +1,13 @@
 return {
   {
     'ibhagwan/fzf-lua',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'echasnovski/mini.nvim' },
     config = function()
       require('fzf-lua').setup {
         'fzf-tmux',
+        defaults = {
+          file_icons = 'mini',
+        },
         grep = {
           prompt = 'grep > ',
           hidden = true,
