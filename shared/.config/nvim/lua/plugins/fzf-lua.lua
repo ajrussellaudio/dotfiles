@@ -18,6 +18,7 @@ return {
         },
         buffers = {
           prompt = 'Buffers > ',
+          formatter = 'path.filename_first', -- places file name first
         },
         lsp = {
           prompt_postfix = ' > ',
@@ -30,7 +31,7 @@ return {
       local fzf_lua = require 'fzf-lua'
       -- Meta
       vim.keymap.set('n', '<leader><leader>', fzf_lua.global, { desc = 'Search all (fzf global)' })
-      vim.keymap.set('n', '<leader>ss', fzf_lua.builtin, { desc = '[S]earch [S]elect Telescope' })
+      vim.keymap.set('n', '<leader>ss', fzf_lua.builtin, { desc = '[S]earch [S]elect picker' })
       vim.keymap.set('n', '<leader>sr', fzf_lua.resume, { desc = '[S]earch [R]esume' })
 
       -- Neovim
