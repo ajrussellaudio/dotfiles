@@ -50,6 +50,9 @@ return {
 
       -- grep
       vim.keymap.set('n', '<leader>sg', fzf_lua.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', function()
+        fzf_lua.live_grep { resume = true }
+      end, { desc = '[S]earch by [G]rep, resume' })
       vim.keymap.set('n', '<leader>sw', fzf_lua.grep_cword, { desc = '[S]earch current [w]ord' })
       vim.keymap.set('n', '<leader>sW', fzf_lua.grep_cWORD, { desc = '[S]earch current [W]ORD' })
       vim.keymap.set('n', '<leader>/', fzf_lua.lgrep_curbuf, { desc = 'Fuzzy search in current buffer' })
