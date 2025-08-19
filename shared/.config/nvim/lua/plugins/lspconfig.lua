@@ -90,16 +90,19 @@ return {
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', fzf_lua.lsp_document_symbols, 'Open Document Symbols')
+          map('grO', fzf_lua.lsp_document_symbols, 'Open Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gW', fzf_lua.lsp_live_workspace_symbols, 'Open Workspace Symbols')
+          map('grW', fzf_lua.lsp_live_workspace_symbols, 'Open Workspace Symbols')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('grt', fzf_lua.lsp_typedefs, '[G]oto [T]ype Definition')
+
+          -- TODO: show count?
+          require('which-key').add { 'gr', group = 'Code Actions' }
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.

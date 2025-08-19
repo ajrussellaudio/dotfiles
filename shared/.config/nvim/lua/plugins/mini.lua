@@ -25,6 +25,7 @@ return {
           replace = 'gsr', -- Replace surrounding
           update_n_lines = 'gsn', -- Update `n_lines`
         },
+        -- TODO: show count?
         require('which-key').add { 'gs', group = 'Surround' },
       }
 
