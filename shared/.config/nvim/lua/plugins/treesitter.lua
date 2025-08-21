@@ -36,4 +36,12 @@ return {
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+  {
+    'windwp/nvim-ts-autotag',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    ft = { 'html', 'javascriptreact', 'typescriptreact' },
+    opts = {},
+  },
 }
