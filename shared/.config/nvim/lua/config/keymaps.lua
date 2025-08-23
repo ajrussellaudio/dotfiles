@@ -59,7 +59,6 @@ map('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
 map('n', '<C-w>r', function()
   vim.cmd 'LspRestart'
-  vim.notify 'LSP Restarted'
 end, { silent = false, desc = 'LSP Restart' })
 
 map('n', 'K', function()

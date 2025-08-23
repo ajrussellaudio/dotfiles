@@ -59,9 +59,8 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         group = ts_start_group,
         pattern = ensure_installed,
-        callback = function(event)
+        callback = function()
           vim.treesitter.start()
-          vim.notify('Treesitter started: ' .. event.match)
         end,
       })
     end,
