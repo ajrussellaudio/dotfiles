@@ -78,6 +78,12 @@ return {
           exec_empty_query = true,
         })
       end)
+
+      -- Marks
+      vim.keymap.set({ 'n', 'v' }, '<leader>sm', function()
+        fzf_lua.marks { marks = '%a' }
+      end, { desc = '[S]earch user [M]arks' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>sM', fzf_lua.marks, { desc = '[S]earch all [M]arks' })
     end,
   },
 }
