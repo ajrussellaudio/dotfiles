@@ -64,6 +64,20 @@ return {
 
       -- Visual
       vim.keymap.set('v', '<leader>sg', fzf_lua.grep_visual, { desc = '[S]earch by [G]rep (visual selection)' })
+
+      -- Notifications
+      vim.keymap.set('n', '<leader>sn', function()
+        require('fzf-lua').fzf_exec(function(fzf_cb)
+          local history = require('fidget.notification').get_history()
+          for _, item in ipairs(history) do
+            fzf_cb(item.message)
+          end
+          fzf_cb()
+        end, {
+          prompt = 'Notifications > ',
+          exec_empty_query = true,
+        })
+      end)
     end,
   },
 }
