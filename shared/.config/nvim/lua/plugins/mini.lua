@@ -33,7 +33,14 @@ return {
       require('mini.animate').setup()
 
       -- File browser
-      require('mini.files').setup {}
+      require('mini.files').setup {
+        windows = {
+          preview = true,
+          width_focus = 40,
+          width_no_focus = 10,
+          width_preview = math.max(50, math.floor(vim.o.columns / 2)),
+        },
+      }
       vim.keymap.set('n', '_', MiniFiles.open, { desc = 'Open mini.files (cwd)' })
       vim.keymap.set('n', '-', function()
         local buf_name = vim.api.nvim_buf_get_name(0)
