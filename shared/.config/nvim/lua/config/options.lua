@@ -84,3 +84,7 @@ vim.o.confirm = true
 vim.o.expandtab = true -- Use spaces instead of tabs
 vim.o.tabstop = 2 -- Number of spaces tabs count for
 vim.o.shiftwidth = 2 -- Size of an indent
+
+-- Undercurl in terminals
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]
