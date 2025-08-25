@@ -2,8 +2,8 @@ theme = catppuccin-mocha
 
 font-family = VictorMono NF
 font-size = 14
-font-style = SemiBold
-font-style-italic = SemiBold Italic
+font-style = Regular
+font-style-italic =  Italic
 font-style-bold = Bold
 font-style-bold-italic = Bold Italic
 adjust-cell-height = 5%
