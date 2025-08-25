@@ -3,6 +3,10 @@ tap "charmbracelet/tap"
 tap "jandedobbeleer/oh-my-posh"
 # Code searching, linting, rewriting
 brew "ast-grep"
+# Securely store and access AWS credentials in development environments
+brew "aws-vault"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -63,6 +67,8 @@ brew "subversion"
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
+# Parser generator tool
+brew "tree-sitter-cli"
 # JavaScript package manager
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
