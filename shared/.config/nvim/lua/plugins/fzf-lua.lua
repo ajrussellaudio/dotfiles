@@ -3,14 +3,24 @@ return {
     'ibhagwan/fzf-lua',
     dependencies = { 'echasnovski/mini.nvim' },
     config = function()
+      local actions = require 'fzf-lua.actions'
+      local toggle_ignore_hidden = {
+        ['alt-i'] = { actions.toggle_ignore },
+        ['alt-h'] = { actions.toggle_hidden },
+      }
       require('fzf-lua').setup {
         'fzf-tmux',
         defaults = {
           file_icons = 'mini',
         },
+        files = {
+          actions = toggle_ignore_hidden,
+        },
         grep = {
           prompt = 'grep > ',
           hidden = true,
+          rg_opts = '--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --glob "!.git/" --glob "!node_modules/" -e ',
+          actions = toggle_ignore_hidden,
         },
         oldfiles = {
           prompt = 'Recents > ',
