@@ -9,6 +9,10 @@ end
 --  See `:help hlsearch`
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Saving
+map('n', '<leader>w', ':w<CR>', { desc = '[W]rite buffer (Save)' })
+map('n', '<leader>W', ':wa<CR>', { desc = '[W]rite all buffers (Save All)' })
+
 -- Diagnostic keymaps
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
