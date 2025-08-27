@@ -1,13 +1,28 @@
 [tools]
+
+# Runtimes
 node = "lts"
-"npm:@google/gemini-cli" = "latest"
-"npm:@sanity/cli" = "latest"
-"npm:mcp-hub" = "latest"
-"npm:sanity" = "latest"
 python = "latest"
 rust = "latest"
+
+# AI
+gemini-cli = "latest"
+claude-code = "latest"
+"npm:mcp-hub" = "latest"
+
+# Work
+"npm:@sanity/cli" = "latest"
+"npm:sanity" = "latest"
+
+# AWS
+aws-cli = "latest"
+aws-vault = "latest"
 terraform = "latest"
+
+# Package managers
+pnpm = "latest"
 uv = "latest"
+yarn = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
