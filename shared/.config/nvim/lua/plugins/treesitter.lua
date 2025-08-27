@@ -15,6 +15,12 @@ local ensure_installed = {
   'groq', -- best parser ever
   'regex',
 
+  -- Go
+  'go',
+  'gomod',
+  'gowork',
+  'gosum',
+
   -- Neovim
   'lua',
   'luadoc',
