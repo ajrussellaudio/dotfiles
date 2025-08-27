@@ -3,6 +3,7 @@
 # Runtimes
 node = "lts"
 python = "latest"
+go = "latest"
 rust = "latest"
 
 # AI
