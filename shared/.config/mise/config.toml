@@ -10,7 +10,7 @@ gemini-cli = "latest"
 claude-code = "latest"
 "npm:mcp-hub" = "latest"
 
-# Work
+# CMS
 "npm:@sanity/cli" = "latest"
 "npm:sanity" = "latest"
 
@@ -18,6 +18,10 @@ claude-code = "latest"
 aws-cli = "latest"
 aws-vault = "latest"
 terraform = "latest"
+terragrunt = "latest"
+
+# Containers
+rancher = "latest"
 
 # Package managers
 pnpm = "latest"
