@@ -72,6 +72,9 @@ return {
       vim.keymap.set('n', '<leader>sd', fzf_lua.diagnostics_document, { desc = '[S]earch document [D]iagnostics' })
       vim.keymap.set('n', '<leader>sD', fzf_lua.diagnostics_workspace, { desc = '[S]earch workspace [D]iagnostics' })
 
+      -- To be done (can't say TODO)
+      vim.keymap.set('n', '<leader>st', ':TodoFzfLua<CR>', { desc = '[S]earch [T]odo comments' })
+
       -- Visual
       vim.keymap.set('v', '<leader>sg', fzf_lua.grep_visual, { desc = '[S]earch by [G]rep (visual selection)' })
 
