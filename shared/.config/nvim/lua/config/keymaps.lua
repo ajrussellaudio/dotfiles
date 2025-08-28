@@ -46,7 +46,11 @@ local diagnostic_goto = function(next, severity)
   local count = next and 1 or -1
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    vim.diagnostic.jump { count = count, severity = severity, float = true }
+    vim.diagnostic.jump { count = count, severity = severity, float = {
+      scope = 'cursor',
+      border = 'rounded',
+      severity = severity,
+    } }
   end
 end
 map('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
@@ -62,5 +66,9 @@ map('n', '<C-w>r', function()
 end, { silent = false, desc = 'LSP Restart' })
 
 map('n', 'K', function()
-  vim.lsp.buf.hover { border = 'single' }
-end)
+  vim.lsp.buf.hover {
+    border = 'single',
+    focusable = true,
+    close_events = { 'CursorMoved', 'BufLeave', 'WinLeave' },
+  }
+end, { desc = 'Hover' })
