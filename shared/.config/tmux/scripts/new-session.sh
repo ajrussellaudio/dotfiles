@@ -9,6 +9,6 @@ tput sgr0
 # zsh
 read "NAME?New session name: "
 
-tmux new-session -d -s $NAME
-tmux switch-client -t $NAME
+tmux new-session -d -s "$NAME"
+tmux switch-client -t "$NAME"
 
