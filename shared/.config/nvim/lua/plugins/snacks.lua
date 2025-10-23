@@ -31,6 +31,7 @@ return {
             indent = 10,
           },
           { section = 'keys', gap = 1, padding = 1 },
+          { section = 'recent_files', cwd = true, padding = 1 },
           { section = 'startup' },
         },
       },
