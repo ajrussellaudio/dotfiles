@@ -8,9 +8,6 @@ return {
 
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['markdown'] = { 'markdownlint' }
-      lint.linters_by_ft['javascript'] = { 'eslint' }
-      lint.linters_by_ft['typescript'] = { 'eslint' }
-      lint.linters_by_ft['typescriptreact'] = { 'eslint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
 
       -- However, note that this will enable a set of default linters,
