@@ -10,6 +10,7 @@ rust = "latest"
 gemini-cli = "latest"
 claude-code = "latest"
 "npm:mcp-hub" = "latest"
+"npm:@github/copilot" = "latest"
 
 # CMS
 "npm:@sanity/cli" = "latest"
