@@ -14,11 +14,15 @@ if initialize_session "dotfiles"; then
 
     window_root "$session_root/shared/.config/nvim"
     new_window "nvim"
-    run_cmd "nvim"
+    split_h 20
+    run_cmd "nvim" 1
+    select_pane 1
 
     window_root "$session_root/shared/.config/tmux"
     new_window "tmux"
-    run_cmd "nvim"
+    split_h 20
+    run_cmd "nvim" 1
+    select_pane 1
 
     select_window 1
 
