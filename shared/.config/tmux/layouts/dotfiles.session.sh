@@ -1,19 +1,26 @@
-# Set a custom session root path. Default is `$HOME`.
-# Must be called before `initialize_session`.
 session_root "~/dotfiles"
 
-# Create session with specified name if it does not already exist. If no
-# argument is given, session name will be based on layout file name.
+new_window_titled () {
+  window_root "$session_root/$1"
+  new_window $1
+}
+
 if initialize_session "dotfiles"; then
 
-    # Create a new window inline within session layout definition.
-    new_window "editor"
+    new_window "root"
+    split_h 20
+    run_cmd "nvim" 1
+    select_pane 1
 
-    # Load a defined window layout.
-    #load_window "example"
+    window_root "$session_root/shared/.config/nvim"
+    new_window "nvim"
+    run_cmd "nvim"
 
-    # Select the default active window on session creation.
-    #select_window 1
+    window_root "$session_root/shared/.config/tmux"
+    new_window "tmux"
+    run_cmd "nvim"
+
+    select_window 1
 
 fi
 
