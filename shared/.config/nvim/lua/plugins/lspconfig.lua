@@ -236,6 +236,9 @@ return {
         },
         eslint = {},
         tailwindcss = {},
+        bashls = {
+          filetypes = { 'bash', 'sh' },
+        },
         --
 
         lua_ls = {
