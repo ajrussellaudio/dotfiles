@@ -40,7 +40,6 @@ return {
       component_separators = '',
       section_separators = '',
       globalstatus = true,
-      disabled_filetypes = { statusline = { 'snacks_dashboard' } },
     })
 
     opts.sections = {
@@ -161,6 +160,21 @@ return {
         },
       },
     }
+
+    local dash_cwd = {
+      sections = {
+        lualine_y = {
+          function()
+            local session_root = vim.fn.environ()['TMUXIFIER_SESSION_ROOT']
+            local cwd = vim.fn.getcwd()
+            local local_cwd = vim.fn.fnamemodify(cwd, ':s?' .. session_root .. '?.?')
+            return local_cwd
+          end,
+        },
+      },
+      filetypes = { 'snacks_dashboard' },
+    }
+    opts.extensions = { dash_cwd }
 
     return opts
   end,
