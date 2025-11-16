@@ -27,6 +27,12 @@ if [ -d "$HOME/.config/tmux/plugins/tmuxifier" ]; then
     export TMUXIFIER_LAYOUT_PATH="$HOME/.config/tmux/layouts"
 fi
 
+# Add my scripts to the path if any exist
+if [ -d "$HOME/scripts/bin" ]; then
+  export PATH="$HOME/scripts/bin:$PATH"
+fi
+
+
 # --- Shell Behavior and History ---
 # History settings
 HISTSIZE=5000
