@@ -75,7 +75,7 @@ return {
         {
           'filename',
           file_status = true,
-          path = 4,
+          path = 1,
           shorting_target = 20,
           symbols = {
             modified = '[+]',
