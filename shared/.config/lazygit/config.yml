@@ -1,8 +1,8 @@
 # Config relating to git
 git:
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
-  paging:
-    # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
-    colorArg: always
-    pager: "delta --features catppuccin-mocha --paging=never --tabs 2"
+  pagers:
+    - # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
+      colorArg: always
+      pager: "delta --features catppuccin-mocha --paging=never --tabs 2"
   overrideGpg: true
