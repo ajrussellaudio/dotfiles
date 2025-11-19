@@ -9,6 +9,7 @@ return {
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['markdown'] = { 'markdownlint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
+      lint.linters_by_ft['terraform'] = { 'tflint' }
 
       -- However, note that this will enable a set of default linters,
       -- which will cause errors unless these tools are available:
@@ -21,7 +22,6 @@ return {
       --   markdown = { "vale" },
       --   rst = { "vale" },
       --   ruby = { "ruby" },
-      --   terraform = { "tflint" },
       --   text = { "vale" }
       -- }
       --
@@ -32,7 +32,6 @@ return {
       lint.linters_by_ft['janet'] = nil
       lint.linters_by_ft['rst'] = nil
       lint.linters_by_ft['ruby'] = nil
-      lint.linters_by_ft['terraform'] = nil
       lint.linters_by_ft['text'] = nil
 
       -- Create autocommand which carries out the actual linting
