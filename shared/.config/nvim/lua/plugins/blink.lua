@@ -1,5 +1,6 @@
+-- Autocompletion
 return {
-  { -- Autocompletion
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
@@ -10,6 +11,9 @@ return {
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
     opts = {
+      enabled = function()
+        return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
+      end,
       keymap = {
         -- 'default' (recommended) for mappings similar to built-in completions
         --   <c-y> to accept ([y]es) the completion.
