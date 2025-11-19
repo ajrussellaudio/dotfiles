@@ -26,10 +26,13 @@ _fzf_comprun() {
         then bat --plain --color=always --tabs=2 {}; \
         else echo "Preview not available."; \
         fi' ;;
-    pnpm) jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json \
-      | column -t -s $'\t' \
-      | fzf "$@" \
-        --no-preview ;;
     *) fzf "$@" ;;
   esac
+}
+
+_fzf_complete_pnpm() {
+  _fzf_complete -- "$@" < <(
+    jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json \
+    | column -t -s $'\t' \
+  )
 }
