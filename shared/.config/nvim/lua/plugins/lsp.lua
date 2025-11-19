@@ -1,3 +1,34 @@
+local ensure_installed = {
+  -- Web dev
+  'emmet_language_server',
+  'eslint',
+  'prettier',
+  'prettierd',
+  'tailwindcss',
+  'vtsls', -- TypeScript
+
+  -- Other langs
+  'gofumpt',
+  'goimports',
+  'gopls',
+  'terraform',
+  'terraform-ls',
+  'tflint',
+  'zls', -- Zig
+
+  -- Docs
+  'markdown-toc',
+  'marksman',
+
+  -- Neovim config
+  'lua_ls',
+  'stylua',
+  'tree-sitter-cli',
+
+  -- Scripting
+  'bashls',
+}
+
 return {
   {
     {
@@ -67,35 +98,7 @@ return {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       opts = {
-        ensure_installed = {
-          -- Web dev
-          'emmet_language_server',
-          'eslint',
-          'prettier',
-          'prettierd',
-          'tailwindcss',
-          'vtsls', -- TypeScript
-
-          -- Other langs
-          'gofumpt',
-          'goimports',
-          'gopls',
-          'terraform',
-          'terraform-ls',
-          'tflint',
-
-          -- Docs
-          'markdown-toc',
-          'marksman',
-
-          -- Neovim config
-          'lua_ls',
-          'stylua',
-          'tree-sitter-cli',
-
-          -- Scripting
-          'bashls',
-        },
+        ensure_installed = ensure_installed,
       },
     },
   },
