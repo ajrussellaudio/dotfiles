@@ -13,19 +13,23 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf "$@" --preview 'eza --tree --all --color=always {}' ;;
-    rm)         fzf "$@" --preview 'if [ -d {} ]; \
+    cd) fzf "$@" --preview 'eza --tree --all --color=always {}' ;;
+    rm) fzf "$@" --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
         elif [ -f {} ]; \
         then bat --plain --color=always --tabs=2 {}; \
         else echo "Preview not available."; \
         fi' ;;
-    nvim)         fzf "$@" --preview 'if [ -d {} ]; \
+    nvim) fzf "$@" --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
         elif [ -f {} ]; \
         then bat --plain --color=always --tabs=2 {}; \
         else echo "Preview not available."; \
         fi' ;;
-    *)            fzf "$@" ;;
+    pnpm) jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json \
+      | column -t -s $'\t' \
+      | fzf "$@" \
+        --no-preview ;;
+    *) fzf "$@" ;;
   esac
 }
