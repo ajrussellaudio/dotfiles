@@ -1,7 +1,7 @@
 return {
   {
     'ibhagwan/fzf-lua',
-    dependencies = { 'echasnovski/mini.nvim' },
+    dependencies = { 'nvim-mini/mini.icons' },
     config = function()
       local actions = require 'fzf-lua.actions'
       local toggle_ignore_hidden = {

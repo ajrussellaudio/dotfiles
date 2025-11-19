@@ -9,6 +9,7 @@ require 'lazy-init'
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup {
   { import = 'plugins' }, -- imports from lua/plugins/*.lua
+  { import = 'plugins/mini' }, -- imports from lua/plugins/mini/*.lua
 }
 
 -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
