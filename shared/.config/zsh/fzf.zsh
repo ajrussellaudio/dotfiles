@@ -36,3 +36,7 @@ _fzf_complete_pnpm() {
     | column -t -s $'\t' \
   )
 }
+
+_fzf_complete_pnpm_post() {
+  awk '{print $1}'
+}
