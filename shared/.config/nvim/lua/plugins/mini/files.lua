@@ -1,7 +1,7 @@
 -- File browser
 return {
   'nvim-mini/mini.files',
-  version = '*',
+  version = false,
   config = function()
     require('mini.files').setup {
       windows = {
