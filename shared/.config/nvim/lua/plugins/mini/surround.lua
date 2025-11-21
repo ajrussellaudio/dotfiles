@@ -5,7 +5,8 @@
 -- - sr)'  - [S]urround [R]eplace [)] [']
 return {
   'nvim-mini/mini.surround',
-  version = '*',
+  version = false,
+  event = 'VimEnter',
   config = function()
     require('mini.surround').setup {
       mappings = {
@@ -17,7 +18,7 @@ return {
         replace = 'gsr', -- Replace surrounding
         update_n_lines = 'gsn', -- Update `n_lines`
       },
-      require('which-key').add { 'gs', group = 'Surround', mode = { 'n', 'v' } },
     }
+    require('which-key').add { 'gs', group = 'Surround', mode = { 'n', 'v' } }
   end,
 }
