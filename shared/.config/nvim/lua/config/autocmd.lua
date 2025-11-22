@@ -10,3 +10,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- open help in vertical split
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'help',
+  command = 'wincmd L',
+})
+
+-- resize splits when Neovin resizes
+vim.api.nvim_create_autocmd('VimResized', {
+  command = 'wincmd =',
+})
