@@ -42,5 +42,7 @@ function _safely_stow() {
   fi
 }
 
-_use_package_manager $@
-_safely_stow $@
+function do_install() {
+  _use_package_manager add $@
+  _safely_stow add $@
+}
