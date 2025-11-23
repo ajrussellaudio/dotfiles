@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+function _uninstall() {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "We are on a Mac"
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "Brew not installed"
+    else
+      echo "Brew is installed"
+      brew uninstall $1
+    fi
+  else
+    echo "We are on Linux I guess..."
+  fi
+}
+
+stow -d ~/dotfiles -vvD $1
+_uninstall $1
+
