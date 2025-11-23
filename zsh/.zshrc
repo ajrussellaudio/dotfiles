@@ -41,8 +41,6 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups \
 source "$HOME/.config/zsh/plugins.zsh"
 
 # --- Tools and Integrations ---
-# fzf shell integration
-eval "$(fzf --zsh)"
 
 # mise (dev tools version manager)
 eval "$($(which mise) activate zsh)"
