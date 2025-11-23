@@ -1,8 +1,3 @@
-# ~/.zshrc
-# For an explanation of the philosophy behind this file, see:
-# https://www.youtube.com/watch?v=ud7YxC33Z3w&t=5s
-# https://github.com/dreamsofautonomy/zensh/blob/main/.zshrc
-
 # --- Environment and Path ---
 # Set XDG base directories for config files
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -28,10 +23,9 @@ if [ -d "$HOME/.config/tmux/plugins/tmuxifier" ]; then
 fi
 
 # Add my scripts to the path if any exist
-if [ -d "$HOME/scripts/bin" ]; then
-  export PATH="$HOME/scripts/bin:$PATH"
+if [ -d "$HOME/.bin" ]; then
+  export PATH="$HOME/.bin:$PATH"
 fi
-
 
 # --- Shell Behavior and History ---
 # History settings
