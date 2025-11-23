@@ -22,19 +22,23 @@ function _use_package_manager() {
   else
     echo "We are on Linux I guess..."
   fi
-
   eval $pack_man $cmd $2
 }
 
 function _safely_stow() {
-  if ! command -v stow >/dev/null 2>&1; then
-    echo "stow not installed, installing..."
-    _use_package_manager add stow
-  fi
-  if [ "$1" = "add" ]; then
-    stow -d ~/dotfiles -vv $2
-  elif [ "$1" = "remove" ]; then
-    stow -d ~/dotfiles -vvD $2
+  local dotfiles_dir="$HOME/dotfiles"
+  if [ -d "$dotfiles_dir/$2" ]; then
+    if ! command -v stow >/dev/null 2>&1; then
+      echo "stow not installed, installing..."
+      _use_package_manager add stow
+    fi
+    if [ "$1" = "add" ]; then
+      stow -d ~/dotfiles -v $2
+    elif [ "$1" = "remove" ]; then
+      stow -d ~/dotfiles -vD $2
+    fi
+  else
+    echo "stow package not found: " "$dotfiles_dir/$2"
   fi
 }
 
