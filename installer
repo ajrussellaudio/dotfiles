@@ -10,7 +10,7 @@ function _use_package_manager() {
     if ! command -v brew >/dev/null 2>&1; then
       echo "Brew not installed"
     else
-      pack_man="brew"
+      pack_man="HOMEBREW_NO_ENV_HINTS=1 brew"
       if [ "$1" = "add" ]; then
         cmd="install"
       elif [ "$1" = "remove" ]; then
