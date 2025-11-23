@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+function _use_package_manager() {
+  local pack_man
+  local cmd
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "Brew not installed"
+    else
+      pack_man="brew"
+      if [ "$1" = "add" ]; then
+        cmd="install"
+      elif [ "$1" = "remove" ]; then
+        cmd="uninstall"
+      else
+        cmd="search"
+      fi
+    fi
+  else
+    echo "We are on Linux I guess..."
+  fi
+
+  eval $pack_man $cmd $2
+}
+
+function _safely_stow() {
+  if ! command -v stow >/dev/null 2>&1; then
+    echo "stow not installed, installing..."
+    _use_package_manager add stow
+  fi
+  if [ "$1" = "add" ]; then
+    stow -d ~/dotfiles -vv $2
+  elif [ "$1" = "remove" ]; then
+    stow -d ~/dotfiles -vvD $2
+  fi
+}
+
+_use_package_manager $@
+_safely_stow $@
