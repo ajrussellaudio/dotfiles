@@ -3,6 +3,7 @@
 source "$HOME/dotfiles/_install/utils.sh"
 
 # Stuff to install first
+do_install "ghostty"
 do_install "zsh"
 do_install "zsh-completions"
 do_install "tmux"
@@ -18,7 +19,6 @@ do_install "btop"
 do_install "eza"
 do_install "fzf"
 do_install "gh"
-do_install "ghostty"
 do_install "git-delta"
 do_install "glow"
 do_install "lazydocker"
