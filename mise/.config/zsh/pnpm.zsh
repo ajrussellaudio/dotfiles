@@ -26,3 +26,9 @@ if type compdef &>/dev/null; then
 fi
 ###-end-pnpm-completion-###
 
+export PNPM_HOME="/Users/alanrussell/Library/pnpm"
+
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
