@@ -3,7 +3,7 @@ set -e
 set -u
 set -o pipefail
 
-if [ ! $# -eq 1 ]; then
+if [ $# -ne 1 ]; then
   echo 'mksh takes one argument' 1>&2
   exit 1
 elif [ -e "$1" ]; then
