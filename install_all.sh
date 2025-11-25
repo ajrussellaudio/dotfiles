@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-source "$HOME/dotfiles/_install/utils.sh"
+# Determine the directory where this script resides
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+UTILS_SH="$DOTFILES_DIR/_install/utils.sh"
+if [[ ! -f "$UTILS_SH" ]]; then
+  echo "Error: utils.sh not found at $UTILS_SH"
+  exit 1
+fi
+source "$UTILS_SH"
 
 # Stuff to install first
 do_install "ghostty"
