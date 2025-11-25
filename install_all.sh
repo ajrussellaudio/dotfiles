@@ -9,6 +9,10 @@ if [[ ! -f "$UTILS_SH" ]]; then
 fi
 source "$UTILS_SH"
 
+# No install
+_safely_stow add scripts
+_safely_stow add git
+
 # Stuff to install first
 do_install "ghostty"
 do_install "zsh"
@@ -16,9 +20,11 @@ do_install "zsh-completions"
 do_install "tmux"
 do_install "neovim"
 do_install "mise"
-mise install
 
-_safely_stow add scripts
+# Install mise stuff
+mise install
+_safely_stow add claude
+_safely_stow add gemini
 
 # Stuff with config
 do_install "bat"
