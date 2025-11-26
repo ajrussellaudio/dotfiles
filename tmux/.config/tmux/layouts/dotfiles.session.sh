@@ -1,10 +1,5 @@
 session_root "~/dotfiles"
 
-new_window_titled () {
-  window_root "$session_root/$1"
-  new_window $1
-}
-
 if initialize_session "dotfiles"; then
 
     new_window "root"
@@ -12,13 +7,13 @@ if initialize_session "dotfiles"; then
     run_cmd "nvim" 1
     select_pane 1
 
-    window_root "$session_root/shared/.config/nvim"
+    window_root "$session_root/nvim/.config/nvim"
     new_window "nvim"
     split_h 20
     run_cmd "nvim" 1
     select_pane 1
 
-    window_root "$session_root/shared/.config/tmux"
+    window_root "$session_root/tmux/.config/tmux"
     new_window "tmux"
     split_h 20
     run_cmd "nvim" 1
