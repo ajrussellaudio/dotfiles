@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+function _use_package_manager() {
+  local pack_man
+  local cmd
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if ! command -v brew >/dev/null 2>&1; then
+      echo "Brew not installed"
+    else
+      pack_man="HOMEBREW_NO_ENV_HINTS=1 brew"
+      if [ "$1" = "add" ]; then
+        cmd="install"
+      elif [ "$1" = "remove" ]; then
+        cmd="uninstall"
+      else
+        cmd="search"
+      fi
+    fi
+  else
+    echo "We are on Linux I guess..."
+  fi
+  eval $pack_man $cmd $2
+}
+
+function _safely_stow() {
+  local dotfiles_dir="$HOME/dotfiles"
+  if [ -d "$dotfiles_dir/$2" ]; then
+    if ! command -v stow >/dev/null 2>&1; then
+      echo "stow not installed, installing..."
+      _use_package_manager add stow
+    fi
+    if [ "$1" = "add" ]; then
+      stow -d ~/dotfiles -v $2
+    elif [ "$1" = "remove" ]; then
+      stow -d ~/dotfiles -vD $2
+    fi
+  else
+    echo "stow package not found: " "$dotfiles_dir/$2"
+  fi
+}
+
+function do_install() {
+  _use_package_manager add $@
+  _safely_stow add $@
+}
