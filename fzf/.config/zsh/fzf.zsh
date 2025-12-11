@@ -16,14 +16,14 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd) fzf "$@" --preview 'eza --tree --all --color=always {}' ;;
-    rm) fzf "$@" --preview 'if [ -d {} ]; \
+    cd) fzf "$@" --walker dir,follow,hidden --preview 'eza --tree --all --color=always {}' ;;
+    rm) fzf "$@" --walker file,dir,follow,hidden --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
         elif [ -f {} ]; \
         then bat --plain --color=always --tabs=2 {}; \
         else echo "Preview not available."; \
         fi' ;;
-    nvim) fzf "$@" --preview 'if [ -d {} ]; \
+    nvim) fzf "$@" --walker file,follow,hidden --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
         elif [ -f {} ]; \
         then bat --plain --color=always --tabs=2 {}; \
