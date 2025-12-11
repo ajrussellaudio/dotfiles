@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+PROJECT_PATH=$1
+shift
+
+dependencies=("")
+devDependencies=("")
+
+AS_PACKAGE=false
+COPY_TARGET=""
+
+while [ $OPTIND -le "$#" ]; do
+  if getopts pc:d:D: option; then
+    case $option in
+    p) AS_PACKAGE=true ;;
+    c) COPY_TARGET="$OPTARG" ;;
+    d) dependencies+=("$OPTARG") ;;
+    D) devDependencies+=("$OPTARG") ;;
+    esac
+  fi
+done
+
+if [ -d "$PROJECT_PATH" ]; then
+  echo "Project $PROJECT_PATH already exists!"
+  exit 1
+fi
+
+if $AS_PACKAGE; then
+  yq -i \
+    ".packages += \"$PROJECT_PATH\" | .packages |= unique | .packages |= sort" \
+    pnpm-workspace.yaml
+fi
+
+if [ -n "$COPY_TARGET" ]; then
+  echo "Copying from: $COPY_TARGET"
+  cp -r "$COPY_TARGET" "$PROJECT_PATH"
+  cd "$PROJECT_PATH"
+  jq ".name = \"$PROJECT_PATH\"" package.json >package.json.tmp &&
+    mv package.json.tmp package.json
+  pnpm install
+else
+  mkdir "$PROJECT_PATH"
+  cd "$PROJECT_PATH"
+
+  mkdir src
+  pnpm init
+
+  cat >tsconfig.json <<-EOF
+{
+  "\$schema": "https://json.schemastore.org/tsconfig",
+  "_version": "22.0.0",
+
+  "compilerOptions": {
+    "lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator"],
+    "module": "nodenext",
+    "target": "es2022",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node16",
+
+    "types": ["vitest/globals"]
+  }
+}
+EOF
+  cat >vitest.config.ts <<-EOF
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    globals: true,
+    // ... Specify options here.
+  },
+})
+EOF
+  jq '.scripts.test = "vitest"' package.json >package.json.tmp &&
+    mv package.json.tmp package.json
+  echo "console.log('Hiya');" >>src/index.ts
+
+  jq '.scripts.start = "tsx ./src/index.ts"' package.json >package.json.tmp &&
+    mv package.json.tmp package.json
+fi
+
+pnpm add --reporter=append-only -D ${devDependencies[@]}
+pnpm add --reporter=append-only ${dependencies[@]}
