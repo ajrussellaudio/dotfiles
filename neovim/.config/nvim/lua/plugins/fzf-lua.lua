@@ -89,6 +89,9 @@ return {
         end, {
           prompt = 'Notifications > ',
           exec_empty_query = true,
+          fzf_opts = {
+            ['--header'] = 'ctrl-/ to wrap',
+          },
         })
       end)
 
