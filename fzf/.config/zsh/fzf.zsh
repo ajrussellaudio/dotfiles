@@ -35,12 +35,7 @@ _fzf_comprun() {
 }
 
 _fzf_complete_pnpm() {
-  _fzf_complete -- "$@" < <(
-    jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json \
-    | column -t -s $'\t' \
+  _fzf_complete --delimiter '\s\s+' --accept-nth=1 -- "$@" < <(
+    jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json | column -t -s $'\t' 
   )
-}
-
-_fzf_complete_pnpm_post() {
-  awk '{print $1}'
 }
