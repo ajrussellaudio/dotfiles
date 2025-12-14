@@ -1,3 +1,8 @@
+local prompt = function(text)
+  local t = text or ''
+  return t .. ' > '
+end
+
 return {
   {
     'ibhagwan/fzf-lua',
@@ -17,25 +22,25 @@ return {
           actions = toggle_ignore_hidden,
         },
         grep = {
-          prompt = 'grep > ',
+          prompt = prompt 'grep',
           hidden = true,
           rg_opts = '--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --glob "!.git/" --glob "!node_modules/" -e ',
           actions = toggle_ignore_hidden,
         },
         oldfiles = {
-          prompt = 'Recents > ',
+          prompt = prompt 'Recents',
           cwd_only = true,
         },
         buffers = {
-          prompt = 'Buffers > ',
+          prompt = prompt 'Buffers',
           formatter = 'path.filename_first', -- places file name first
         },
         lsp = {
-          prompt_postfix = ' > ',
+          prompt_postfix = prompt(),
           cwd_only = true,
         },
         diagnostics = {
-          prompt = 'Diagnostics > ',
+          prompt = prompt 'Diagnostics',
         },
       }
       local fzf_lua = require 'fzf-lua'
@@ -54,7 +59,7 @@ return {
       vim.keymap.set('n', '<leader>s.', fzf_lua.oldfiles, { desc = '[S]earch Recent Files' })
       vim.keymap.set('n', '<leader>s!', function()
         fzf_lua.oldfiles {
-          prompt = 'All Recents > ',
+          prompt = prompt 'All Recents',
           cwd_only = false,
         }
       end, { desc = '[S]earch Recent Files (everywhere)' })
@@ -87,13 +92,13 @@ return {
           end
           fzf_cb()
         end, {
-          prompt = 'Notifications > ',
+          prompt = prompt 'Notifications',
           exec_empty_query = true,
           fzf_opts = {
             ['--header'] = 'ctrl-/ to wrap',
           },
         })
-      end)
+      end, { desc = '[S]earch [N]otifications' })
 
       -- Marks
       vim.keymap.set({ 'n', 'v' }, '<leader>sm', function()
