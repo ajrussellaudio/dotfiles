@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-set -e
-set -u
-set -o pipefail
+#!/usr/bin/env zsh
 
-tldr "$@" || run-help "$@" || man "$@" || curl "cheat.sh/$@" || "$@" --help
+tldr "$@" || run-help "$@" || man "$@" || "$@" --help || curl "cheat.sh/$@"
