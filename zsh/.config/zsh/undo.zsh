@@ -1,2 +1,2 @@
 bindkey '^u' undo
-bindkey '^r' redo
+bindkey '^y' redo
