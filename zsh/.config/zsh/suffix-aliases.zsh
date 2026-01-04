@@ -3,7 +3,7 @@ function this_or_that() {
   shift
   local that=$1
   shift
-  (( $+commands[$this] )) && $this $@ || $that $@
+  (( $+commands[$this] )) && $this "$@" || $that "$@"
 }
 
 alias -s json='this_or_that jless bat'
