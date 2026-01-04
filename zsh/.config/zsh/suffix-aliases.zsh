@@ -17,4 +17,4 @@ alias -s mjs='$EDITOR'
 alias -s ts='$EDITOR'
 alias -s tsx='$EDITOR'
 alias -s mts='$EDITOR'
-alias -s html=open  # macOS: open in default browser
+alias -s html='this_or_that xdg-open open'
