@@ -17,3 +17,5 @@ userstate.cbor
 work/
 secrets.zsh
 shared/.config/gh/hosts.yml
+
+!.claude
