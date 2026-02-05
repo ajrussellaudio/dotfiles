@@ -49,3 +49,4 @@ for script in ~/.config/zsh/*.zsh; do
     source "$script"
   fi
 done
+export PATH="$HOME/.local/bin:$PATH"
