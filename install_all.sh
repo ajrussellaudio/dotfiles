@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Determine the directory where this script resides
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UTILS_SH="$DOTFILES_DIR/_install/utils.sh"
 if [[ ! -f "$UTILS_SH" ]]; then
   echo "Error: utils.sh not found at $UTILS_SH"
