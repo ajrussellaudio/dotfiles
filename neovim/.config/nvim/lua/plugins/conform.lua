@@ -35,7 +35,7 @@ return {
         lua = { 'stylua' },
         markdown = { 'prettierd' },
         typescript = { 'prettierd' },
-        typescriptreact = { 'prettierd' },
+        typescriptreact = { 'eslint-lsp', 'tailwindcss-language-server', 'prettierd' },
         yaml = { 'prettierd' },
       },
     },
