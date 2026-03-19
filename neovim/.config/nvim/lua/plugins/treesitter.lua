@@ -1,11 +1,11 @@
-local ensure_installed = {
+vim.g.ts_install = {
   -- JavaScript
   'javascript',
-  'javascriptreact',
+  -- 'javascriptreact',
   'json',
   'jsx',
   'typescript',
-  'typescriptreact',
+  -- 'typescriptreact',
   'tsx',
   'astro',
 
@@ -39,7 +39,7 @@ local ensure_installed = {
 
   -- git
   'diff',
-  'gitconfig',
+  -- 'gitconfig',
   'gitignore',
 
   -- Shell
@@ -60,14 +60,28 @@ return {
     config = function()
       local nvim_ts = require 'nvim-treesitter'
       nvim_ts.setup()
-      nvim_ts.install(ensure_installed)
 
-      local ts_start_group = vim.api.nvim_create_augroup('TreesitterStart', { clear = true })
+      local ts_install = vim.g.ts_install or {}
+      local ts_filetypes = vim
+        .iter(ts_install)
+        :map(function(lang)
+          return vim.treesitter.language.get_filetypes(lang)
+        end)
+        :flatten()
+        :totable()
+
+      nvim_ts.install(ts_install)
+
       vim.api.nvim_create_autocmd('FileType', {
-        group = ts_start_group,
-        pattern = ensure_installed,
-        callback = function()
-          vim.treesitter.start()
+        desc = 'Setup treesitter for a buffer',
+        -- NOTE: We explicitly define filetypes
+        pattern = ts_filetypes,
+        group = vim.api.nvim_create_augroup('ts_setup', { clear = true }),
+        callback = function(e)
+          vim.treesitter.start(e.buf)
+          -- vim.wo.foldmethod = 'expr'
+          -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
     end,
