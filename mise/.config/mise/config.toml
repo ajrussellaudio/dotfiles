@@ -10,7 +10,6 @@ rust = "latest"
 gemini-cli = "latest"
 claude-code = "latest"
 "npm:mcp-hub" = "latest"
-"npm:@github/copilot" = "latest"
 
 # AWS
 aws-cli = "latest"
