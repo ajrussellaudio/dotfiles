@@ -11,6 +11,10 @@ fi
 TARGET="$1"
 
 # Resolve/create the directory (shared by both branches)
+if [ -e "$TARGET" ] && [ ! -d "$TARGET" ]; then
+  echo "txcd: target exists and is not a directory: $TARGET" >&2
+  exit 1
+fi
 if [ ! -d "$TARGET" ]; then
   mkdir -p -- "$TARGET"
 fi
@@ -27,7 +31,7 @@ if [ -z "${TMUX:-}" ]; then
   # Create new session with a locked "root" window, then attach
   tmux new-session -d -s "$SESSION_NAME" -n "root" -c "$ABS_PATH"
   tmux set-window-option -t "$SESSION_NAME:root" automatic-rename off
-  exec tmux attach-session -t "$SESSION_NAME"
+  exec tmux attach-session -t "=$SESSION_NAME"
 fi
 
 # Get the session root directory
@@ -38,10 +42,10 @@ if [[ "$ABS_PATH" == "$SESSION_ROOT" ]]; then
   WINDOW_NAME="."
 elif [[ "$ABS_PATH" == "$SESSION_ROOT/"* ]]; then
   WINDOW_NAME="${ABS_PATH#"$SESSION_ROOT/"}"
-elif [[ "$ABS_PATH" == "$HOME" ]]; then
+elif [[ "$ABS_PATH" == "${HOME:-}" ]] && [ -n "${HOME:-}" ]; then
   WINDOW_NAME="~"
-elif [[ "$ABS_PATH" == "$HOME/"* ]]; then
-  WINDOW_NAME="~/${ABS_PATH#"$HOME/"}"
+elif [ -n "${HOME:-}" ] && [[ "$ABS_PATH" == "${HOME}/"* ]]; then
+  WINDOW_NAME="~/${ABS_PATH#"${HOME}/"}"
 else
   WINDOW_NAME="$ABS_PATH"
 fi
