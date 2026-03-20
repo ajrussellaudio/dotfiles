@@ -10,13 +10,13 @@ fi
 
 TARGET="$1"
 
-if [ -z "${TMUX:-}" ]; then
+# Resolve/create the directory (shared by both branches)
+if [ ! -d "$TARGET" ]; then
+  mkdir -p -- "$TARGET"
+fi
+ABS_PATH="$(cd "$TARGET" && pwd)"
 
-  # Resolve/create the directory before starting the session
-  if [ ! -d "$TARGET" ]; then
-    mkdir -p -- "$TARGET"
-  fi
-  ABS_PATH="$(cd "$TARGET" && pwd)"
+if [ -z "${TMUX:-}" ]; then
   SESSION_NAME="$(basename "$ABS_PATH")"
 
   # Attach to existing session if one already exists with this name
@@ -29,14 +29,6 @@ if [ -z "${TMUX:-}" ]; then
   tmux set-window-option -t "$SESSION_NAME:root" automatic-rename off
   exec tmux attach-session -t "$SESSION_NAME"
 fi
-
-# Create directory if it doesn't exist
-if [ ! -d "$TARGET" ]; then
-  mkdir -p -- "$TARGET"
-fi
-
-# Resolve absolute path
-ABS_PATH="$(cd "$TARGET" && pwd)"
 
 # Get the session root directory
 SESSION_ROOT="$(tmux display-message -p "#{session_path}")"
