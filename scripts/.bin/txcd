@@ -37,9 +37,16 @@ fi
 # Get the session root directory
 SESSION_ROOT="$(tmux display-message -p "#{session_path}")"
 
+# Normalize session root: strip trailing slash unless it is exactly "/"
+if [[ "$SESSION_ROOT" != "/" ]]; then
+  SESSION_ROOT="${SESSION_ROOT%/}"
+fi
+
 # Compute window name: relative to session root, ~-relative, or absolute
 if [[ "$ABS_PATH" == "$SESSION_ROOT" ]]; then
   WINDOW_NAME="."
+elif [[ "$SESSION_ROOT" == "/" ]] && [[ "$ABS_PATH" == /* ]]; then
+  WINDOW_NAME="${ABS_PATH#/}"
 elif [[ "$ABS_PATH" == "$SESSION_ROOT/"* ]]; then
   WINDOW_NAME="${ABS_PATH#"$SESSION_ROOT/"}"
 elif [[ "$ABS_PATH" == "${HOME:-}" ]] && [ -n "${HOME:-}" ]; then
