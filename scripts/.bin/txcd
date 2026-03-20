@@ -8,12 +8,27 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-if [ -z "${TMUX:-}" ]; then
-  echo "txcd: must be run inside a tmux session" >&2
-  exit 1
-fi
-
 TARGET="$1"
+
+if [ -z "${TMUX:-}" ]; then
+
+  # Resolve/create the directory before starting the session
+  if [ ! -d "$TARGET" ]; then
+    mkdir -p -- "$TARGET"
+  fi
+  ABS_PATH="$(cd "$TARGET" && pwd)"
+  SESSION_NAME="$(basename "$ABS_PATH")"
+
+  # Attach to existing session if one already exists with this name
+  if tmux has-session -t "=$SESSION_NAME" 2>/dev/null; then
+    exec tmux attach-session -t "=$SESSION_NAME"
+  fi
+
+  # Create new session with a locked "root" window, then attach
+  tmux new-session -d -s "$SESSION_NAME" -n "root" -c "$ABS_PATH"
+  tmux set-window-option -t "$SESSION_NAME:root" automatic-rename off
+  exec tmux attach-session -t "$SESSION_NAME"
+fi
 
 # Create directory if it doesn't exist
 if [ ! -d "$TARGET" ]; then
