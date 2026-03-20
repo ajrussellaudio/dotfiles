@@ -46,8 +46,9 @@ else
   WINDOW_NAME="$ABS_PATH"
 fi
 
-# If a window with this name already exists, switch to it
+# If a window with this name already exists, switch to it and lock the name
 if tmux select-window -t "=$WINDOW_NAME" 2>/dev/null; then
+  tmux set-window-option -t "=$WINDOW_NAME" automatic-rename off
   exit 0
 fi
 
