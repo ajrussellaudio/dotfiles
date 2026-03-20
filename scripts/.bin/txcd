@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: txcd <directory>" >&2
+  exit 1
+fi
+
+TARGET="$1"
+
+# Resolve/create the directory (shared by both branches)
+if [ -e "$TARGET" ] && [ ! -d "$TARGET" ]; then
+  echo "txcd: target exists and is not a directory: $TARGET" >&2
+  exit 1
+fi
+if [ ! -d "$TARGET" ]; then
+  mkdir -p -- "$TARGET"
+fi
+ABS_PATH="$(cd "$TARGET" && pwd)"
+
+if [ -z "${TMUX:-}" ]; then
+  SESSION_NAME="$(basename "$ABS_PATH")"
+
+  # Attach to existing session if one already exists with this name
+  if tmux has-session -t "=$SESSION_NAME" 2>/dev/null; then
+    exec tmux attach-session -t "=$SESSION_NAME"
+  fi
+
+  # Create new session with a locked "root" window, then attach
+  tmux new-session -d -s "$SESSION_NAME" -n "root" -c "$ABS_PATH"
+  tmux set-window-option -t "=$SESSION_NAME:root" automatic-rename off
+  exec tmux attach-session -t "=$SESSION_NAME"
+fi
+
+# Get the session root directory
+SESSION_ROOT="$(tmux display-message -p "#{session_path}")"
+
+# Normalize session root: strip trailing slash unless it is exactly "/"
+if [[ "$SESSION_ROOT" != "/" ]]; then
+  SESSION_ROOT="${SESSION_ROOT%/}"
+fi
+
+# Compute window name: relative to session root, ~-relative, or absolute
+if [[ "$ABS_PATH" == "$SESSION_ROOT" ]]; then
+  WINDOW_NAME="."
+elif [[ "$SESSION_ROOT" == "/" ]] && [[ "$ABS_PATH" == /* ]]; then
+  WINDOW_NAME="${ABS_PATH#/}"
+elif [[ "$ABS_PATH" == "$SESSION_ROOT/"* ]]; then
+  WINDOW_NAME="${ABS_PATH#"$SESSION_ROOT/"}"
+elif [[ "$ABS_PATH" == "${HOME:-}" ]] && [ -n "${HOME:-}" ]; then
+  WINDOW_NAME="~"
+elif [ -n "${HOME:-}" ] && [[ "$ABS_PATH" == "${HOME}/"* ]]; then
+  WINDOW_NAME="~/${ABS_PATH#"${HOME}/"}"
+else
+  WINDOW_NAME="$ABS_PATH"
+fi
+
+# If a window with this name already exists, switch to it and lock the name
+if tmux select-window -t "=$WINDOW_NAME" 2>/dev/null; then
+  tmux set-window-option -t "=$WINDOW_NAME" automatic-rename off
+  exit 0
+fi
+
+# Create and switch to a new window, locking the name
+tmux new-window -n "$WINDOW_NAME" -c "$ABS_PATH"
+tmux set-window-option automatic-rename off
