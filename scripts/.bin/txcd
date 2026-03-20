@@ -30,7 +30,7 @@ if [ -z "${TMUX:-}" ]; then
 
   # Create new session with a locked "root" window, then attach
   tmux new-session -d -s "$SESSION_NAME" -n "root" -c "$ABS_PATH"
-  tmux set-window-option -t "$SESSION_NAME:root" automatic-rename off
+  tmux set-window-option -t "=$SESSION_NAME:root" automatic-rename off
   exec tmux attach-session -t "=$SESSION_NAME"
 fi
 
