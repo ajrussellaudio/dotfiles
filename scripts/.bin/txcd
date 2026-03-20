@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: txcd <directory>" >&2
+  exit 1
+fi
+
+if [ -z "${TMUX:-}" ]; then
+  echo "txcd: must be run inside a tmux session" >&2
+  exit 1
+fi
+
+TARGET="$1"
+
+# Create directory if it doesn't exist
+if [ ! -d "$TARGET" ]; then
+  mkdir -p -- "$TARGET"
+fi
+
+# Resolve absolute path
+ABS_PATH="$(cd "$TARGET" && pwd)"
+
+# Get the session root directory
+SESSION_ROOT="$(tmux display-message -p "#{session_path}")"
+
+# Compute window name: relative to session root, ~-relative, or absolute
+if [[ "$ABS_PATH" == "$SESSION_ROOT" ]]; then
+  WINDOW_NAME="."
+elif [[ "$ABS_PATH" == "$SESSION_ROOT/"* ]]; then
+  WINDOW_NAME="${ABS_PATH#"$SESSION_ROOT/"}"
+elif [[ "$ABS_PATH" == "$HOME" ]]; then
+  WINDOW_NAME="~"
+elif [[ "$ABS_PATH" == "$HOME/"* ]]; then
+  WINDOW_NAME="~/${ABS_PATH#"$HOME/"}"
+else
+  WINDOW_NAME="$ABS_PATH"
+fi
+
+# If a window with this name already exists, switch to it
+if tmux select-window -t "=$WINDOW_NAME" 2>/dev/null; then
+  exit 0
+fi
+
+# Create and switch to a new window, locking the name
+tmux new-window -n "$WINDOW_NAME" -c "$ABS_PATH"
+tmux set-window-option automatic-rename off
