@@ -1,6 +1,6 @@
 ---
 name: write-a-prd
-description: Create a PRD through user interview, codebase exploration, and module design, then save as ./plans/<slug>.md. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
+description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
 ---
 
 This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
@@ -19,36 +19,24 @@ Check with the user that these modules match their expectations. Check with the 
 
 5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD.
 
-Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This will be used to name the feature branch and `plans/` directory.
+Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This will be used to name the GitHub label and feature branch.
 
-Save the PRD as `./plans/<slug>.md` in the current project. Create the `plans/` directory if it doesn't exist.
+The PRD should be submitted as a GitHub issue with two labels:
+- `prd` — marks this as a PRD issue that must never be implemented directly
+- `prd/<slug>` — scopes this PRD and all its task issues to a feature branch (`feat/<slug>`)
 
-The file must start with YAML front matter containing the slug, followed by the PRD content:
-
-```markdown
----
-label: <slug>
----
-
-## Problem Statement
-...
+Create the labels if they don't exist yet:
+```bash
+gh label create "prd" --color "5319E7" 2>/dev/null || true
+gh label create "prd/<slug>" --color "0075ca" 2>/dev/null || true
 ```
 
-Create the file:
+Then create the issue:
 ```bash
-mkdir -p ./plans
-cat > "./plans/<slug>.md" << 'EOF'
----
-label: <slug>
----
-
-<prd content here>
-EOF
+gh issue create --title "..." --body "..." --label "prd" --label "prd/<slug>"
 ```
 
 <prd-template>
-
-The PRD file body (after the front matter) should use this structure:
 
 ## Problem Statement
 
