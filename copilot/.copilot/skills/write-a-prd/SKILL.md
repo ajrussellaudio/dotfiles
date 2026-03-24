@@ -1,6 +1,6 @@
 ---
 name: write-a-prd
-description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
+description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue or GitHub Projects board. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
 ---
 
 This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
@@ -21,6 +21,10 @@ Check with the user that these modules match their expectations. Check with the 
 
 Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This will be used to name the GitHub label and feature branch.
 
+6. Ask the user which backend to use for the PRD:
+
+### Option A: GitHub Issues
+
 The PRD should be submitted as a GitHub issue with two labels:
 - `prd` — marks this as a PRD issue that must never be implemented directly
 - `prd/<slug>` — scopes this PRD and all its task issues to a feature branch (`feat/<slug>`)
@@ -33,8 +37,53 @@ gh label create "prd/<slug>" --color "0075ca" 2>/dev/null || true
 
 Then create the issue:
 ```bash
-gh issue create --title "..." --body "..." --label "prd" --label "prd/<slug>"
+gh issue create --title "PRD: <title>" --body "..." --label "prd" --label "prd/<slug>"
 ```
+
+After creating the issue, tell the user they can break it into tasks with `/prd-to-issues`.
+
+### Option B: GitHub Projects
+
+For repos where GitHub Issues are disabled. The PRD is stored as the description of a new GitHub Projects V2 board.
+
+First, get the user's GitHub user ID:
+```bash
+gh api graphql -f query='{ viewer { id } }' --jq '.data.viewer.id'
+```
+
+Create a Project board named after the slug:
+```bash
+gh api graphql -f query='
+mutation {
+  createProjectV2(input: {ownerId: "<USER_ID>", title: "<slug>"}) {
+    projectV2 { id url number }
+  }
+}'
+```
+
+Then set the PRD text as the board's short description (max 256 chars — use the Problem Statement summary):
+```bash
+gh api graphql -f query='
+mutation {
+  updateProjectV2(input: {projectId: "<PROJECT_ID>", shortDescription: "<summary>"}) {
+    projectV2 { id }
+  }
+}'
+```
+
+Also post the full PRD as a pinned draft item titled "PRD: <title>" so the complete text is accessible on the board:
+```bash
+gh api graphql -f query='
+mutation {
+  addProjectV2DraftIssue(input: {projectId: "<PROJECT_ID>", title: "PRD: <title>", body: "<full PRD text>"}) {
+    projectItem { id }
+  }
+}'
+```
+
+Print the board URL and tell the user they can break it into tasks with `/prd-to-project`.
+
+**Note:** The `gh` token must have the `project` scope. If the GraphQL call fails with `INSUFFICIENT_SCOPES`, tell the user to run `gh auth refresh -s project`.
 
 <prd-template>
 
