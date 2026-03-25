@@ -73,7 +73,7 @@ priority: normal
 blocked_by: []
 status: pending
 branch: ""
-review_notes: ""
+review_notes: []            # Ralph appends a new entry after each review round
 fix_count: 0
 ---
 
@@ -104,7 +104,7 @@ Reference by number from the parent PRD:
 - `priority`: `normal` or `high`
 - `blocked_by`: list of task numbers (the `NN` prefix) that must be `done` first, e.g. `[1, 2]`. Use `[]` if none.
 - `status`: always `pending` for newly created files — Ralph manages this field
-- `branch`, `review_notes`, `fix_count`: always empty/zero — Ralph manages these fields
+- `review_notes`: always `[]` — Ralph appends a new `|` literal block scalar entry after each review round; never use quoted strings (colons and special chars would break YAML)
 
 Create the task directory and files:
 ```bash
