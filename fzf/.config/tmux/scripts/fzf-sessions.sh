@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 tmux list-sessions -F "#S" \
-    | grep -v $(tmux display-message -p "#S") \
+    | grep -vx $(tmux display-message -p "#S") \
     | fzf \
         --tmux 80% \
         --no-multi \
