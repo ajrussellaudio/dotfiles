@@ -40,3 +40,6 @@
 
 [diff]
 	colorMoved = default
+
+[alias]
+  sync = "!git checkout main; git pull upstream main; git push origin main"
