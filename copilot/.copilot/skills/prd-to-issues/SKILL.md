@@ -59,6 +59,20 @@ Create issues in dependency order (blockers first) so you can reference real iss
 
 Apply the feature label (the `prd/<slug>` label from the parent PRD) to every task issue you create. Do not apply the `prd` label to task issues — only the PRD issue itself carries that label.
 
+After creating each issue, register it as a sub-issue of the parent PRD issue. This requires the database ID (not the issue number) of the newly created issue:
+
+```bash
+# Get the database ID of the new issue
+ISSUE_ID=$(gh api repos/<owner>/<repo>/issues/<new-issue-number> --jq '.id' < /dev/null)
+
+# Register as sub-issue of the PRD
+gh api repos/<owner>/<repo>/issues/<prd-issue-number>/sub_issues \
+  --method POST \
+  -F sub_issue_id="$ISSUE_ID" < /dev/null
+```
+
+This gives the PRD issue a live progress bar (e.g. "3/6 sub-issues closed") in the GitHub UI.
+
 <issue-template>
 ## Parent PRD
 
