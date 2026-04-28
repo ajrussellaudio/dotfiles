@@ -14,26 +14,6 @@ alias f="fzf --preview 'bat --plain --color=always --tabs=2 {}'"
 
 [[ $PATH =~ "$HOME/.fzf" ]] || PATH="$HOME/.fzf:$PATH"
 
-rf() (
-  RELOAD='reload:rg --hidden --column --color=always --smart-case {q} || :'
-  OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
-      nvim {1} +{2}
-    else
-      nvim +cw -q {+f}
-    fi'
-  fzf \
-    --disabled \
-    --ansi \
-    --bind "start:$RELOAD" \
-    --bind "change:$RELOAD" \
-    --bind "enter:become:$OPENER" \
-    --bind "ctrl-o:execute:$OPENER" \
-    --delimiter : \
-    --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
-    --preview-window '~4,+{2}+4/3,<80(up)' \
-    --query "$*"
-)
-
 _fzf_comprun() {
   local command=$1
   shift
