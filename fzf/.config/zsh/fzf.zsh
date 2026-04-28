@@ -12,6 +12,8 @@ export FZF_DEFAULT_OPTS=" \
 
 alias f="fzf --preview 'bat --plain --color=always --tabs=2 {}'"
 
+[[ $PATH =~ "$HOME/.fzf" ]] || PATH="$HOME/.fzf:$PATH"
+
 rf() (
   RELOAD='reload:rg --hidden --column --color=always --smart-case {q} || :'
   OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
