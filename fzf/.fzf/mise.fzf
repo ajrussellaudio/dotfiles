@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+tool=$(mise registry |
+  fzf --style full --prompt 'tool> ' --nth 1 --color fg:dim,nth:regular --accept-nth 1)
+[[ $tool ]] || exit 1
+
+version=$(
+  (
+    mise ls-remote "$tool" |
+      grep -Fxv -f <(mise ls "$tool" | awk '{print $2}') |
+      sed 's/^/remote\t/'
+    echo -e "remote\tlatest"
+    mise ls "$tool" | awk '{print "local\t" $2}'
+  ) | fzf --prompt "$tool@" --tabstop 16 --accept-nth 2 \
+    --header 'Press CTRL-Y to copy coordinate to clipboard' \
+    --bind "ctrl-y:become:echo -n $tool@{2} | pbcopy" \
+    --style full --tac --tiebreak index
+)
+[[ $version ]] || exit 1
+
+mise use "$@" "$tool@$version"
