@@ -1,7 +1,17 @@
+_worktree_name() {
+  local name="$1"
+
+  [[ "$name" == */* ]] && name="${name#*/}"
+  print -r -- "${name//\//-}"
+}
+
 create-worktree() {
-  local branch="$1" dir="../$(basename "$PWD")-${1//\//-}"
+  local branch="$1" name dir
+  name="$(_worktree_name "$branch")"
+  dir="../$(basename "$PWD")-$name"
+
   git worktree add "$dir" -b "$branch" 2>/dev/null || git worktree add "$dir" "$branch"
-  tmux new-window -n "$branch" -c "$dir"
+  tmux new-window -n "$name" -c "$dir"
 }
 
 _worktree_descendant_pids() {
