@@ -1,6 +1,6 @@
 ---
 name: write-a-prd
-description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue or GitHub Projects board. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
+description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue, GitHub Projects board, or JIRA ticket. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
 ---
 
 This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
@@ -19,11 +19,16 @@ Check with the user that these modules match their expectations. Check with the 
 
 5. Once you have a complete understanding of the problem and solution, use the template below to write the PRD.
 
-Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This will be used to name the GitHub label and feature branch.
-
 6. Ask the user which backend to use for the PRD:
 
+- **GitHub Issues** — for repos with Issues enabled
+- **GitHub Projects** — for repos with Issues disabled
+- **JIRA (new ticket)** — for work projects with a fresh ticket on a board
+- **JIRA (existing ticket Dev Notes)** — append PRD to an existing ticket's Dev Notes field
+
 ### Option A: GitHub Issues
+
+Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This will be used to name the GitHub label and feature branch.
 
 The PRD should be submitted as a GitHub issue with two labels:
 - `prd` — marks this as a PRD issue that must never be implemented directly
@@ -42,9 +47,13 @@ gh issue create --title "PRD: <title>" --body "..." --label "prd" --label "prd/<
 
 After creating the issue, tell the user they can break it into tasks with `/prd-to-issues`.
 
+Also tell the user to start Ralph with `ralph run --label=<slug>`.
+
 ### Option B: GitHub Projects
 
 For repos where GitHub Issues are disabled. The PRD is stored as the description of a new GitHub Projects V2 board.
+
+Ask the user for a short, lowercase, hyphenated slug for this feature (e.g. `foo-widget`). This is used as the project board title and feature branch suffix.
 
 First, get the user's GitHub user ID:
 ```bash
@@ -84,6 +93,42 @@ mutation {
 Print the board URL and tell the user they can break it into tasks with `/prd-to-project`.
 
 **Note:** The `gh` token must have the `project` scope. If the GraphQL call fails with `INSUFFICIENT_SCOPES`, tell the user to run `gh auth refresh -s project`.
+
+### Option C: JIRA (new ticket)
+
+For work projects backed by JIRA. The PRD is stored as the description of a new parent ticket on a JIRA board. Sub-tasks of this ticket will become Ralph's task units.
+
+Use the Atlassian MCP tools (prefixed `atlassian-rovo-mcp-`) — not jira-cli — for skill operations.
+
+1. Ask the user for the JIRA project key (e.g. `CAPP`, `PROJ`). This is the prefix that appears in ticket IDs like `CAPP-123`.
+
+2. Resolve the cloudId. Try the user's site hostname first, or call `getAccessibleAtlassianResources` if unknown.
+
+3. Confirm the issue type to use for the parent. Default to `Story` unless the user specifies otherwise (e.g. `Epic`, `Task`). Ralph treats whichever type the user picks as the "parent ticket" — issue type only matters for sub-task branch prefix, not the parent.
+
+4. Create the parent ticket with `createJiraIssue`:
+   - `projectKey`: the project key
+   - `issueTypeName`: from step 3
+   - `summary`: `PRD: <title>`
+   - `description`: full PRD body (use `contentFormat: "markdown"`)
+
+5. Print the ticket key and URL. Tell the user they can break it into sub-tasks with `/prd-to-subtasks`.
+
+### Option D: JIRA (existing ticket Dev Notes)
+
+For when the user has already created a JIRA ticket and wants to attach the PRD to it. The PRD is appended to a custom field called **Dev Notes** on the ticket.
+
+1. Ask the user for the ticket key (e.g. `CAPP-123`).
+
+2. Resolve the cloudId (as above).
+
+3. Find the Dev Notes custom field ID for this project — Dev Notes is a custom field, so its ID is `customfield_NNNNN`. Use `getJiraIssueTypeMetaWithFields` against the ticket's project and issue type, find the field whose name is `Dev Notes`, and note its `customfield_*` key. If there are multiple matches or none, ask the user to confirm.
+
+4. Fetch the current ticket with `getJiraIssue` so you have the existing Dev Notes content (don't overwrite it).
+
+5. Update the ticket with `editJiraIssue`, setting the Dev Notes field to the existing content followed by the full PRD body. Use a clear separator like `\n\n---\n\n# PRD: <title>\n\n...` between the prior content and the new PRD so it's obvious where the PRD starts.
+
+6. Print the ticket key and URL. Tell the user they can break it into sub-tasks with `/prd-to-subtasks`.
 
 <prd-template>
 
