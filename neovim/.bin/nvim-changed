@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+ # nvim-changed: open files changed vs main in Neovim's quickfix list
+
+ base="${1:-main}"
+ mapfile -t files < <(git diff --name-only --diff-filter=ACMR "$(git merge-base "$base" HEAD)" -- | while read
+ -r f; do [ -e "$f" ] && echo "$f"; done)
+
+ if [ ${#files[@]} -eq 0 ]; then
+   echo "No changed files vs $base"
+   exit 0
+ fi
+
+ nvim -q <(printf '%s:1:1: changed\n' "${files[@]}") -c copen
