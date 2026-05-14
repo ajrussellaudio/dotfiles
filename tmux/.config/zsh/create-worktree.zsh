@@ -11,7 +11,7 @@ create-worktree() {
   dir="../$(basename "$PWD")-$name"
 
   git worktree add "$dir" -b "$branch" 2>/dev/null || git worktree add "$dir" "$branch"
-  tmux new-window -n "$name" -c "$dir"
+  tmux new-window -n "$name" -c "$dir" "mise trust; exec $SHELL -i"
 }
 
 _worktree_descendant_pids() {
