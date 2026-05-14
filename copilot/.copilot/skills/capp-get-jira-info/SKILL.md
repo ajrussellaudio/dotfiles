@@ -8,12 +8,6 @@ description: >
 
 # CaPP Jira Reference Data
 
-> **Scope:** This metadata applies only to the **CAPP** project on Andy Berry's
-> Atlassian Cloud instance. Do not assume these IDs are valid for other projects
-> or tenants.
->
-> **Last verified:** 2025-07-16
-
 ## Stability Classification
 
 | Level | Meaning | Examples |
