@@ -38,3 +38,10 @@ _fzf_comprun() {
     *) fzf "$@" ;;
   esac
 }
+
+_fzf_complete_pnpm() {
+  _fzf_complete --delimiter '\s\s+' --accept-nth=1 --tmux "40%" -- "$@" < <(
+    jq -r ".scripts | to_entries[] | [.key, .value] | @tsv" ./package.json | column -t -s $'\t'
+  )
+}
+
