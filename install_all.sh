@@ -1,62 +1,57 @@
 #!/usr/bin/env bash
+#
+# Install every dotfiles package.
+#
+# Each package owns an install.sh that installs its dependencies and stows
+# its config. This script simply discovers and runs those scripts.
+#
+# Optional/situational packages (see SKIP below) are not installed by default.
+# Run their install.sh directly, e.g.: ./work/install.sh
 
-# Determine the directory where this script resides
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UTILS_SH="$DOTFILES_DIR/_install/utils.sh"
-if [[ ! -f "$UTILS_SH" ]]; then
-  echo "Error: utils.sh not found at $UTILS_SH"
-  exit 1
-fi
-source "$UTILS_SH"
+export DOTFILES_DIR
 
-# No install
-_safely_stow add scripts
-_safely_stow add git
+# Packages installed first, in this order. The rest follow in any order.
+PRIORITY=(zsh tmux mise neovim)
 
-# Stuff to install first
-do_install "ghostty"
-do_install "zsh"
-do_install "zsh-completions"
-do_install "tmux"
-do_install "neovim"
-do_install "mise"
+# Packages excluded from the default install.
+SKIP=(work audio)
 
-# Install mise stuff
-mise install
-_safely_stow add claude
-_safely_stow add gemini
+_contains() {
+  local needle="$1"; shift
+  local item
+  for item in "$@"; do
+    [ "$item" = "$needle" ] && return 0
+  done
+  return 1
+}
 
-# Stuff with config
-do_install "bat"
-do_install "btop"
-do_install "eza"
-do_install "fzf"
-do_install "gh"
-do_install "git-delta"
-do_install "glow"
-do_install "lazydocker"
-do_install "lazygit"
-do_install "mprocs"
-do_install "oh-my-posh"
-do_install "ripgrep"
-do_install "stormy"
+_install_pkg() {
+  local install_script="$DOTFILES_DIR/$1/install.sh"
+  [ -f "$install_script" ] || { echo "!! no install.sh for $1, skipping"; return; }
+  echo "==> Installing $1"
+  if ! bash "$install_script"; then
+    echo "!! $1 install failed, continuing"
+  fi
+}
 
-# Stuff with no config
-do_install "1password"
-do_install "1password-cli@beta"
-do_install "ast-grep"
-do_install "as-tree"
-do_install "coreutils"
-do_install "fastfetch"
-do_install "fd"
-do_install "flac"
-do_install "jq"
-do_install "obsidian"
-do_install "spotify"
-do_install "tldr"
-do_install "vivaldi"
+# Priority packages first.
+for pkg in "${PRIORITY[@]}"; do
+  _install_pkg "$pkg"
+done
 
-# Fonts
-do_install "font-commit-mono-nerd-font"
-do_install "font-sauce-code-pro-nerd-font"
-do_install "font-victor-mono-nerd-font"
+# Everything else.
+for install_script in "$DOTFILES_DIR"/*/install.sh; do
+  [ -f "$install_script" ] || continue
+  pkg="$(basename "$(dirname "$install_script")")"
+
+  if _contains "$pkg" "${PRIORITY[@]}"; then
+    continue
+  fi
+  if _contains "$pkg" "${SKIP[@]}"; then
+    echo "==> Skipping optional package: $pkg"
+    continue
+  fi
+
+  _install_pkg "$pkg"
+done
