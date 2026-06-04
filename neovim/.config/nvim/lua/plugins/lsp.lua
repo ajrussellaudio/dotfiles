@@ -34,12 +34,20 @@ return {
     {
       'neovim/nvim-lspconfig',
       config = function()
+        -- Apply per-server settings from lua/lsp/<server>.lua.
+        -- Each file returns a vim.lsp.Config table that is deep-merged onto the
+        -- base config shipped by nvim-lspconfig. mason-lspconfig auto-enables
+        -- installed servers, picking up these overrides.
+        for _, file in ipairs(vim.api.nvim_get_runtime_file('lua/lsp/*.lua', true)) do
+          vim.lsp.config(vim.fn.fnamemodify(file, ':t:r'), dofile(file))
+        end
+
         vim.api.nvim_create_autocmd('LspAttach', {
           group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
           callback = function(event)
             local map = function(keys, func, desc, mode)
               mode = mode or 'n'
-              vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+              vim.keymap.set(mode, keys, func, { buf = event.buf, desc = 'LSP: ' .. desc })
             end
 
             local fzf_lua = require 'fzf-lua'
@@ -60,12 +68,12 @@ return {
             if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
               local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
               vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                buffer = event.buf,
+                buf = event.buf,
                 group = highlight_augroup,
                 callback = vim.lsp.buf.document_highlight,
               })
               vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                buffer = event.buf,
+                buf = event.buf,
                 group = highlight_augroup,
                 callback = vim.lsp.buf.clear_references,
               })
@@ -73,7 +81,7 @@ return {
                 group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
                 callback = function(event2)
                   vim.lsp.buf.clear_references()
-                  vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                  vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buf = event2.buf }
                 end,
               })
             end

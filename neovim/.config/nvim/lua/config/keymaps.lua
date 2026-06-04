@@ -46,11 +46,17 @@ local diagnostic_goto = function(next, severity)
   local count = next and 1 or -1
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    vim.diagnostic.jump { count = count, severity = severity, float = {
-      scope = 'cursor',
-      border = 'rounded',
+    vim.diagnostic.jump {
+      count = count,
       severity = severity,
-    } }
+      on_jump = function(_, bufnr)
+        vim.diagnostic.open_float(bufnr, {
+          scope = 'cursor',
+          border = 'rounded',
+          severity = severity,
+        })
+      end,
+    }
   end
 end
 map('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
