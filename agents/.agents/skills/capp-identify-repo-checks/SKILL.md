@@ -1,121 +1,50 @@
 ---
 name: capp-identify-repo-checks
-description: Identify the validation checks a repository expects before code is pushed. Discovers package manager, package scripts, GitHub Actions workflows, CI-only checks, and outputs targeted/required/conditional tiers. Use before implementing, addressing review comments, or fixing CI.
+description: CaPP — identify a repo's validation checks before push (package manager, scripts, GitHub Actions, CI-only checks; outputs targeted/required/conditional tiers). Internal; invoke explicitly.
 ---
 
 # CaPP Identify Checks
 
-You are identifying the checks that should run before code is pushed. Your output is a practical validation plan, not a guarantee that every CI job can or should run locally.
+Produce a practical validation plan for a repo — not a guarantee that every CI job can run locally.
 
-## Inputs
-
-Expect some or all of:
-- Repository path or current working directory
-- Ticket or PR context
-- Affected packages/modules/files, if already known
-- Repo instructions such as AGENTS.md, CONTRIBUTING.md, README, or package-level docs
-
-If the affected area is unknown, identify repo-wide checks and note which checks need narrowing once files are changed.
-
-## Outputs
-
-Return a concise validation plan with:
-- Package manager and evidence used to identify it
-- Targeted checks to run before each commit
-- Required local checks to run before pushing
-- Conditional checks to run when relevant
-- CI-only checks that should be left to CI or explicitly requested
-- Notes for generated files, lockfiles, secrets, or external services
-- Exact commands where they can be inferred safely
+**In:** repo path/cwd; ticket/PR context; affected packages/files if known; repo instructions
+(AGENTS.md, CONTRIBUTING, README, package docs). If the affected area is unknown, identify repo-wide
+checks and note which need narrowing once files change.
+**Out:** package manager (+ evidence); the four check tiers below; notes on generated files,
+lockfiles, secrets, external services; exact commands where safely inferable.
 
 ## Discovery order
 
-1. Read repo instructions:
-   - AGENTS.md
-   - CONTRIBUTING.md
-   - README and package-level READMEs
-   - CONTEXT.md or equivalent domain/architecture docs if present
-2. Detect package manager:
-   - `packageManager` in `package.json`
-   - lockfiles: `pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `bun.lockb`
-   - workspace files such as `pnpm-workspace.yaml`
-3. Inspect package scripts:
-   - root `package.json`
-   - affected package `package.json` files
-   - scripts for lint, typecheck, test, test:unit, format/check, coverage, build, depcheck, generated type checks, schema checks, bundle limits, and repo-specific validation
-4. Inspect GitHub Actions workflows in `.github/workflows/`.
-   - Treat workflows as the strongest signal for what CI expects.
-   - Map CI steps back to local commands where possible.
-   - Note checks that rely on secrets, deployed services, browsers, external datasets, or CI-only infrastructure.
-5. Inspect other CI/config files if present:
-   - Turbo/Nx configs
-   - Vitest/Jest/Playwright configs
-   - ESLint/Prettier configs
-   - TypeScript project references
-   - Sanity typegen/schema scripts
-   - Terraform/Terragrunt or infrastructure validation scripts
+1. **Repo instructions:** AGENTS.md, CONTRIBUTING, README + package READMEs, CONTEXT.md.
+2. **Package manager:** `packageManager` in `package.json`; lockfiles (`pnpm-lock.yaml`,
+   `yarn.lock`, `package-lock.json`, `bun.lockb`); workspace files (`pnpm-workspace.yaml`).
+3. **Package scripts** (root + affected packages): lint, typecheck, test/test:unit, format/check,
+   coverage, build, depcheck, generated-type checks, schema checks, bundle limits, repo-specific
+   validation.
+4. **GitHub Actions** (`.github/workflows/`) — the strongest signal for what CI expects. Map steps
+   to local commands; note steps needing secrets, deployed services, browsers, external datasets, or
+   CI-only infra.
+5. **Other configs if present:** Turbo/Nx, Vitest/Jest/Playwright, ESLint/Prettier, TS project
+   references, Sanity typegen/schema, Terraform/Terragrunt validation.
 
 ## Validation tiers
 
-### Targeted checks
+- **Targeted** (before each commit): tests for changed modules; the exact failed check after a fix;
+  package-local lint/typecheck; generated type/schema checks for changed inputs.
+- **Required local** (before pushing): lint, typecheck, unit tests, format check, build (if CI
+  requires it and it's feasible locally).
+- **Conditional** (when relevant): coverage (when thresholds touched / CI enforces); Sanity
+  typegen/schema (schema or query changes); bundle-size (frontend/runtime); infra plan/synth/validate
+  (infra changes); integration tests (documented local path).
+- **CI-only** (document, don't run unless instructed): E2E/browser suites; deployment checks; checks
+  needing production-like secrets/external services; long-running CI-only suites. Run E2E only when
+  the developer explicitly asks or repo instructions require it.
 
-Run targeted checks before each commit.
+## Policies
 
-Examples:
-- Tests for changed modules or packages
-- The exact failed check after a fix
-- Package-local lint/typecheck when available
-- Generated type/schema checks for changed generated-type inputs
-
-### Required local checks
-
-Run required local checks before pushing.
-
-Examples:
-- Lint
-- Typecheck
-- Unit tests
-- Format check
-- Build, if CI requires it and it is feasible locally
-
-### Conditional checks
-
-Run conditional checks when relevant to the changed area.
-
-Examples:
-- Coverage when coverage thresholds are touched or CI enforces coverage
-- Sanity typegen/schema checks for schema or query changes
-- Bundle-size checks for frontend/runtime changes
-- Infrastructure plan/synth/validate for infrastructure changes
-- Integration tests when the affected code has a local, documented integration test path
-
-### CI-only checks
-
-Document but do not run locally unless explicitly instructed.
-
-Examples:
-- E2E/browser suites
-- Deployment checks
-- Checks requiring production-like secrets or external services
-- Long-running integration suites intended only for CI
-
-E2E checks must only be run when the developer explicitly asks for them or repo instructions for the current task require them.
-
-## Package manager and dependency policy
-
-- Use the detected package manager only.
-- Do not switch package managers.
-- Prefer existing dependencies and utilities.
-- Ask before adding a new runtime dependency.
-- Do not hand-edit lockfiles.
-- It is OK to regenerate/update lockfiles through the package manager when dependency changes require it.
-
-## Generated file policy
-
-- Do not hand-edit generated files.
-- If generated output is required, run the repo's documented generator.
-- For Sanity types, use the documented typegen flow rather than editing generated type files.
-
-## Failure handling
-
-If a command cannot be inferred safely, say what evidence is missing and ask the developer. If a CI workflow uses a command that cannot run locally because of secrets, external services, or CI-only setup, classify it as CI-only and explain why.
+- **Package manager:** use the detected one only; don't switch. Prefer existing dependencies; ask
+  before adding a runtime dependency. Don't hand-edit lockfiles, but regenerating via the package
+  manager when dependencies change is fine.
+- **Generated files:** don't hand-edit; run the documented generator (e.g. Sanity typegen flow).
+- **Failure handling:** if a command can't be inferred safely, say what evidence is missing and ask.
+  If a CI command can't run locally (secrets/external/CI-only), classify it CI-only and explain why.

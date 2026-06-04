@@ -1,155 +1,105 @@
 ---
 name: capp-create-a-ticket
-description: Create well-structured Jira tickets through adaptive interview. Captures goals, constraints, and acceptance criteria without prescribing implementation. Use when creating new work items for the CaPP team.
+description: CaPP — create well-structured Jira tickets via adaptive interview, capturing goals/constraints/AC without prescribing implementation. Use for CaPP/Jira ticket creation.
 ---
 
 # CaPP Create Ticket
 
-You are helping an Engineering Manager or Product Manager create a well-structured Jira ticket. Your goal is to capture the right level of detail — enough context for a developer to understand and pick up the work, without prescribing implementation.
+Help an EM/PM create a well-structured Jira ticket — enough context for a developer to pick up the
+work, without prescribing implementation.
 
-## Workflow Position
+**Step 1** of the CaPP workflow. The ticket may sit for weeks before pickup, so do **not** reference
+downstream skills/steps. (Small bugs: create → `capp-do-work` → `capp-self-review`; features
+continue through PRD and subtask planning.)
 
-This is the **first step** in the CaPP development workflow. The ticket may sit for days or weeks before a developer picks it up, so do not reference next steps or downstream skills.
-
-For small bugs or tasks, the lightweight workflow may be `capp-create-a-ticket` -> `capp-do-work` -> `capp-self-review`. Standard feature work should continue through PRD and subtask planning.
-
-## Inputs
-
-Expect a user request, bug report, feature idea, or rough work description. The user may also provide links to designs, Confluence pages, existing tickets, customer reports, or affected systems.
-
-## Outputs
-
-Create one or more Jira tickets with:
-- Clear problem statement and affected users
-- Acceptance criteria
-- CMS/content impact
-- Constraints, dependencies, and open questions
-- Links to relevant context
-- Appropriate Jira project, issue type, priority, sprint, and links where available
+**In:** a request, bug report, feature idea, or rough description, plus any links (designs,
+Confluence, tickets).
+**Out:** one or more Jira tickets with problem statement, acceptance criteria, CMS/content impact,
+constraints/dependencies/open questions, links, and correct project/issue type/priority/sprint/epic.
 
 ## Process
 
-### 1. Understand the request
+### 1. Understand & interview
 
-Ask the user what they need. Adapt your interview style:
-- **Simple/clear requests**: Batch related questions, keep it brief
-- **Complex/ambiguous requests**: Deep interview, resolve one branch at a time
+Adapt style: batch questions for simple requests; deep one-branch-at-a-time interview for complex
+ones. Gather:
 
-### 2. Interview
+- **Required:** problem statement (what + why), acceptance criteria (measurable), affected
+  users/audience, priority indication.
+- **Prompt for (don't demand):** technical context the requester knows; constraints
+  (deadlines, dependencies); links (include prominently if mentioned); CMS impact (Sanity schema or
+  content?); epic (key e.g. `CAPP-387` or name e.g. "CMS BAU"); sprint (active sprint?).
+- **Watch for:** CMS + UI scope → encourage splitting schema from UI into separate tickets (per
+  `capp-conventions`). Large scope → suggest splitting, linked with "depends on" / "relates to".
 
-Gather the following through conversation:
+### 2. Create the ticket
 
-**Required:**
-- Problem statement — what needs to change and why
-- Acceptance criteria — measurable definition of done
-- Affected users / audience
-- Priority indication
-
-**Prompt for (don't demand):**
-- Technical context — capture what the requester knows without requiring deep technical knowledge
-- Constraints — deadlines, dependencies, limitations
-- Links — Confluence pages, Figma designs, related tickets. If mentioned, include them prominently
-- CMS impact — does this involve Sanity CMS schema or content changes?
-- Epic — ask if this ticket belongs to an epic. The user may provide an epic key (e.g. `CAPP-387`) or an epic name (e.g. "CMS BAU")
-- Sprint — ask if this should be added to the active sprint
-
-**Watch for:**
-- **CMS + UI scope** — strongly encourage separating CMS schema changes from UI/code changes into separate tickets. Prompt if the request seems to span both
-- **Large scope** — if the request is too large for a single ticket, suggest splitting and linking with "depends on" / "relates to" relationships
-
-### 3. Create the ticket
-
-**Before creating any Jira issues**, invoke `capp-get-jira-info` to load hardcoded CAPP Jira metadata (cloud ID, project key/ID, issue type IDs, link types). Use these values directly instead of discovering them via API.
-
-**Project:** Default to CAPP (project ID `14798`). Ask if a different project is needed.
-
-**Ticket structure:**
+First invoke `capp-get-jira-info` for metadata (cloud ID, project, issue type IDs, link types) and
+use it directly. Default project CAPP (`14798`); ask if different. Write with
+`contentFormat: "markdown"`.
 
 ```
 ## TL;DR
-[One-line summary of the change]
+[One-line summary]
 
 ## Design Links
-[Figma links, mockups — if any were mentioned]
+[Figma/mockups — if mentioned]
 
 ## Links
-[Confluence pages, related tickets, external references]
+[Confluence, related tickets, external refs]
 
 ## Problem
 [What needs to change and why]
 
 ## Acceptance Criteria
-- [ ] [Measurable outcome 1]
-- [ ] [Measurable outcome 2]
+- [ ] [Measurable outcome]
 
 ## Affected Users
-[Who is impacted by this change]
+[Who is impacted]
 
 ## CMS Impact
-[Does this involve Sanity CMS? Schema changes? Content changes? "None" if not applicable]
+[Sanity schema/content changes? "None" if N/A]
 
 ## Constraints
-[Deadlines, dependencies, technical limitations, out of scope items]
+[Deadlines, dependencies, limitations, out of scope]
 
 ## Open Questions
-[Unresolved details or assumptions that the developer should be aware of]
+[Unresolved details / assumptions]
 ```
 
-### 4. Scope splitting
+### 3. Scope splitting
 
-If the work should be multiple tickets:
-1. Create each ticket with the structure above
-2. Link them appropriately:
-   - "depends on" for sequential dependencies
-   - "relates to" for parallel/related work
-3. Clearly state which ticket should be picked up first
+If multiple tickets: create each with the structure above, link ("depends on" sequential /
+"relates to" parallel), and state which to pick up first.
 
-### 5. Sprint
+### 4. Sprint
 
-If the user confirms the ticket should be in a sprint:
-1. Discover the active CAPP sprint.
-2. If exactly one active CAPP sprint is available, use it.
-3. If multiple active sprints are available, or discovery fails, ask for the sprint name/ID.
-4. If the developer is unavailable or the sprint cannot be identified, leave the ticket in the backlog and state why.
+If a sprint is wanted: discover the active CAPP sprint; use it if exactly one; if multiple or
+discovery fails, ask. If unresolved, leave in backlog and say why. Otherwise backlog.
 
-Otherwise leave it in the backlog.
+### 5. Epic
 
-### 6. Epic
+User gives an epic key or name.
+- **Key:** fetch and confirm it exists, is an Epic, and is in the intended project (unless a
+  cross-project epic is explicitly wanted); otherwise ask.
+- **Name:** search with JQL (escape input):
+  `project = <key> AND issuetype = Epic AND summary ~ "<name>"`. Prefer active epics. One match →
+  use it; multiple → ask (show key, summary, status); none → ask for clarification/key.
+- **Assign via Jira hierarchy, not issue links:** use the `parent` field on create; if rejected,
+  use the Epic Link custom field from field metadata; if neither works, create the ticket and add a
+  comment recording the intended epic, and report it.
+- If split into multiple tickets, ask whether the epic applies to all or some.
 
-Ask whether the ticket should belong to an epic. The user may provide either an epic key (e.g. `CAPP-387`) or an epic name (e.g. "CMS BAU").
+## Jira capability & fallback
 
-**If the user provides an epic key:**
-1. Fetch the issue and confirm it exists, is an Epic, and belongs to the intended project (unless the user explicitly wants a cross-project epic).
-2. If the issue is not found, is not an Epic, or is in an unexpected project, ask for clarification.
-
-**If the user provides an epic name:**
-1. Search for matching epics in the selected project using JQL, escaping user input:
-   `project = <projectKey> AND issuetype = Epic AND summary ~ "<epic name>"`
-2. Prefer active epics — deprioritise Done/Closed epics.
-3. If exactly one suitable epic matches, use it.
-4. If multiple match, ask the user to pick — show key, summary, and status for each.
-5. If none match, ask for clarification or an epic key.
-
-**Assigning the epic:**
-
-Assign the ticket to the epic using Jira hierarchy metadata — do NOT use issue links (Relates, Blocks, etc.) for epic membership.
-
-- Use the `parent` field when creating the issue.
-- If `parent` is unavailable or rejected, inspect Jira field metadata for the Epic Link custom field and use that instead.
-- If the epic cannot be set through available Jira tools, create the ticket and add a Jira comment preserving the intended epic (e.g. "Intended epic: CAPP-387 — CMS BAU"). Report this to the user.
-
-**Scope splitting:** If the request is split into multiple tickets, ask whether the selected epic applies to all tickets or only specific ones.
-
-## Jira capability handling
-
-CaPP Jira is expected to support this workflow. Use values from `capp-get-jira-info` (cloud ID, issue type IDs, link types, field IDs) to skip redundant discovery calls. Always pass `contentFormat: "markdown"` when writing description content.
-
-If a field, issue type, priority, sprint, or link operation fails, follow the fallback protocol in `capp-get-jira-info` — perform live discovery once, continue if unambiguous, and report the mismatch. If the developer is unavailable and context would otherwise be lost, add a Jira comment with the information instead of overwriting the description.
+Use `capp-get-jira-info` values to skip discovery. If any field/issue-type/priority/sprint/link
+operation fails, follow its fallback protocol (discover once, continue if unambiguous, report
+mismatch). If the developer is unavailable and context would be lost, add a comment rather than
+overwriting the description.
 
 ## Rules
 
-- Do NOT overwrite or delete existing ticket content
-- Do NOT mention downstream workflow steps — the ticket stands alone
-- Use the Jira CAPP project by default, confirm if the user mentions a different project
-- If Confluence pages or Figma designs are mentioned during the conversation, add them to the appropriate section
-- Keep language clear and jargon-free — tickets are read by developers, QA, and stakeholders
+- Do NOT overwrite/delete existing ticket content, or mention downstream workflow steps.
+- Default to CAPP; confirm if another project is mentioned.
+- Add any mentioned Confluence/Figma links to the right section.
+- Keep language clear and jargon-free — read by devs, QA, and stakeholders.

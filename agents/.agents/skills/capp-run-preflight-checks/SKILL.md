@@ -1,97 +1,64 @@
 ---
 name: capp-run-preflight-checks
-description: Run the standard CaPP workflow preflight before code or Jira/GitHub workflow actions. Confirms repo, branch, clean working tree, branch naming, repo docs, Jira context, package manager, checks, and safety constraints.
+description: CaPP workflow — preflight before code or Jira/GitHub actions (repo, branch, clean tree, naming, docs, Jira context, package manager, checks, safety). Internal; invoke explicitly.
 ---
 
 # CaPP Preflight
 
-You are performing the shared preflight for CaPP workflow skills. The goal is to ensure the agent is operating in the right repo, on the right branch, with the right context, before making changes.
+Shared preflight for CaPP workflow skills: ensure the agent is in the right repo, on the right
+branch, with the right context, before making changes.
 
-## Inputs
-
-Expect some or all of:
-- Jira ticket key
-- PR URL or number
-- Intended target repo
-- Intended branch or branch type
-- Whether code changes, Jira changes, GitHub changes, or review-only work will happen
-- Affected packages/modules/files, if known
-
-If required context is missing, infer it from the ticket/PR/repo where safe. Ask the developer when ambiguity could cause work in the wrong place.
-
-## Outputs
-
-Return a concise preflight summary:
-- Target repo and current repo match status
-- Current branch and whether it follows branch naming conventions
-- Working tree status
-- Relevant repo instructions found
-- Jira ticket/PR context loaded
-- Jira transitions/link types/fields needed for the workflow
-- Package manager
-- Check tiers from `capp-identify-repo-checks`
-- Blockers or questions before work can proceed
+**In:** ticket key; PR URL/number; intended repo and branch/type; what kind of work (code / Jira /
+GitHub / review-only); affected files if known. Infer missing context from the ticket/PR/repo where
+safe; ask when ambiguity could cause work in the wrong place.
+**Out:** a concise summary — repo match; current branch + naming validity; working-tree status; repo
+instructions found; Jira/PR context loaded; Jira transitions/links/fields needed; package manager;
+check tiers from `capp-identify-repo-checks`; blockers/questions.
 
 ## Required preflight
 
-1. Confirm the current repository matches the ticket or PR.
-   - If the target repo is unclear, infer from the ticket/PR links.
-   - If the current directory appears wrong, stop and ask the developer to switch repos.
-2. Read repo instructions:
-   - AGENTS.md
-   - CONTRIBUTING.md
-   - PR templates
-   - CONTEXT.md or equivalent domain/architecture docs
-   - Package-level docs for affected areas
-3. Check git state for code-changing work:
-   - Confirm the current branch.
-   - Confirm the branch is not the default branch unless the workflow is explicitly read-only.
-   - Confirm the branch follows repo branch naming conventions. If the repo does not define one, use `<type>/<TICKET-ID>-<description>`.
-   - Confirm there are no outstanding uncommitted changes before starting.
-   - If outstanding changes exist, stop and ask whether to commit, stash, use a worktree, or switch branch. Do not mix unrelated local changes into the work.
-4. Invoke `capp-get-jira-info` to load hardcoded CAPP Jira metadata (cloud ID, field IDs, transition map, link types). Use these values directly instead of discovering them via API.
-5. Load Jira context when a ticket is involved:
-   - Summary, description, acceptance criteria, links, comments, subtasks, and dependencies. Use `responseContentFormat: "markdown"` when reading fields.
-   - Use transition IDs from `capp-get-jira-info` after validating the issue's current status matches the expected "From" status.
-   - Check the field availability matrix in `capp-get-jira-info` before writing to Dev Notes (`customfield_26991`) or Story Points.
-   - Use link type names from `capp-get-jira-info` (e.g. `"Blocks"`) when creating dependency links.
-6. Load GitHub context when a PR is involved:
-   - PR diff, description, files, comments, review threads, and latest head SHA when relevant.
-   - PR template requirements from the repo.
-7. Run `capp-identify-repo-checks` for code-changing work and record its tiered output.
-8. Identify generated-file, lockfile, dependency, Sanity, infrastructure, or external-service constraints before changing files.
+1. **Repo match:** confirm the current repo matches the ticket/PR (infer from links). If the
+   directory looks wrong, stop and ask to switch.
+2. **Repo instructions:** AGENTS.md, CONTRIBUTING, PR templates, CONTEXT.md, package-level docs for
+   affected areas.
+3. **Git state (code-changing work):** confirm the current branch; confirm it's not the default
+   branch (unless read-only); confirm naming (repo convention, else `<type>/<TICKET-ID>-<desc>`);
+   confirm no uncommitted changes — if any, stop and ask whether to commit, stash, use a worktree,
+   or switch (don't mix unrelated changes in).
+4. **Jira metadata:** invoke `capp-get-jira-info` and use its values directly.
+5. **Jira context (if a ticket):** summary, description, AC, links, comments, subtasks, dependencies
+   (`responseContentFormat: "markdown"`). Validate current status before using a transition ID;
+   check field availability before writing Dev Notes/Story Points; use link-type names for
+   dependencies.
+6. **GitHub context (if a PR):** diff, description, files, comments, review threads, latest head SHA;
+   PR template requirements.
+7. **Checks:** run `capp-identify-repo-checks` for code-changing work and record its tiers.
+8. Identify generated-file, lockfile, dependency, Sanity, infra, or external-service constraints
+   before changing files.
 
-## Jira capability handling
+## Jira capability & fallback
 
-CaPP Jira is expected to support this workflow. Do not over-defensively avoid Jira actions.
-
-If a Jira field, transition, issue type, link type, assignee lookup, or sprint operation fails:
-- Follow the fallback protocol in `capp-get-jira-info` — try hardcoded value, live discovery once, continue if unambiguous, report mismatch, ask user if ambiguous.
-- If the developer is unavailable and a fallback is needed to preserve context, use a Jira comment rather than overwriting issue description or silently dropping information.
-- For PRDs, fall back to a Jira comment titled `Technical PRD` if Dev Notes (`customfield_26991`) cannot be located or updated.
+CaPP Jira supports this workflow — don't over-defensively avoid Jira actions. On any failure, follow
+the `capp-get-jira-info` fallback protocol. If the developer is unavailable and context would be
+lost, use a comment rather than overwriting the description. For PRDs, fall back to a `Technical PRD`
+comment only if Dev Notes can't be located/updated.
 
 ## PR template discovery
 
-When preparing or checking a PR description, inspect:
-1. `.github/pull_request_template.md`
-2. `.github/PULL_REQUEST_TEMPLATE.md`
-3. `.github/PULL_REQUEST_TEMPLATE/`
-4. Repository-level `CONTRIBUTING.md` or PR guidance
-
-Preserve required sections from the repo template. Do not invent repo-specific conventions that are not documented in repo instructions.
+Follow `capp-conventions` (check `.github` template paths, then CONTRIBUTING; preserve required
+sections; don't invent conventions).
 
 ## Jira status rules
 
-- Use transition IDs from `capp-get-jira-info` (e.g. Begin Work `2`, Done `6`) after confirming the issue's current status matches the expected "From" status.
-- `In Review` (transition ID `3`) is the review status for the parent task.
-- Skills may move implementation subtasks through their workflow, including to Done (transition ID `6`) when implementation is complete.
-- No skill should move the parent task past `In Review`; moving the parent task to Done is a post-merge human or release workflow action.
+Use transitions from `capp-get-jira-info` (Begin Work `2`, Done `6`) after confirming the current
+status. `In Review` (`3`) is the parent task's review status. Skills may move implementation
+subtasks through to Done. **No skill moves the parent task past In Review** — moving it to Done is a
+post-merge human/release action.
 
 ## Safety rules
 
-- Do not merge PRs.
-- Do not force-push, rebase shared branches, delete branches, or discard local changes without explicit developer approval.
-- Do not publish Sanity content or deploy infrastructure unless explicitly instructed.
-- Do not commit secrets.
-- Do not hand-edit generated files or lockfiles.
-- Use repo-documented conventions over hardcoded CaPP-specific PR conventions.
+- Don't merge PRs; don't force-push, rebase shared branches, delete branches, or discard local
+  changes without explicit approval.
+- Don't publish Sanity content or deploy infrastructure unless instructed.
+- Don't commit secrets or hand-edit generated files/lockfiles.
+- Prefer repo-documented conventions over hardcoded CaPP-specific PR conventions.
