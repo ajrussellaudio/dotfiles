@@ -16,7 +16,11 @@ create-worktree() {
   fi
 
   git worktree add "$dir" -b "$branch" 2>/dev/null || git worktree add "$dir" "$branch"
-  tmux new-window -n "$name" -c "$dir" "${trust_cmd} exec $SHELL -i"
+
+  local setup_cmd="git pull origin ${(q)branch} || echo 'git pull skipped (no upstream branch?)';"
+  [[ -f "$dir/package.json" ]] && setup_cmd+=' pnpm install;'
+
+  tmux new-window -n "$name" -c "$dir" "${trust_cmd} ${setup_cmd} exec $SHELL -i"
 }
 
 _worktree_descendant_pids() {
