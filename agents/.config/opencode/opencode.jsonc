@@ -21,6 +21,10 @@
       "headers": {
         "Authorization": "Bearer {env:GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
+    },
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }
