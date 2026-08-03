@@ -7,3 +7,7 @@ mise.local.toml
 CLAUDE.md
 
 ralph.toml
+
+docs/agents
+.scratch
+.out-of-scope

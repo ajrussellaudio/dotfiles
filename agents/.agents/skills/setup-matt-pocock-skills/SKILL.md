@@ -21,7 +21,7 @@ This is a prompt-driven skill, not a deterministic script. Explore, present what
 Look at the current repo to understand its starting state. Read whatever exists; don't assume:
 
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
-- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
+- `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either? For `AGENTS.md`, also note whether git **tracks** it (`git ls-files --error-unmatch AGENTS.md`) — a tracked one is shared with the team and shouldn't receive personal config (see step 4).
 - `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - `docs/agents/` — does this skill's prior output already exist?
@@ -78,10 +78,14 @@ Let them edit before writing.
 **Pick the file to edit:**
 
 - If `CLAUDE.md` exists, edit it.
-- Else if `AGENTS.md` exists, edit it.
+- Else if `AGENTS.md` exists, **check whether git tracks it** (`git ls-files --error-unmatch AGENTS.md`):
+  - **Untracked** — it's yours alone, so edit it.
+  - **Tracked** — it's shared with other developers, and this setup is personal. Don't edit it. Create `CLAUDE.md` instead and put the block there, then tell the user why. (`CLAUDE.md`, like `docs/agents/`, is expected to be git-ignored — confirm it is, and offer to add it to the repo's `.gitignore` or the user's global excludes file if it isn't.)
 - If neither exists, ask the user which one to create — don't pick for them.
 
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa) — always edit the one that's already there.
+Never create `AGENTS.md` when `CLAUDE.md` already exists — always edit the one that's already there. The tracked-`AGENTS.md` case above is the sole exception to the reverse: it creates `CLAUDE.md` alongside a shared `AGENTS.md` rather than writing personal config into a file the whole team reads.
+
+This whole skill's output is **personal, per-developer config**. Everything it writes — `docs/agents/*.md` and the `## Agent skills` block — should stay out of a shared repo's history unless the user explicitly says the team is adopting these skills together.
 
 If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
 
