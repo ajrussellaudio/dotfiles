@@ -1,10 +1,10 @@
 ---
-name: ask-matt
+name: ask-alan
 description: Ask which skill or flow fits your situation. A router over the skills in this repo.
 disable-model-invocation: true
 ---
 
-# Ask Matt
+# Ask Alan
 
 You don't remember every skill, so ask.
 
