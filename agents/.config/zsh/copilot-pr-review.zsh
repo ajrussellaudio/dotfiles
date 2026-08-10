@@ -17,7 +17,7 @@ copilot-pr-review() {
   head_branch=$(echo "$pr_json" | jq -r '.headRefName')
   base_branch=$(echo "$pr_json" | jq -r '.baseRefName')
 
-  local review_cmd="git pull origin ${head_branch} && copilot -i \"/code-review-and-quality - Review all changes between HEAD and origin/${base_branch}.\" --yolo --autopilot"
+  local review_cmd="git pull origin ${head_branch} && claude -p \"/code-review-and-quality - Review all changes between HEAD and origin/${base_branch}.\" --permission-mode bypassPermissions"
 
   if type create-worktree &>/dev/null; then
     local win_name
