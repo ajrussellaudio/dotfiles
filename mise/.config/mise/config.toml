@@ -7,8 +7,8 @@ go = "latest"
 rust = "latest"
 
 # AI
-# Copilot CLI, Claude Code and OpenCode are installed via the agents package.
 gemini-cli = "latest"
+claude-code = "latest"
 "npm:mcp-hub" = "latest"
 
 # AWS
@@ -26,7 +26,6 @@ uv = "latest"
 yarn = "latest"
 zig = "latest"
 "npm:@bradygaster/squad-cli" = "latest"
-claude-code = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]
