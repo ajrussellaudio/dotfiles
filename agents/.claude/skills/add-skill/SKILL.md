@@ -1,6 +1,6 @@
 ---
 name: add-skill
-description: Import a skill from exactly one GitHub file URL, raw GitHub URL, or single-file gist URL into ~/.agents/skills/. Use when the user wants to add a skill from GitHub content.
+description: Import a skill from exactly one GitHub file URL, raw GitHub URL, or single-file gist URL into ~/.claude/skills/. Use when the user wants to add a skill from GitHub content.
 ---
 
 Import a Copilot skill from a GitHub-hosted text file into this repository.
@@ -23,7 +23,7 @@ Import a Copilot skill from a GitHub-hosted text file into this repository.
 
 Create the new skill immediately under:
 
-`~/.agents/skills/<normalized-name>/SKILL.md`
+`~/.claude/skills/<normalized-name>/SKILL.md`
 
 Then report:
 
@@ -74,7 +74,7 @@ Use that same normalized value for both:
 
 ### 4. Check the destination
 
-Target directory: `~/.agents/skills/<normalized-name>/`
+Target directory: `~/.claude/skills/<normalized-name>/`
 
 If that directory already exists, stop and refuse. Do not overwrite, merge, or partially update it. Tell the user to choose a different name or remove the existing skill first.
 
@@ -103,7 +103,7 @@ When a description must be synthesized, infer a short, concrete, action-oriented
 ### 7. Write the files
 
 - Create the destination directory.
-- Write the final content to `~/.agents/skills/<normalized-name>/SKILL.md`.
+- Write the final content to `~/.claude/skills/<normalized-name>/SKILL.md`.
 - Do not create any other files.
 
 ## Guardrails
@@ -117,7 +117,7 @@ When a description must be synthesized, infer a short, concrete, action-oriented
 ## Success Response
 
 ```
-Created: ~/.agents/skills/<normalized-name>/SKILL.md
+Created: ~/.claude/skills/<normalized-name>/SKILL.md
 name: <normalized-name>
 description: <final description>
 ```
