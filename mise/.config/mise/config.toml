@@ -26,6 +26,7 @@ uv = "latest"
 yarn = "latest"
 zig = "latest"
 "npm:@bradygaster/squad-cli" = "latest"
+claude-code = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]
