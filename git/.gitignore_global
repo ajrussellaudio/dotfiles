@@ -8,6 +8,6 @@ CLAUDE.md
 
 ralph.toml
 
-docs/agents
-.scratch
-.out-of-scope
+docs/agents/
+.scratch/
+.out-of-scope/
