@@ -8,8 +8,4 @@ CLAUDE.md
 
 ralph.toml
 
-docs/agents/
-.scratch/
-.out-of-scope/
-
 **/.claude/settings.local.json
