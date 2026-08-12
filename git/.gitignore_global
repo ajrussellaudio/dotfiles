@@ -4,8 +4,12 @@ mise.local.toml
 .ck
 
 .claude
-CLAUDE.md
 
 ralph.toml
+
+# mattpocock/skills per-developer config. CLAUDE.md itself is deliberately NOT
+# ignored — it is team-shared and committed; personal config goes in CLAUDE.local.md.
+CLAUDE.local.md
+docs/agents/
 
 **/.claude/settings.local.json
