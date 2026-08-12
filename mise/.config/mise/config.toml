@@ -25,7 +25,6 @@ pnpm = "latest"
 uv = "latest"
 yarn = "latest"
 zig = "latest"
-"npm:@bradygaster/squad-cli" = "latest"
 bun = "latest"
 
 [settings]
