@@ -1,0 +1,7 @@
+# SSH keys trusted to verify git signatures.
+# Format: <principals> [options] <keytype> <key>
+#   principals — comma-separated committer emails this key may sign as
+#   namespaces="git" — key is only valid for git signatures, not arbitrary files
+# See ssh-keygen(1), "ALLOWED SIGNERS".
+
+ajrussellaudio@gmail.com namespaces="git" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIECyTyu2lX9hlaBqldupWiCjADvMb84xMDPdpgTqCYs8
