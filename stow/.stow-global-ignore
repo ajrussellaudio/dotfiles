@@ -1,0 +1,38 @@
+# Stowed to ~/.stow-global-ignore.
+#
+# Stow checks a package's .stow-local-ignore first, then this file, and uses
+# whichever it finds FIRST - it does not merge them with the built-in defaults
+# (Stow.pm: get_ignore_regexps). So this file must restate those defaults, or
+# they are silently lost.
+#
+# Everything above the last section is stow 2.4.1's built-in list, verbatim.
+
+RCS
+.+,v
+
+CVS
+\.\#.+       # CVS conflict files / emacs lock files
+\.cvsignore
+
+\.svn
+_darcs
+\.hg
+
+\.git
+\.gitignore
+\.gitmodules
+
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
+
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# --- local additions ---
+
+# Every package carries its own install.sh, which is run by install_all.sh and
+# must never be symlinked into $HOME. _safely_stow passes --ignore for this,
+# but a bare `stow <pkg>` does not - which is how ~/install.sh once appeared.
+# Anchored so a genuinely nested install.sh inside a config tree still stows.
+^/install\.sh$

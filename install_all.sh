@@ -12,7 +12,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export DOTFILES_DIR
 
 # Packages installed first, in this order. The rest follow in any order.
-PRIORITY=(zsh tmux mise neovim)
+PRIORITY=(stow zsh tmux mise neovim)
 
 # Packages excluded from the default install.
 SKIP=(work audio)
