@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__codegraph__*"
+    ],
+    "defaultMode": "auto"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "codegraph prompt-hook"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "explanatory-output-style@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": false,
+    "learning-output-style@claude-plugins-official": true
+  },
+  "tui": "fullscreen",
+  "editorMode": "vim",
+  "model": "opus[1m]"
+}
