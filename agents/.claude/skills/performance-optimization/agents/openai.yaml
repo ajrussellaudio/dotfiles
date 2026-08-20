@@ -1,0 +1,3 @@
+interface:
+  display_name: "Performance Optimization"
+  short_description: "Find and fix performance bottlenecks"
