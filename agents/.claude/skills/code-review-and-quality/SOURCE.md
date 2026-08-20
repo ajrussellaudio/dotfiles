@@ -9,8 +9,11 @@ Vendored from Addy Osmani's agent-skills collection.
 ## Local changes
 
 `SKILL.md` is upstream verbatim, plus one added section: `## Writing the Review`.
-That section makes the review report pass the `ste-writing` linter. See
-`../ste-writing/SOURCE.md`.
+That section applies the `ste-writing` skill to the review report, so the report
+itself is not slop.
+
+The section names that skill and nothing else. It holds no path into the skill's
+directory, so `ste-writing` stays free to move or change its internals.
 
 Re-apply that section after each resync. Insert it before
 `## Dependency Discipline`.

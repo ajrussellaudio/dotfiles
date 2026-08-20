@@ -1,7 +1,6 @@
 ---
 name: ste-writing
-description: Rewrite prose into ASD-STE100 Simplified Technical English to strip "AI slop". Strict mode covers procedures, safety text, and error messages. Flavored mode covers docs, READMEs, and PR descriptions. Never code.
-disable-model-invocation: true
+description: Write, rewrite, or review prose in ASD-STE100 Simplified Technical English to strip "AI slop". Use when asked for plainer docs, error messages, or PR text, or to report STE violations without rewriting. Use when another skill needs its own written output in STE. Prose only, never code.
 metadata:
   spec: ASD-STE100 Issue 9 (January 2025)
 ---

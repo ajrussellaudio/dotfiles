@@ -279,29 +279,19 @@ When reviewing code — whether written by you, another agent, or a human:
 ## Writing the Review
 
 A review is prose. Slop in a review costs the author time and buries the real
-findings. Write the review, then check it.
+findings. Write the review, then apply the `ste-writing` skill to it in flavored
+mode. That skill lints its own output and reports a score. Give the score with
+the review.
 
-1. Write it in STE-flavored style. The rules are in
-   `~/.claude/skills/ste-writing/SKILL.md`. Read the Rules and Guards sections.
-   Skip the strict word set and the safety-text rules.
-2. Save the draft to a scratch file.
-3. Lint the draft:
+Three constraints on that pass:
 
-   ```
-   python3 ~/.claude/skills/ste-writing/ste-lint.py draft.md
-   ```
-
-4. Fix the reported categories and lint again. Stop after two passes. The target
-   is under 2.5 violations per 100 words.
-5. Give the final score with the review.
-
-Use flavored mode. Do not use `--strict`. Strict mode strips voice, and a review
-needs voice: this skill tells you to name a bug a bug and to push back on a weak
-approach. Keep the direct wording and fix the slop around it.
-
-Two things outrank the score. Never soften a finding to lower it, and never
-reword a severity prefix (`Critical:`, `Nit:`, `Optional:`, `FYI`). The score
-serves the review. The review does not serve the score.
+- **Use flavored mode, not strict.** Strict mode strips voice, and a review needs
+  voice: this skill tells you to name a bug a bug and to push back on a weak
+  approach. Keep the direct wording and fix the slop around it.
+- **Never soften a finding to improve the score.** The score serves the review.
+  The review does not serve the score.
+- **Never reword a severity prefix** (`Critical:`, `Nit:`, `Optional:`, `FYI`).
+  They are the review's vocabulary, not prose.
 
 ## Dependency Discipline
 
