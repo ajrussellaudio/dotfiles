@@ -9,7 +9,6 @@ rust = "latest"
 # AI
 gemini-cli = "latest"
 claude-code = "latest"
-"npm:mcp-hub" = "latest"
 
 # AWS
 aws-cli = "latest"
