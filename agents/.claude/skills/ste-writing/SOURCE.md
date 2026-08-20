@@ -20,6 +20,14 @@ Vendored from Ege Çelebi's "The cure for AI slop is a 1986 aircraft manual" kit
 3. Rewrote the `description`. Upstream's version renamed one branch several
    times over ("not sound like AI", "clear or plain", "reads human"). This one
    keeps one trigger per branch and adds a reach clause for other skills.
+4. Rewrote `## Verify`. Upstream documented one invocation, a file path. Text
+   that never reaches a file could not be linted, so a caller had to fall back
+   to the manual checklist and could report a score it never measured. The
+   section now covers both modes, says how to read the result, and says to give
+   no score when the script did not run.
+
+   The script reads stdin only when it gets no arguments. `-` becomes a
+   filename and crashes. Stdin mode always prints JSON and ignores `--json`.
 
 Upstream description, kept here for a future re-merge:
 

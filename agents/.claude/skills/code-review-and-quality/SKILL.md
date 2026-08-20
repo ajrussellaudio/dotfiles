@@ -202,6 +202,25 @@ Check the author's verification story:
 - Is there a before/after comparison?
 ```
 
+### Step 6: Clean the Review Before You Send It
+
+A review is prose. Slop in a review costs the author time and buries the real
+findings. Draft the review, then apply the `ste-writing` skill to it in flavored
+mode. Do this before the review leaves your hands.
+
+Three constraints on that pass:
+
+- **Flavored mode, not strict.** Strict mode strips voice, and a review needs
+  voice: name a bug a bug, and push back on a weak approach. Keep the direct
+  wording and fix the slop around it.
+- **Never soften a finding to improve the score.** The score serves the review.
+  The review does not serve the score.
+- **Never reword a severity prefix** (`Critical:`, `Nit:`, `Optional:`, `FYI`).
+  They are the review's vocabulary, not prose.
+
+This step is done when `ste-writing` reports a measured score for the final
+text. Give that score with the review. Do not call a review clean without it.
+
 ## Multi-Model Review Pattern
 
 Use different models for different review perspectives:
@@ -276,23 +295,6 @@ When reviewing code — whether written by you, another agent, or a human:
 - **Push back on approaches with clear problems.** Sycophancy is a failure mode in reviews. If the implementation has issues, say so directly and propose alternatives.
 - **Accept override gracefully.** If the author has full context and disagrees, defer to their judgment. Comment on code, not people — reframe personal critiques to focus on the code itself.
 
-## Writing the Review
-
-A review is prose. Slop in a review costs the author time and buries the real
-findings. Write the review, then apply the `ste-writing` skill to it in flavored
-mode. That skill lints its own output and reports a score. Give the score with
-the review.
-
-Three constraints on that pass:
-
-- **Use flavored mode, not strict.** Strict mode strips voice, and a review needs
-  voice: this skill tells you to name a bug a bug and to push back on a weak
-  approach. Keep the direct wording and fix the slop around it.
-- **Never soften a finding to improve the score.** The score serves the review.
-  The review does not serve the score.
-- **Never reword a severity prefix** (`Critical:`, `Nit:`, `Optional:`, `FYI`).
-  They are the review's vocabulary, not prose.
-
 ## Dependency Discipline
 
 Part of code review is dependency review:
@@ -358,6 +360,9 @@ For triaging `npm audit` findings and supply-chain risk (typosquatting, compromi
 - [ ] Tests pass
 - [ ] Build succeeds
 - [ ] Manual verification done (if applicable)
+
+### Review Quality
+- [ ] Review text passed `ste-writing` in flavored mode, score reported
 
 ### Verdict
 - [ ] **Approve** — Ready to merge

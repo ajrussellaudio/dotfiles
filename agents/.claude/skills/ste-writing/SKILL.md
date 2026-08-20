@@ -69,14 +69,33 @@ STRUCTURE
 
 ## Verify
 
-If you can run commands, lint the draft with the script that ships next to this skill:
+If you can run commands, lint the text with the script that ships next to this skill.
+
+For text already in a file, pass the path:
 
 ```
 python3 ~/.claude/skills/ste-writing/ste-lint.py draft.md            # flavored target: under 2.5 per 100 words
 python3 ~/.claude/skills/ste-writing/ste-lint.py --strict draft.md   # strict target: under 1.5 per 100 words
 ```
 
-Fix the reported categories and lint again — at most two passes. Report the final score with the text. Do not present text as clean without a lint run.
+For text that is not in a file — a chat reply, a review, a commit message — pipe
+it in and pass no path:
+
+```
+cat <<'STE' | python3 ~/.claude/skills/ste-writing/ste-lint.py
+<the text>
+STE
+```
+
+Pass no path in this mode. The script reads any argument as a filename, so `-`
+makes it fail. Add `--strict` in the same position as above.
+
+Read `total_per100w` from the result. File mode prints one summary line for each
+file. Stdin mode always prints JSON and ignores `--json`.
+
+Fix the reported categories and lint again — at most two passes. Report the
+measured score with the text. If you did not run the script, say so and give no
+score.
 
 If you cannot run commands, use this checklist:
 

@@ -8,12 +8,19 @@ Vendored from Addy Osmani's agent-skills collection.
 
 ## Local changes
 
-`SKILL.md` is upstream verbatim, plus one added section: `## Writing the Review`.
-That section applies the `ste-writing` skill to the review report, so the report
-itself is not slop.
+`SKILL.md` is upstream verbatim, plus `### Step 6: Clean the Review Before You
+Send It` in `## Review Process`, and one line in `## The Review Checklist`. The
+step applies the `ste-writing` skill to the review report, so the report itself
+is not slop.
 
-The section names that skill and nothing else. It holds no path into the skill's
-directory, so `ste-writing` stays free to move or change its internals.
+Step 6 sits in the ordered flow and the checklist asks for it, so it has a
+trigger. An earlier version was a free-standing `## Writing the Review` section
+that nothing referred to, which left it to chance.
+
+The step names the skill and its mode. It holds no path, no script name, no
+score threshold, and no output field. Those belong to `ste-writing`, which
+documents how to run its linter and how to read the result. This skill only
+states that the review goes through it and reports what it measured.
 
 Re-apply that section after each resync. Insert it before
 `## Dependency Discipline`.
