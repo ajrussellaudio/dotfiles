@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Read `AGENTS.md` first.** This is a personal repository, not a Twinkl project.
+`AGENTS.md` records which Twinkl git conventions do not apply here — branch
+naming, commit signing, and the protected `main` branch — and which rules stand
+in their place. Claude Code does not load `AGENTS.md` on its own, so read it.
+
 ## Repository Overview
 
 This is a personal dotfiles repository using GNU Stow for package management. Configuration is organized into discrete packages (directories) that can be independently installed via `stow`. The repository supports both macOS and Linux.
