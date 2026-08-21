@@ -27,7 +27,7 @@ _fzf_comprun() {
         else echo "Preview not available."; \
         fi' ;;
     nvim) fzf "$@" \
-      --walker file,follow,hidden
+      --walker file,follow,hidden \
       --prompt 'nvim > ' \
       --preview 'if [ -d {} ]; \
         then eza --tree --all --icons --color=always {}; \
