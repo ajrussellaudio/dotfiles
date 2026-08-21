@@ -5,6 +5,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -21,9 +22,10 @@
     "explanatory-output-style@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
-    "learning-output-style@claude-plugins-official": true
+    "learning-output-style@claude-plugins-official": true,
+    "twinkl-web@twinkl": true,
+    "twinkl-capp@twinkl": true
   },
   "tui": "fullscreen",
-  "editorMode": "vim",
-  "model": "opus[1m]"
+  "editorMode": "vim"
 }
