@@ -33,4 +33,4 @@ deep-review() {
   fi
 }
 
-alias dr=deep-review
+alias dpr=deep-review
