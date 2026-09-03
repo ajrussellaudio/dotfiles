@@ -1,6 +1,6 @@
 ---
-name: code-review-and-quality
-description: Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch.
+name: deep-review
+description: The deep five-axis review — correctness, readability, architecture, security, performance — with the quality gate and the GitHub posting format. Slower and more thorough than /code-review.
 disable-model-invocation: true
 ---
 
