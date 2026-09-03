@@ -203,6 +203,59 @@ Check the author's verification story:
 - Is there a before/after comparison?
 ```
 
+### Step 6: Post the Review
+
+A posted review has two audiences: a human skimming it, and an agent parsing the raw markdown to act on it. Serve both by putting the verdict and a one-line-per-finding TL;DR **above the fold**, and collapsing the reasoning into `<details>`. Collapsing changes only how GitHub *renders* the comment — the API returns the full body, so bots read every word.
+
+**The review summary comment:**
+
+````markdown
+**Request changes** — 1 critical, 2 required, 3 nits.
+
+### TL;DR
+
+- **Critical:** token bucket is rebuilt per request, so the limiter never limits — `limiter.ts:42`
+- Retry loop has no ceiling; an upstream 500 spins forever — `client.ts:88`
+- No test covers the 429 path — `limiter.test.ts`
+- **Nit:** ×3 — naming and an unused import (below)
+
+<details>
+<summary>Full review — correctness, readability, architecture, security, performance</summary>
+
+### Correctness
+
+...the verbose per-axis review...
+
+</details>
+````
+
+Above the fold, in order: the verdict, then one line per finding.
+
+- **Each bullet stands alone.** State the symptom and its consequence — "token bucket is rebuilt per request, so the limiter never limits", not "fix the limiter". A bullet that can't be acted on without expanding the details has failed.
+- **Keep the severity prefix** from Step 4, so required and optional separate at a glance.
+- **Anchor each bullet** to `file:line`.
+- **Index every finding.** Each finding in the collapsed body gets a bullet — the TL;DR *is* the index, and an unindexed finding is one the author never sees.
+- **Order by leverage**, as in Step 4.
+- **Roll up the tail.** Past ~3 nits, one bullet carries them and the specifics stay collapsed. Fifteen bullets is a review, not a TL;DR.
+
+**Inline comments** take the same shape at smaller scale: the first line does above-the-fold duty for that one finding, and the reasoning collapses beneath it. Keep any `suggestion` block above the fold as well — collapsed, its one-click Apply button is unreachable.
+
+````markdown
+**Nit:** `t` reads as a duration, not a count
+
+```suggestion
+    let tokens = bucket.capacity;
+```
+
+<details>
+<summary>Why</summary>
+
+`t` is used three lines later in a subtraction against `elapsedMs`, so a reader
+holds both meanings at once to follow the expiry check.
+
+</details>
+````
+
 ## Multi-Model Review Pattern
 
 Use different models for different review perspectives:
@@ -365,6 +418,8 @@ For triaging `npm audit` findings and supply-chain risk (typosquatting, compromi
 | "It's only a small addition to this file" | Small diffs still push files past a healthy size and bolt branches onto unrelated flows. Judge the resulting structure, not the diff size. |
 | "It's just a version bump" | A bump is a behavior change you didn't write. Read the changelog; semver doesn't guarantee no breakage. |
 | "I'll upgrade everything in one PR to save time" | A bulk bump that breaks the build hides which package did it. One dependency per change keeps the cause and the revert clean. |
+| "It's all in the review if they read it" | A review nobody reads is a review that didn't happen. The TL;DR is not a courtesy — it's the part that gets acted on. |
+| "Collapsing detail hides it from tooling" | `<details>` changes rendering only. The GitHub API returns the full body, so bots read every word. |
 
 ## Red Flags
 
@@ -382,6 +437,9 @@ For triaging `npm audit` findings and supply-chain risk (typosquatting, compromi
 - A bespoke helper that duplicates an existing canonical one, or feature logic placed in a shared module
 - A bulk "bump dependencies" PR with no changelog review and no per-package isolation
 - A lockfile change that's hand-edited, uncommitted, or merged without reviewing its diff
+- A posted review with no verdict above the fold — the author reads a wall of prose to learn whether it blocks the merge
+- A finding buried in the collapsed `<details>` body with no matching TL;DR bullet
+- A TL;DR bullet so vague it can't be acted on without expanding the details ("clean up the error handling")
 
 ## Verification
 
@@ -392,6 +450,8 @@ After review is complete:
 - [ ] Tests pass
 - [ ] Build succeeds
 - [ ] The verification story is documented (what changed, how it was verified)
+- [ ] The posted review leads with a verdict and a TL;DR, with the verbose body collapsed into `<details>`
+- [ ] Every finding in the collapsed body has a matching TL;DR bullet, and every inline comment opens with a one-line tldr
 - [ ] Dependency upgrades were reviewed against their changelog, isolated per package, and verified by a green suite with the lockfile diff reviewed
 
 **Presumptive blockers:** surface and propose the simpler design for each of these; escalate to Required only when the change actively makes structure worse: a refactor that relocates complexity instead of reducing it; a change that pushes a file past the size boundary with no decomposition; feature logic added to a shared module; a near-duplicate of an existing canonical helper; a silent fallback that hides an unclear invariant.
