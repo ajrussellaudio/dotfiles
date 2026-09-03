@@ -1,8 +1,8 @@
-copilot-pr-review() {
+deep-review() {
   local pr_number="$1"
 
   if [[ -z "$pr_number" ]]; then
-    echo "Usage: copilot-pr-review <pr-number>" >&2
+    echo "Usage: deep-review <pr-number>" >&2
     return 1
   fi
 
@@ -33,4 +33,4 @@ copilot-pr-review() {
   fi
 }
 
-alias cpr=copilot-pr-review
+alias dr=deep-review
