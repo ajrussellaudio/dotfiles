@@ -8,16 +8,19 @@ deep-review() {
 
   # Validate the PR exists and fetch metadata
   local pr_json
-  pr_json=$(gh pr view "$pr_number" --json headRefName,baseRefName 2>&1) || {
+  pr_json=$(gh pr view "$pr_number" --json headRefName,baseRefName,url 2>&1) || {
     echo "Error: could not fetch PR #${pr_number}: ${pr_json}" >&2
     return 1
   }
 
-  local head_branch base_branch
+  local head_branch base_branch pr_url
   head_branch=$(echo "$pr_json" | jq -r '.headRefName')
   base_branch=$(echo "$pr_json" | jq -r '.baseRefName')
+  pr_url=$(echo "$pr_json" | jq -r '.url')
 
-  local review_cmd="git pull origin ${head_branch} && claude -p \"/deep-review - Review all changes between HEAD and origin/${base_branch}.\" --permission-mode bypassPermissions"
+  # create-worktree already fetched and placed the worktree at origin/<branch>,
+  # and gh pr checkout fetches too — so no pull is needed here.
+  local review_cmd="claude \"/deep-review - Review PR #${pr_number}: ${pr_url}. Read the PR description and any linked issues first to establish intent, then review the changes between HEAD and origin/${base_branch}.\" --permission-mode bypassPermissions"
 
   if type create-worktree &>/dev/null; then
     local win_name
