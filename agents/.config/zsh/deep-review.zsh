@@ -20,7 +20,7 @@ deep-review() {
 
   # create-worktree already fetched and placed the worktree at origin/<branch>,
   # and gh pr checkout fetches too — so no pull is needed here.
-  local review_cmd="claude \"/deep-review - Review PR #${pr_number}: ${pr_url}. Read the PR description and any linked issues first to establish intent, then review the changes between HEAD and origin/${base_branch}.\" --permission-mode bypassPermissions"
+  local review_cmd="claude \"/deep-review - Review PR #${pr_number}: ${pr_url}. Read the PR description and any linked issues first to establish intent, then review the changes between HEAD and origin/${base_branch}.\""
 
   if type create-worktree &>/dev/null; then
     local win_name
