@@ -2,6 +2,7 @@
 name: deep-review
 description: The deep five-axis review — correctness, readability, architecture, security, performance — with the quality gate and the GitHub posting format. Slower and more thorough than /code-review.
 disable-model-invocation: true
+source: adapted from addyosmani/agent-skills@df1edb2e0548 (MIT, see LICENSE)
 ---
 
 # Code Review and Quality

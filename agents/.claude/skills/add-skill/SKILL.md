@@ -58,6 +58,11 @@ For gists:
 
 Only continue if the fetched content is text. If the content is binary, inaccessible, or missing, fail with a clear explanation.
 
+While fetching, capture two facts for the provenance stamp in step 5:
+
+- **The commit sha.** Resolve any branch or tag ref to the commit it points at, so the stamp names an immutable point rather than a ref that moves out from under it.
+- **The licence.** Read it from the source repository's `LICENSE` file or its repo metadata; record `unknown` when it has none.
+
 ### 3. Derive the skill name
 
 Pick the destination skill name in this order:
@@ -91,6 +96,12 @@ If that directory already exists, stop and refuse. Do not overwrite, merge, or p
 
 - generate front matter with `name:` and `description:` (see step 6)
 
+**Provenance (always):**
+
+- Add a `source:` key recording where the file came from: `source: <owner>/<repo>@<short-sha> (<licence>)`, or `source: gist <gist-id> (<licence>)` for a gist.
+- Write the plain form at import. Once the local copy diverges from upstream, prefix it with `adapted from ` so the stamp says so.
+- The pinned sha is the diff base for the next upstream sync — preserve it rather than rewriting it on later edits.
+
 **Body rules:**
 
 - Markdown source: preserve the body verbatim after the final `---` front matter delimiter.
@@ -113,6 +124,8 @@ When a description must be synthesized, infer a short, concrete, action-oriented
 - Do not silently coerce binary content into text.
 - Do not overwrite an existing skill directory.
 - Do not continue after a failed fetch.
+- Do not drop the `source:` stamp, and do not stamp a branch name where a commit sha belongs.
+- Most licences worth importing under — MIT and BSD among them — require the notice to travel with copies. The stamp records origin, not the notice: when the destination repository is public, tell the user to vendor the upstream `LICENSE` beside the skill.
 
 ## Success Response
 
@@ -120,4 +133,5 @@ When a description must be synthesized, infer a short, concrete, action-oriented
 Created: ~/.claude/skills/<normalized-name>/SKILL.md
 name: <normalized-name>
 description: <final description>
+source: <owner>/<repo>@<short-sha> (<licence>)
 ```
