@@ -228,6 +228,8 @@ A posted review has two audiences: a human skimming it, and an agent parsing the
 ...the verbose per-axis review...
 
 </details>
+
+— AL-9000 🔴
 ````
 
 Above the fold, in order: the verdict, then one line per finding.
@@ -238,6 +240,7 @@ Above the fold, in order: the verdict, then one line per finding.
 - **Index every finding.** Each finding in the collapsed body gets a bullet — the TL;DR *is* the index, and an unindexed finding is one the author never sees.
 - **Order by leverage**, as in Step 4.
 - **Roll up the tail.** Past ~3 nits, one bullet carries them and the specifics stay collapsed. Fifteen bullets is a review, not a TL;DR.
+- **Sign it.** Close the summary body with `— AL-9000 🔴` on its own line, after the collapsed `<details>`. Inline comments stay unsigned — one signature per posted review, not one per finding.
 
 **Inline comments** take the same shape at smaller scale: the first line does above-the-fold duty for that one finding, and the reasoning collapses beneath it. Keep any `suggestion` block above the fold as well — collapsed, its one-click Apply button is unreachable.
 
@@ -453,6 +456,7 @@ After review is complete:
 - [ ] The verification story is documented (what changed, how it was verified)
 - [ ] The posted review leads with a verdict and a TL;DR, with the verbose body collapsed into `<details>`
 - [ ] Every finding in the collapsed body has a matching TL;DR bullet, and every inline comment opens with a one-line tldr
+- [ ] The posted review summary is signed `— AL-9000 🔴` on a final line of its own
 - [ ] Dependency upgrades were reviewed against their changelog, isolated per package, and verified by a green suite with the lockfile diff reviewed
 
 **Presumptive blockers:** surface and propose the simpler design for each of these; escalate to Required only when the change actively makes structure worse: a refactor that relocates complexity instead of reducing it; a change that pushes a file past the size boundary with no decomposition; feature logic added to a shared module; a near-duplicate of an existing canonical helper; a silent fallback that hides an unclear invariant.

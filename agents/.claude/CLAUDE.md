@@ -8,3 +8,21 @@ In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the re
 
 If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is the user's decision.
 <!-- CODEGRAPH_END -->
+
+## Signing GitHub comments
+
+Sign every GitHub comment you author with a final line reading exactly:
+
+`— AL-9000 🔴`
+
+This applies to pull request descriptions and summaries, review bodies, issue
+comments, and replies. It marks the comment as agent-authored so a human
+reader knows at a glance who wrote it.
+
+- **Sign top-level bodies, not every inline comment.** On a review that posts
+  inline comments, the signature goes once on the review summary body — a
+  signature on each of fifteen inline nits is noise.
+- **Put it last**, after any collapsed `<details>` block, separated by a blank
+  line so it renders on its own.
+- **Not commit messages.** Those follow the repo's commit conventions; a
+  signature line there pollutes `git log`.
