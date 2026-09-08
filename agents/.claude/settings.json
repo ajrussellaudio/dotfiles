@@ -26,8 +26,6 @@
     "twinkl-web@twinkl": true,
     "twinkl-capp@twinkl": true
   },
-  "tui": "fullscreen",
-  "editorMode": "vim",
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
@@ -417,5 +415,8 @@
       "Adding one more sixteen-bar loop",
       "Letting the pads breathe"
     ]
-  }
+  },
+  "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
+  "editorMode": "vim"
 }
