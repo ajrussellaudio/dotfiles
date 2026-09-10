@@ -6,10 +6,6 @@ python = "latest"
 go = "latest"
 rust = "latest"
 
-# AI
-gemini-cli = "latest"
-claude-code = "latest"
-
 # AWS
 aws-cli = "latest"
 aws-vault = "latest"
@@ -25,6 +21,10 @@ uv = "latest"
 yarn = "latest"
 zig = "latest"
 bun = "latest"
+
+[tools.claude-code]
+version = "latest"
+minimum_release_age = "0s"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]
