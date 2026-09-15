@@ -26,3 +26,35 @@ reader knows at a glance who wrote it.
   line so it renders on its own.
 - **Not commit messages.** Those follow the repo's commit conventions; a
   signature line there pollutes `git log`.
+
+## Checking whether a branch is merged
+
+**Twinkl repos squash-merge**, so a merged branch's head is never an ancestor
+of `main` — the squash is a new commit with a different SHA.
+
+- **Never use `git merge-base --is-ancestor <head> origin/main`** to decide
+  this. It reports correctly merged work as unmerged, which is how a
+  legitimate worktree cleanup gets refused.
+- **Check instead** for the squash commit on `main`
+  (`git log --oneline -40 origin/main | grep '#<PR>'`), or the PR's
+  `merged_at`. GitHub's **list**-pull-requests endpoint leaves `merged` false
+  even when `merged_at` is set; the single-PR endpoint populates it properly.
+- Confirm the shape when unsure: `git log --merges --oneline -40 origin/main`
+  returning nothing means squash-or-rebase only, so ancestry proves nothing.
+- A consequence worth remembering: because every PR lands as one commit,
+  **commit granularity inside a PR is reviewer convenience only.** Don't
+  rewrite history or restructure tickets to tidy it.
+
+## Declining a review finding
+
+When a review raises something real that is genuinely out of scope, the reply
+is almost always "raising this as a follow-up rather than dropping it."
+
+- **Create the ticket first, then reply with its key.** Never reply with the
+  promise intending to raise it afterwards — the PR gets approved and merged,
+  and the reviewer has no way to tell "tracked elsewhere" from "ignored".
+- Commentary dies with the session; only artifacts survive it. A promise in a
+  PR description or review reply has an external reader, so it is a commitment
+  rather than a note to self.
+- An item you have repeated across several turns needs writing down **now**.
+  Repetition is not tracking.
