@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Scaffold the per-repo configuration that the engineering skills assume:
 
-- **Issue tracker** — where issues live (Jira, GitHub, GitLab, or local markdown out of the box)
+- **Issue tracker** — where issues live (Jira, GitHub, GitLab, Obsidian, or local markdown out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
 
@@ -26,6 +26,7 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - `docs/agents/` — does this skill's prior output already exist?
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
+- Obsidian signals — an `.obsidian/` directory at or above the repo root (a vault the repo sits inside). An external vault can't be detected, so never propose Obsidian on a hunch; it's an explicit choice the user makes.
 - Jira signals — Jira issue keys (`ABC-1234`) in `git log --oneline -30` or in local branch names, an Atlassian MCP server available in your tools, or a `.jira`/`.jira.d` config. Work repos often have a GitHub remote *and* track issues in Jira with GitHub Issues disabled, so check this before assuming GitHub.
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
 - Monorepo signals — a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. Present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
@@ -45,10 +46,13 @@ Default posture: **work repos track their issues in Jira, and GitHub Issues are 
 - **Jira** — issues live in a Jira project (uses the Atlassian MCP, not a CLI); supports Dev Notes specs and subtasks
 - **GitHub** — issues live in the repo's GitHub Issues (uses the `gh` CLI)
 - **GitLab** — issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI)
+- **Obsidian** — issues live as notes in an Obsidian vault, linked with `[[wiki-links]]` (good when planning already happens in a vault; needs the vault path)
 - **Local markdown** — issues live as files under `.scratch/<feature>/` in this repo (good for solo projects or repos without a remote)
 - **Other** (Linear, etc.) — ask the user to describe the workflow in one paragraph; the skill will record it as freeform prose
 
 Record the choice in `docs/agents/issue-tracker.md`. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off** — leave it off and don't raise it; a user who wants external PRs in the triage queue can flip the flag in the file later. (The Jira template has the same flag, pinned off — Jira has no external request surface.)
+
+On Obsidian, ask for the **absolute vault path** and the folder inside it that should hold efforts (e.g. `Efforts`), and write both into the "Vault settings" section of the seed template — every path in that doc resolves against them, so the tracker is unusable until they're recorded. Mention that the vault is typically outside the repo, so these notes won't be version-controlled with the code.
 
 On Jira, confirm the instance settings before writing: ask which project this repo tracks work in, and check the "Instance settings" section of the seed template. If the project isn't the one recorded there, live-discover the cloud id, project id, issue type ids, Dev Notes field id, transition ids and link types via the Atlassian MCP, and write the discovered values into that section.
 
@@ -114,6 +118,7 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [issue-tracker-jira.md](./issue-tracker-jira.md) — Jira issue tracker (via the Atlassian MCP)
 - [issue-tracker-github.md](./issue-tracker-github.md) — GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md) — GitLab issue tracker
+- [issue-tracker-obsidian.md](./issue-tracker-obsidian.md) — Obsidian vault issue tracker
 - [issue-tracker-local.md](./issue-tracker-local.md) — local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md) — label mapping (only if `triage` is installed)
 - [domain.md](./domain.md) — domain doc consumer rules + layout
