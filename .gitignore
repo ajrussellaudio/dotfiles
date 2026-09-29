@@ -19,3 +19,6 @@ secrets.zsh
 shared/.config/gh/hosts.yml
 
 !.claude
+
+# Claude Code account-synced skills (CLI-managed cache)
+agents/.claude/skills/synced/
