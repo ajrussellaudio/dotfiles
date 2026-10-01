@@ -22,6 +22,11 @@ yarn = "latest"
 zig = "latest"
 bun = "latest"
 
+# Language servers
+"npm:typescript-language-server" = "latest"
+# Pinned to 6: typescript-language-server wraps tsserver, which TypeScript 7 no longer ships
+"npm:typescript" = "6"
+
 [tools.claude-code]
 version = "latest"
 minimum_release_age = "0s"

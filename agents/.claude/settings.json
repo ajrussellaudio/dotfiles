@@ -21,7 +21,7 @@
   "enabledPlugins": {
     "explanatory-output-style@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": true,
     "learning-output-style@claude-plugins-official": false,
     "twinkl-web@twinkl": true,
     "twinkl-capp@twinkl": true
