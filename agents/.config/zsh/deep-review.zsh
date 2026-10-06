@@ -28,8 +28,9 @@ deep-review() {
 
     create-worktree "$head_branch"
 
-    # Keys buffer in the terminal input until the new shell is ready
-    tmux send-keys -t ":${win_name}" "$review_cmd" Enter
+    # Keys buffer in the terminal input until the new shell is ready. Once
+    # Claude exits, tear down the worktree and its window, as cwrm does.
+    tmux send-keys -t ":${win_name}" "${review_cmd}; remove-current-worktree" Enter
   else
     gh pr checkout "$pr_number"
     eval "$review_cmd"
