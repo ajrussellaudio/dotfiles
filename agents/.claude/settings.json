@@ -25,7 +25,8 @@
     "learning-output-style@claude-plugins-official": false,
     "twinkl-web@twinkl": true,
     "twinkl-capp@twinkl": true,
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "spinnerVerbs": {
     "mode": "replace",
