@@ -22,3 +22,6 @@ shared/.config/gh/hosts.yml
 
 # Claude Code account-synced skills (CLI-managed cache)
 agents/.claude/skills/synced/
+
+# Claude Code moves removed skills here on update
+agents/.claude/skills/.trash/
