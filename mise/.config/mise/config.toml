@@ -8,7 +8,6 @@ rust = "latest"
 
 # AWS
 aws-cli = "latest"
-aws-vault = "latest"
 terraform = "latest"
 terragrunt = "latest"
 
