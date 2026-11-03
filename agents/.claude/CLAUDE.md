@@ -58,3 +58,26 @@ is almost always "raising this as a follow-up rather than dropping it."
   rather than a note to self.
 - An item you have repeated across several turns needs writing down **now**.
   Repetition is not tracking.
+
+## Coding discipline
+
+Adapted from [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills).
+These bias toward caution over speed; on trivial tasks, use judgment.
+
+- **Think before coding.** State your assumptions. When a request has several
+  readings, lay them out instead of picking one silently; when a simpler
+  approach exists, say so and push back. If something is unclear, name what
+  confuses you and ask before implementing.
+- **Simplicity first.** Write the minimum code that solves the problem asked:
+  no speculative features, single-use abstractions, unrequested
+  configurability, or error handling for impossible cases. If 200 lines could
+  be 50, rewrite it. Test: would a senior engineer call it overcomplicated?
+- **Surgical changes.** Every changed line traces to the request. Match the
+  existing style, leave adjacent code, comments and formatting as they are,
+  and mention unrelated dead code rather than deleting it. Do remove the
+  imports, variables and functions your own change orphaned.
+- **Goal-driven execution.** Turn the task into a verifiable goal and loop
+  until it's met: "fix the bug" becomes "write a test that reproduces it, then
+  make it pass"; "refactor X" becomes "tests pass before and after". For
+  multi-step work, state a brief plan with a check per step
+  (`1. [step] → verify: [check]`).
