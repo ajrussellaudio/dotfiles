@@ -24,9 +24,8 @@
     "typescript-lsp@claude-plugins-official": true,
     "learning-output-style@claude-plugins-official": false,
     "twinkl-web@twinkl": true,
-    "twinkl-capp@twinkl": true,
-    "superpowers@claude-plugins-official": true,
-    "mattpocock-skills@claude-plugins-official": true
+    "twinkl-capp@twinkl": false,
+    "superpowers@claude-plugins-official": true
   },
   "spinnerVerbs": {
     "mode": "replace",
@@ -420,5 +419,10 @@
   },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  }
 }
