@@ -44,7 +44,6 @@ vim.g.ts_install = {
 
   -- Shell
   'bash',
-  'tmux',
 
   -- Other
   'supercollider',
