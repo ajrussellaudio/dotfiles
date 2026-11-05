@@ -27,6 +27,32 @@ reader knows at a glance who wrote it.
 - **Not commit messages.** Those follow the repo's commit conventions; a
   signature line there pollutes `git log`.
 
+## What to post without asking
+
+Writing that people only read goes out without asking first. Actions that
+change state wait until I ask for that specific action. This overrides the
+skills' "confirm before posting" and "approve only when asked" rules (in
+`twinkl-core:github`, `twinkl-core:review` and `twinkl-core:jira`), but only
+for the first list.
+
+- **Post or edit freely:**
+  - comments on PRs and issues, and review replies;
+  - PR reviews, including approving and requesting changes;
+  - PR titles and descriptions;
+  - Jira comments, and a Jira ticket's description.
+
+  Link to what you posted in your reply, so I can see what went out.
+- **Never without an explicit ask:**
+  - merging, closing or reopening a PR;
+  - requesting reviewers;
+  - creating, transitioning or assigning a Jira ticket, or changing its sprint.
+
+  "Address the feedback" covers posting the replies. It doesn't cover
+  merging the PR or moving its ticket afterwards.
+- **A reply that promises a follow-up ticket** still needs the ticket to exist
+  first (see "Declining a review finding"). Creating it is structural, so ask
+  before you create it, then reply with its key.
+
 ## Checking whether a branch is merged
 
 **Twinkl repos squash-merge**, so a merged branch's head is never an ancestor
