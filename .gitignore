@@ -25,3 +25,6 @@ agents/.claude/skills/synced/
 
 # Claude Code moves removed skills here on update
 agents/.claude/skills/.trash/
+
+# Claude Code rewrites this on update; kept on disk, not tracked
+agents/.claude/settings.json
