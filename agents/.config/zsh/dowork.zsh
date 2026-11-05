@@ -40,8 +40,9 @@ dowork() {
   create-worktree "$branch" "$ticket" || return 1
 
   # Keys buffer in the terminal input until pnpm install finishes and the new
-  # shell is ready, so Claude starts only after setup.
-  tmux send-keys -t ":${ticket}" "claude \"/implement ${ticket}\"" Enter
+  # shell is ready, so Claude starts only after setup. Once Claude exits, tear
+  # down the worktree and its window, as cwrm does.
+  tmux send-keys -t ":${ticket}" "claude \"/implement ${ticket}\"; remove-current-worktree" Enter
 }
 
 alias dw=dowork
