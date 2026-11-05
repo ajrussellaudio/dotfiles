@@ -23,10 +23,9 @@ deep-review() {
   local review_cmd="claude \"/deep-review - Review PR #${pr_number}: ${pr_url}. Read the PR description and any linked issues first to establish intent, then review the changes between HEAD and origin/${base_branch}.\""
 
   if type create-worktree &>/dev/null; then
-    local win_name
-    win_name=$(_worktree_name "$head_branch")
+    local win_name="review-PR-${pr_number}"
 
-    create-worktree "$head_branch"
+    create-worktree "$head_branch" "$win_name"
 
     # Keys buffer in the terminal input until the new shell is ready. Once
     # Claude exits, tear down the worktree and its window, as cwrm does.

@@ -37,9 +37,10 @@ _worktree_sync_existing_branch() {
 }
 
 create-worktree() {
-  local branch="$1" name dir
-  [[ -z "$branch" ]] && { echo "usage: create-worktree <branch>" >&2; return 1 }
+  local branch="$1" name dir win_name
+  [[ -z "$branch" ]] && { echo "usage: create-worktree <branch> [window-name]" >&2; return 1 }
   name="$(_worktree_name "$branch")"
+  win_name="${2:-$name}"
   dir="../$(basename "$PWD")-$name"
 
   local trust_cmd=""
@@ -64,7 +65,7 @@ create-worktree() {
   local setup_cmd=""
   [[ -f "$dir/package.json" ]] && setup_cmd+='pnpm install;'
 
-  tmux new-window -n "$name" -c "$dir" "${trust_cmd} ${setup_cmd} exec $SHELL -i"
+  tmux new-window -n "$win_name" -c "$dir" "${trust_cmd} ${setup_cmd} exec $SHELL -i"
 }
 
 _worktree_descendant_pids() {
