@@ -1,7 +1,7 @@
 [tools]
 
 # Runtimes
-node = "lts"
+node = "24"
 python = "latest"
 go = "latest"
 rust = "latest"
