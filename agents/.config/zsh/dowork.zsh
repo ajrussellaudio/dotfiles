@@ -25,10 +25,10 @@ Example: feat/${ticket}-add-login" \
 }
 
 dowork() {
-  local ticket="$1" branch
+  local ticket="$1" extra="${*:2}" branch prompt
 
   if [[ ! "$ticket" =~ '^[A-Z][A-Z0-9]*-[0-9]+$' ]]; then
-    echo "Usage: dowork <ticket-key>  (e.g. dowork CAPP-1234)" >&2
+    echo "Usage: dowork <ticket-key> [extra prompt]  (e.g. dowork CAPP-1234 \"but with variables in French\")" >&2
     return 1
   fi
   [[ -z "$TMUX" ]] && { echo "dowork needs to run inside tmux" >&2; return 1 }
@@ -41,8 +41,10 @@ dowork() {
 
   # Keys buffer in the terminal input until pnpm install finishes and the new
   # shell is ready, so Claude starts only after setup. Once Claude exits, tear
-  # down the worktree and its window, as cwrm does.
-  tmux send-keys -t ":${ticket}" "claude \"/implement ${ticket}\"; remove-current-worktree" Enter
+  # down the worktree and its window, as cwrm does. (qq) single-quotes the
+  # prompt so quotes or $ in the extra text survive being typed into the shell.
+  prompt="/implement ${ticket}${extra:+ $extra}"
+  tmux send-keys -t ":${ticket}" "claude ${(qq)prompt}; remove-current-worktree" Enter
 }
 
 alias dw=dowork
